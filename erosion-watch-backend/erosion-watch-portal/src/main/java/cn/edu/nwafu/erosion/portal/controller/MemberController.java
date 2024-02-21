@@ -1,7 +1,8 @@
-package cn.edu.nwafu.erosion.controller;
+package cn.edu.nwafu.erosion.portal.controller;
 
 import cn.edu.nwafu.common.api.CommonResult;
-import cn.edu.nwafu.erosion.service.MemberService;
+import cn.edu.nwafu.erosion.model.Member;
+import cn.edu.nwafu.erosion.portal.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,9 +40,9 @@ public class MemberController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public CommonResult register(@RequestParam String username,
                                  @RequestParam String password,
-                                 @RequestParam String telephone,
+                                 @RequestParam String email,
                                  @RequestParam String authCode) {
-        memberService.register(username, password, telephone, authCode);
+        memberService.register(username, password, email, authCode);
         return CommonResult.success(null, "注册成功");
     }
 
