@@ -1,4 +1,4 @@
-package cn.edu.nwafu.api;
+package cn.edu.nwafu.common.api;
 
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Page;
@@ -6,12 +6,11 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 /**
- * 通用分页数据封装类
+ * 通用分页数据封装类。
  *
  * @author Huang Z.Y.
  */
 public class CommonPage<T> {
-    
     /**
      * 当前页码
      */

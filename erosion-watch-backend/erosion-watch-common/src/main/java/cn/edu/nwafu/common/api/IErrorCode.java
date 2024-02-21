@@ -1,7 +1,7 @@
-package cn.edu.nwafu.api;
+package cn.edu.nwafu.common.api;
 
 /**
- * API 返回码接口
+ * API返回码接口。
  *
  * @author Huang Z.Y.
  */

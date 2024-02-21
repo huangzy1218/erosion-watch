@@ -1,7 +1,7 @@
-package cn.edu.nwafu.api;
+package cn.edu.nwafu.common.api;
 
 /**
- * 通用返回结果封装类
+ * 通用返回结果封装类。
  *
  * @author Huang Z.Y.
  */
