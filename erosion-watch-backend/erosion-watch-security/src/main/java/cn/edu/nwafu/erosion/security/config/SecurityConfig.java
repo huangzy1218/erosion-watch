@@ -1,6 +1,6 @@
 package cn.edu.nwafu.erosion.security.config;
 
-import com.macro.mall.security.component.*;
+import cn.edu.nwafu.erosion.security.component.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,13 +15,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 
 /**
- * SpringSecurity相关配置，仅用于配置SecurityFilterChain
- * Created by macro on 2019/11/5.
+ * SpringSecurity 相关配置，仅用于配置SecurityFilterChain。
+ *
+ * @author Huang Z.Y.
  */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
     @Autowired
     private IgnoreUrlsConfig ignoreUrlsConfig;
     @Autowired
@@ -39,11 +39,11 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = httpSecurity
                 .authorizeRequests();
-        //不需要保护的资源路径允许访问
+        // 不需要保护的资源路径允许访问
         for (String url : ignoreUrlsConfig.getUrls()) {
             registry.antMatchers(url).permitAll();
         }
-        //允许跨域请求的OPTIONS请求
+        // 允许跨域请求的OPTIONS请求
         registry.antMatchers(HttpMethod.OPTIONS)
                 .permitAll();
         // 任何请求需要身份认证

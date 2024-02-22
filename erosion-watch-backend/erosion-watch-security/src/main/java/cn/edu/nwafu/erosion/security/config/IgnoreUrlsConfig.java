@@ -9,7 +9,8 @@ import java.util.List;
 
 /**
  * SpringSecurity白名单资源路径配置
- * Created by macro on 2018/11/5.
+ *
+ * @author Huang Z.Y.
  */
 @Getter
 @Setter

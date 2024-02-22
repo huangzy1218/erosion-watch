@@ -1,12 +1,13 @@
 package cn.edu.nwafu.erosion.security.config;
 
-import com.macro.mall.common.config.BaseRedisConfig;
+import cn.edu.nwafu.common.config.BaseRedisConfig;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * Redis相关配置
- * Created by macro on 2020/3/2.
+ *
+ * @author Huang Z.Y.
  */
 @EnableCaching
 @Configuration
