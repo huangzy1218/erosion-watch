@@ -5,12 +5,11 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Redis相关配置
+ * Redis相关配置。
  *
  * @author Huang Z.Y.
  */
 @EnableCaching
 @Configuration
 public class RedisConfig extends BaseRedisConfig {
-
 }

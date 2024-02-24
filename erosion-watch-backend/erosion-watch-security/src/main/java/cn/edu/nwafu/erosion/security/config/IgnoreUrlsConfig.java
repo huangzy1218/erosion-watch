@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SpringSecurity白名单资源路径配置
+ * SpringSecurit 白名单资源路径配置。
  *
  * @author Huang Z.Y.
  */

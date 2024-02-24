@@ -1,7 +1,6 @@
 package cn.edu.nwafu.erosion.security.component;
 
 import cn.hutool.core.util.URLUtil;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.web.FilterInvocation;
@@ -9,10 +8,11 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
 
 /**
- * 动态权限数据源，用于获取动态权限规则。
+ * 实现 {@link FilterInvocationSecurityMetadataSource} 接口的动态安全元数据源，用于获取动态权限规则。
  *
  * @author Huang Z.Y.
  */
@@ -22,26 +22,34 @@ public class DynamicSecurityMetadataSource implements FilterInvocationSecurityMe
     @Autowired
     private DynamicSecurityService dynamicSecurityService;
 
+    /**
+     * 在构造方法后执行，加载数据源。
+     */
     @PostConstruct
     public void loadDataSource() {
         configAttributeMap = dynamicSecurityService.loadDataSource();
     }
 
+    /**
+     * 清除数据源。
+     */
     public void clearDataSource() {
         configAttributeMap.clear();
         configAttributeMap = null;
     }
-
+    
     @Override
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
-        if (configAttributeMap == null) this.loadDataSource();
+        if (configAttributeMap == null) {
+            this.loadDataSource();
+        }
         List<ConfigAttribute> configAttributes = new ArrayList<>();
-        //获取当前访问的路径
+        // 获取当前访问的路径
         String url = ((FilterInvocation) o).getRequestUrl();
         String path = URLUtil.getPath(url);
         PathMatcher pathMatcher = new AntPathMatcher();
         Iterator<String> iterator = configAttributeMap.keySet().iterator();
-        //获取访问该路径所需资源
+        // 获取访问该路径所需资源
         while (iterator.hasNext()) {
             String pattern = iterator.next();
             if (pathMatcher.match(pattern, path)) {

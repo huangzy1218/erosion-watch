@@ -15,17 +15,21 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
- * 动态权限过滤器，用于实现基于路径的动态权限过滤。
+ * 实现 {@link Filter} 接口的动态权限过滤器，用于实现基于路径的动态权限过滤。
  *
  * @author Huang Z.Y.
  */
 public class DynamicSecurityFilter extends AbstractSecurityInterceptor implements Filter {
-
     @Autowired
     private DynamicSecurityMetadataSource dynamicSecurityMetadataSource;
     @Autowired
     private IgnoreUrlsConfig ignoreUrlsConfig;
 
+    /**
+     * 设置自定义的访问决策管理器。
+     *
+     * @param dynamicAccessDecisionManager 动态访问决策管理器
+     */
     @Autowired
     public void setMyAccessDecisionManager(DynamicAccessDecisionManager dynamicAccessDecisionManager) {
         super.setAccessDecisionManager(dynamicAccessDecisionManager);
@@ -35,6 +39,15 @@ public class DynamicSecurityFilter extends AbstractSecurityInterceptor implement
     public void init(FilterConfig filterConfig) throws ServletException {
     }
 
+    /**
+     * 过滤器方法，用于进行请求过滤和安全检查。
+     *
+     * @param servletRequest  HTTP 请求
+     * @param servletResponse HTTP 响应
+     * @param filterChain     过滤器链
+     * @throws IOException      如果发生 I/O 错误
+     * @throws ServletException 如果发生 Servlet 错误
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;

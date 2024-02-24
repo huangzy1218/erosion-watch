@@ -11,11 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 自定义未登录或者token失效时的返回结果。
+ * 自定义未登录或者 token 失效时的返回结果。
  *
  * @author Huang Z.Y.
  */
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
+    /**
+     * 处理未认证的请求，返回未授权的响应结果。
+     *
+     * @param request       HTTP 请求
+     * @param response      HTTP 响应
+     * @param authException 认证异常
+     * @throws IOException      如果发生 I/O 错误
+     * @throws ServletException 如果发生 Servlet 错误
+     */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         response.setHeader("Access-Control-Allow-Origin", "*");

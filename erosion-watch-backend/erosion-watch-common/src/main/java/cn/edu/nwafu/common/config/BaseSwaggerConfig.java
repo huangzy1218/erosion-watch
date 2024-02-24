@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
  * @author Huang Z.Y.
  */
 public abstract class BaseSwaggerConfig {
-
     @Bean
     public Docket createRestApi() {
         SwaggerProperties swaggerProperties = swaggerProperties();

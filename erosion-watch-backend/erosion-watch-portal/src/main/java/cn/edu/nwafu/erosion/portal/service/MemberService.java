@@ -7,7 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author Huang Z.Y.
  */
 public interface MemberService {
-    void register(String username, String password, String email, String authCode);
+    Member getByUsername(String username);
+
+    Member getById(Long id);
+
+    void register(String username, String password, String telephone, String authCode);
 
     String login(String username, String password);
 

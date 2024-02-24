@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 
 /**
- * SpringSecurity 相关配置，仅用于配置SecurityFilterChain。
+ * SpringSecurity 相关配置，仅用于配置 SecurityFilterChain。
  *
  * @author Huang Z.Y.
  */
@@ -43,7 +43,7 @@ public class SecurityConfig {
         for (String url : ignoreUrlsConfig.getUrls()) {
             registry.antMatchers(url).permitAll();
         }
-        // 允许跨域请求的OPTIONS请求
+        // 允许跨域请求的 OPTIONS 请求
         registry.antMatchers(HttpMethod.OPTIONS)
                 .permitAll();
         // 任何请求需要身份认证

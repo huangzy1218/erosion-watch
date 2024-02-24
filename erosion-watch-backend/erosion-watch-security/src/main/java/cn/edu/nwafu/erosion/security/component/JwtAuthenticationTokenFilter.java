@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * JWT 登录授权过滤器。
+ * JWT 登录授权过滤器，继承了 {@link OncePerRequestFilter}。
  *
  * @author Huang Z.Y.
  */
@@ -33,6 +33,15 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Value("${jwt.token-head}")
     private String tokenHead;
 
+    /**
+     * 进行过滤器的核心逻辑，在每次请求中执行一次。
+     *
+     * @param request  HTTP 请求
+     * @param response HTTP 响应
+     * @param chain    过滤器链
+     * @throws ServletException 如果发生 Servlet 错误
+     * @throws IOException      如果发生 I/O 错误
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,

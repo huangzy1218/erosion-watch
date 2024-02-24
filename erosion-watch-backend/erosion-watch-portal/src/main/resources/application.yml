@@ -9,9 +9,19 @@ spring:
 mybatis:
   mapper-locations:
     - classpath:mapper/*.xml
+    - classpath*:cn/**/mapper/*.xml
 
 jwt:
-  token-header: Authorization #JWT存储的请求头
-  secret: mall-portal-secret #JWT加解密使用的密钥
-  expiration: 604800 #JWT的超期限时间(60*60*24*7)
-  token-head: 'Bearer '  #JWT负载中拿到开头
+  token-header: Authorization # JWT存储的请求头
+  secret: erosion-portal-secret # JWT加解密使用的密钥
+  expiration: 604800 # JWT的超期限时间(60*60*24*7)
+  token-head: 'Bearer '  # JWT负载中拿到开头
+
+redis:
+  database: erosion-watch
+  key:
+    auth-code: 'authCode'
+  expire:
+    auth-code: 90 # 验证码超时时间
+    common: 86400 # 验证码超时时间
+
