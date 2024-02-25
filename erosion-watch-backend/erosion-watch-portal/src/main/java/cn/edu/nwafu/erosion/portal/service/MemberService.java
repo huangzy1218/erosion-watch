@@ -19,11 +19,11 @@ public interface MemberService {
 
     String generateAuthCode(String telephone);
 
-    void updatePassword(String telephone, String password, String authCode);
+    int updatePassword(String telephone, String password, String authCode);
 
     String refreshToken(String token);
 
     UserDetails loadUserByUsername(String username);
 
-    void completeProfile(Member member);
+    int completeProfile(Member member);
 }

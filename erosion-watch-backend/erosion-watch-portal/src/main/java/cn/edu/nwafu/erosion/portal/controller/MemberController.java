@@ -88,8 +88,12 @@ public class MemberController {
     public CommonResult<?> updatePassword(@RequestParam String telephone,
                                           @RequestParam String password,
                                           @RequestParam String authCode) {
-        memberService.updatePassword(telephone, password, authCode);
-        return CommonResult.success(null, "密码修改成功");
+        int count = memberService.updatePassword(telephone, password, authCode);
+        if (count > 0) {
+            return CommonResult.success(null, "密码修改成功");
+        } else {
+            return CommonResult.failed("密码修改失败");
+        }
     }
 
 
@@ -136,8 +140,12 @@ public class MemberController {
                 .biography(biography)
                 .organization(organization)
                 .realName(realName).build();
-        memberService.completeProfile(member);
-        return CommonResult.success(null, "用户资料已完善");
+        int count = memberService.completeProfile(member);
+        if (count > 0) {
+            return CommonResult.success(null, "用户资料完善成功");
+        } else {
+            return CommonResult.failed("用户资料完善失败");
+        }
     }
 }
     

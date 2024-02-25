@@ -1,43 +1,39 @@
 package cn.edu.nwafu.erosion.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class AreaInfo implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Long id;
-
     @ApiModelProperty(value = "地区名称")
     private String areaName;
-
     @ApiModelProperty(value = "行政区划代码")
     private String administrativeCode;
-
     @ApiModelProperty(value = "纬度")
     private BigDecimal latitude;
-
     @ApiModelProperty(value = "经度")
     private BigDecimal longitude;
-
     @ApiModelProperty(value = "面积")
     private BigDecimal area;
-
     @ApiModelProperty(value = "人口")
     private Integer population;
-
     @ApiModelProperty(value = "气候类型")
     private String climateType;
-
     @ApiModelProperty(value = "地形特征")
     private String terrainFeature;
-
     @ApiModelProperty(value = "地貌特征")
     private String landformFeature;
-
     @ApiModelProperty(value = "土地利用情况")
     private String landUse;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

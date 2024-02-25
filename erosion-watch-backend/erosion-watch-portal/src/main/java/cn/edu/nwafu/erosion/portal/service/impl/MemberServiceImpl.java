@@ -133,7 +133,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void updatePassword(String telephone, String password, String authCode) {
+    public int updatePassword(String telephone, String password, String authCode) {
         MemberExample example = new MemberExample();
         example.createCriteria().andPhoneNumberEqualTo(telephone);
         List<Member> members = memberMapper.selectByExample(example);
@@ -146,8 +146,9 @@ public class MemberServiceImpl implements MemberService {
         }
         Member member = members.get(0);
         member.setPassword(passwordEncoder.encode(password));
-        memberMapper.updateByPrimaryKey(member);
+        int count = memberMapper.updateByPrimaryKey(member);
         memberCacheService.delMember(member.getId());
+        return count;
     }
 
     @Override
@@ -165,8 +166,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void completeProfile(Member member) {
-        memberMapper.updateByPrimaryKeySelective(member);
+    public int completeProfile(Member member) {
+        return memberMapper.updateByPrimaryKeySelective(member);
     }
 
     private boolean verifyAuthCode(String authCode, String telephone) {
