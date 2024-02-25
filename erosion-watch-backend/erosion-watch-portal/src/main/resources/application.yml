@@ -20,6 +20,7 @@ jwt:
 redis:
   database: erosion-watch
   key:
+    member: 'member'
     auth-code: 'authCode'
   expire:
     auth-code: 90 # 验证码超时时间

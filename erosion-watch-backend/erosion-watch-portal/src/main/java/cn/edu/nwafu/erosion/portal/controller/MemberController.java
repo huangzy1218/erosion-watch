@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,7 +82,7 @@ public class MemberController {
         return CommonResult.success(authCode, "获取验证码成功");
     }
 
-    @ApiOperation("会员修改密码")
+    @ApiOperation("用户修改密码")
     @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult<?> updatePassword(@RequestParam String telephone,
@@ -98,12 +100,44 @@ public class MemberController {
         String token = request.getHeader(tokenHeader);
         String refreshToken = memberService.refreshToken(token);
         if (refreshToken == null) {
-            return CommonResult.failed("token已经过期！");
+            return CommonResult.failed("token已经过期");
         }
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", refreshToken);
         tokenMap.put("tokenHead", tokenHead);
         return CommonResult.success(tokenMap);
+    }
+
+    @ApiOperation("完善用户资料")
+    @RequestMapping(value = "/completeProfile", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult<?> completeProfile(@RequestParam Long userId,
+                                           @RequestParam(required = false) String nickname,
+                                           @RequestParam(required = false) String email,
+                                           @RequestParam(required = false) String firstName,
+                                           @RequestParam(required = false) String lastName,
+                                           @RequestParam(required = false) String gender,
+                                           @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateOfBirth,
+                                           @RequestParam(required = false) String address,
+                                           @RequestParam(required = false) String profilePicture,
+                                           @RequestParam(required = false) String biography,
+                                           @RequestParam(required = false) String organization,
+                                           @RequestParam(required = false) String realName) {
+        Member member = Member.builder()
+                .id(userId)
+                .nickname(nickname)
+                .email(email)
+                .firstName(firstName)
+                .lastName(lastName)
+                .gender(gender)
+                .dateOfBirth(dateOfBirth)
+                .address(address)
+                .profilePicture(profilePicture)
+                .biography(biography)
+                .organization(organization)
+                .realName(realName).build();
+        memberService.completeProfile(member);
+        return CommonResult.success(null, "用户资料已完善");
     }
 }
     

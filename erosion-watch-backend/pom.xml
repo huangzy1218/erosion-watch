@@ -41,6 +41,7 @@
         <logstash-logback.version>7.2</logstash-logback.version>
         <minio.version>8.4.5</minio.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
+        <knife4j.version>3.0.3</knife4j.version>
         <erosion-watch-common.version>1.0-SNAPSHOT</erosion-watch-common.version>
         <erosion-watch-mbg.version>1.0-SNAPSHOT</erosion-watch-mbg.version>
         <erosion-watch-portal.version>1.0-SNAPSHOT</erosion-watch-portal.version>
@@ -192,6 +193,11 @@
                 <groupId>io.minio</groupId>
                 <artifactId>minio</artifactId>
                 <version>${minio.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

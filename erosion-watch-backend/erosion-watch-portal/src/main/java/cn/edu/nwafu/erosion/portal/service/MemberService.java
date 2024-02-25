@@ -24,4 +24,6 @@ public interface MemberService {
     String refreshToken(String token);
 
     UserDetails loadUserByUsername(String username);
+
+    void completeProfile(Member member);
 }

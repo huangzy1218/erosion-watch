@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * {@link MemberService} 的实现类。
+ *
  * @author Huang Z.Y.
  */
 @Service
@@ -73,7 +75,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void register(String username, String password, String telephone, String authCode) {
         // 验证验证码
-        if (!verifyAuthCode(authCode, telephone)) {
+        if (verifyAuthCode(authCode, telephone)) {
             Asserts.fail("验证码错误");
         }
         // 查询是否已有该用户
@@ -139,7 +141,7 @@ public class MemberServiceImpl implements MemberService {
             Asserts.fail("该账号不存在");
         }
         // 验证验证码
-        if (!verifyAuthCode(authCode, telephone)) {
+        if (verifyAuthCode(authCode, telephone)) {
             Asserts.fail("验证码错误");
         }
         Member member = members.get(0);
@@ -162,13 +164,18 @@ public class MemberServiceImpl implements MemberService {
         throw new UsernameNotFoundException("用户名或密码错误");
     }
 
+    @Override
+    public void completeProfile(Member member) {
+        memberMapper.updateByPrimaryKeySelective(member);
+    }
+
     private boolean verifyAuthCode(String authCode, String telephone) {
         if (StrUtil.isEmpty(authCode)) {
-            return false;
+            return true;
         }
         String realAuthCode = memberCacheService.getAuthCode(telephone);
-        //return authCode.equals(realAuthCode);
-        return true;
+        // return authCode.equals(realAuthCode);todo
+        return false;
     }
 }
     

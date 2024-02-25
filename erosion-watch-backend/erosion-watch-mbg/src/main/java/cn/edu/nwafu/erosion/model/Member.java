@@ -1,62 +1,52 @@
 package cn.edu.nwafu.erosion.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Member implements Serializable {
+    private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "用户ID")
     private Long id;
-
     @ApiModelProperty(value = "用户名")
     private String username;
-
     @ApiModelProperty(value = "密码")
     private String password;
-
     @ApiModelProperty(value = "昵称")
     private String nickname;
-
     @ApiModelProperty(value = "邮箱")
     private String email;
-
     @ApiModelProperty(value = "注册日期")
     private Date registrationDate;
-
     @ApiModelProperty(value = "上次登录时间")
     private Date lastLogin;
-
     @ApiModelProperty(value = "用户的名")
     private String firstName;
-
     @ApiModelProperty(value = "用户的姓")
     private String lastName;
-
     @ApiModelProperty(value = "性别：男、女、其他")
     private String gender;
-
     @ApiModelProperty(value = "出生日期")
     private Date dateOfBirth;
-
     @ApiModelProperty(value = "地址")
     private String address;
-
     @ApiModelProperty(value = "电话号码")
     private String phoneNumber;
-
     @ApiModelProperty(value = "个人头像路径")
     private String profilePicture;
-
     @ApiModelProperty(value = "所属单位")
     private String organization;
-
     @ApiModelProperty(value = "真实姓名")
     private String realName;
-
     @ApiModelProperty(value = "个人简介")
     private String biography;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

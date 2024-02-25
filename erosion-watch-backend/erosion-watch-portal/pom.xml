@@ -28,6 +28,12 @@
             <groupId>cn.edu.nwafu</groupId>
             <artifactId>erosion-watch-security</artifactId>
         </dependency>
+        <!--knife4j配置依赖-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>3.0.3</version>
+        </dependency>
         <!--mongodb依赖配置-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
