@@ -6,7 +6,7 @@
   "MultiTagsCache": false,
   "KeepAlive": true,
   "Locale": "zh",
-  "Layout": "vertical",
+  "Layout": "horizontal",
   "Theme": "default",
   "DarkMode": false,
   "OverallStyle": "light",

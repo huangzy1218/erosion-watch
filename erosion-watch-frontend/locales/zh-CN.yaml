@@ -125,6 +125,11 @@ menus:
   hsboard: 艺术画板
   hsMenuoverflow: 目录超出显示 Tooltip 文字提示
   hsChildMenuoverflow: 菜单超出显示 Tooltip 文字提示
+  hsMyData: 我的数据
+  hsDataProcess: 数据处理
+  hsDataAnalysis: 数据分析
+  hsReferences: 文献资源
+  hsNotes: 我的笔记
 status:
   hsLoad: 加载中...
 login:
