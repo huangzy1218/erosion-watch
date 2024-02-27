@@ -125,6 +125,11 @@ menus:
   hsboard: Paint Board
   hsMenuoverflow: Menu Overflow Show Tooltip Text
   hsChildMenuoverflow: Child Menu Overflow Show Tooltip Text
+  hsMyData: My Data
+  hsDataProcess: Data Process
+  hsDataAnalysis: Data Analysis
+  hsReferences: References
+  hsNotes: My Notes
 status:
   hsLoad: Loading...
 login:
