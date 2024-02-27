@@ -26,3 +26,16 @@ redis:
     auth-code: 90 # 验证码超时时间
     common: 86400 # 验证码超时时间
 
+aliyun:
+  oss:
+    endpoint: oss-cn-shenzhen.aliyuncs.com # oss对外服务的访问域名
+    access-key-id: test # 访问身份验证中用到用户标识
+    access-key-secret: test # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
+    bucket-name: macro-oss # oss的存储空间
+    policy:
+      expire: 300 # 签名有效期(S)
+    max-size: 10 # 上传文件大小(M)
+    callback: http://${virtual-host}/aliyun/oss/callback # 文件上传成功后的回调地址
+    dir:
+      prefix: erosion-watch/images/ # 上传文件夹路径前缀
+

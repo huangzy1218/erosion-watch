@@ -25,7 +25,7 @@ public class MemberCacheServiceImpl implements MemberCacheService {
     @Value("${redis.key.auth-code}")
     private static String REDIS_KEY_AUTH_CODE;
     @Value("${redis.database}")
-    private String REDIS_DATABASE;
+    private static String REDIS_DATABASE;
     @Autowired
     private RedisService redisService;
     @Autowired

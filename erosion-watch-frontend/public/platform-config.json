@@ -7,7 +7,7 @@
   "KeepAlive": true,
   "Locale": "zh",
   "Layout": "vertical",
-  "Theme": "dark",
+  "Theme": "default",
   "DarkMode": false,
   "OverallStyle": "light",
   "Grey": false,
@@ -19,7 +19,7 @@
   "ShowLogo": true,
   "ShowModel": "smart",
   "MenuArrowIconNoTransition": false,
-  "CachingAsyncRoutes": false,
+  "CachingAsyncRoutes": true,
   "TooltipEffect": "light",
   "ResponsiveStorageNameSpace": "responsive-",
   "MapConfigure": {

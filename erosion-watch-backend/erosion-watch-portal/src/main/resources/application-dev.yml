@@ -29,3 +29,5 @@ secure:
       - /**/*.map
       - /auth/**
       - /**/**
+
+virtual-host: 192.168.174.128
