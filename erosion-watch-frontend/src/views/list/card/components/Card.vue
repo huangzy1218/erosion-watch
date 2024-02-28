@@ -93,7 +93,7 @@ const cardLogoClass = computed(() => [
 .list-card-item {
   display: flex;
   flex-direction: column;
-  margin-bottom: 12px;
+  //margin-bottom: 12px;
   overflow: hidden;
   cursor: pointer;
   border-radius: 3px;
@@ -102,17 +102,22 @@ const cardLogoClass = computed(() => [
     flex: 1;
     min-height: 140px;
     padding: 24px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 确保内容垂直居中 */
 
     &--logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      margin-top: 5px; /* 设置图标与卡片顶部的空隙为5px */
+      align-self: center; /* 确保图标水平居中 */
       width: 56px;
       height: 56px;
       font-size: 32px;
       color: #0052d9;
       background: #e0ebff;
       border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &__disabled {
         color: #a1c4ff;
@@ -120,30 +125,28 @@ const cardLogoClass = computed(() => [
     }
 
     &--operation {
-      display: flex;
-      height: 100%;
-
-      &--tag {
-        border: 0;
-      }
+      position: absolute; /* 使用绝对定位，不影响其他内容的布局 */
+      top: 5px; /* 与顶部的距离也设置为5px，保持视觉上的一致性 */
+      right: 5px; /* 保持与右侧的距离 */
     }
 
     &--name {
-      margin: 24px 0 8px;
+      margin-top: 10px; /* 调整名称与图标之间的距离 */
       font-size: 16px;
       font-weight: 400;
+      text-align: center; /* 名称居中显示 */
     }
 
     &--desc {
-      display: -webkit-box;
-      height: 40px;
-      margin-bottom: 24px;
-      overflow: hidden;
       font-size: 12px;
       line-height: 20px;
+      text-align: center; /* 描述也居中显示 */
+      overflow: hidden;
       text-overflow: ellipsis;
+      display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+      margin-top: 5px; /* 调整描述与名称之间的距离 */
     }
   }
 
@@ -151,10 +154,6 @@ const cardLogoClass = computed(() => [
     .list-card-item_detail--name,
     .list-card-item_detail--desc {
       color: var(--el-text-color-disabled);
-    }
-
-    .list-card-item_detail--operation--tag {
-      color: #bababa;
     }
   }
 }

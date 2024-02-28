@@ -19,7 +19,7 @@ import java.util.List;
 @Controller
 @Api(tags = "AreaInfoController")
 @Tag(name = "AreaInfoController", description = "区域信息管理")
-@RequestMapping("/areaInfo")
+@RequestMapping("/area-info")
 public class AreaInfoController {
     @Autowired
     private AreaInfoService areaInfoService;

@@ -21,7 +21,6 @@ const {
   logout,
   backTopMenu,
   onPanel,
-  getLogo,
   username,
   userAvatar,
   avatarsStyle,
@@ -44,7 +43,6 @@ nextTick(() => {
     class="horizontal-header"
   >
     <div class="horizontal-header-left" @click="backTopMenu">
-      <img :src="getLogo()" alt="logo" />
       <span>{{ title }}</span>
     </div>
     <el-menu

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useRole } from "./utils/hook";
+import { useRole } from "@/views/my-data/utils/hook";
 import { PureTableBar } from "@/components/RePureTableBar";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 
@@ -11,10 +11,6 @@ import EditPen from "@iconify-icons/ep/edit-pen";
 import Refresh from "@iconify-icons/ep/refresh";
 import Menu from "@iconify-icons/ep/menu";
 import AddFill from "@iconify-icons/ri/add-circle-line";
-
-defineOptions({
-  name: "SystemRole"
-});
 
 const formRef = ref();
 const {
@@ -44,33 +40,15 @@ const {
       :model="form"
       class="search-form bg-bg_color w-[99/100] pl-8 pt-[12px]"
     >
-      <el-form-item label="角色名称：" prop="name">
+      <el-form-item label="" prop="">
         <el-input
           v-model="form.name"
-          placeholder="请输入角色名称"
+          placeholder="请输入文件名称"
           clearable
           class="!w-[180px]"
         />
       </el-form-item>
-      <el-form-item label="角色标识：" prop="code">
-        <el-input
-          v-model="form.code"
-          placeholder="请输入角色标识"
-          clearable
-          class="!w-[180px]"
-        />
-      </el-form-item>
-      <el-form-item label="状态：" prop="status">
-        <el-select
-          v-model="form.status"
-          placeholder="请选择状态"
-          clearable
-          class="!w-[180px]"
-        >
-          <el-option label="已启用" value="1" />
-          <el-option label="已停用" value="0" />
-        </el-select>
-      </el-form-item>
+
       <el-form-item>
         <el-button
           type="primary"
@@ -86,18 +64,14 @@ const {
       </el-form-item>
     </el-form>
 
-    <PureTableBar
-      title="角色管理（仅演示，操作后不生效）"
-      :columns="columns"
-      @refresh="onSearch"
-    >
+    <PureTableBar title="" :columns="columns" @refresh="onSearch">
       <template #buttons>
         <el-button
           type="primary"
           :icon="useRenderIcon(AddFill)"
           @click="openDialog()"
         >
-          新增角色
+          上传文件
         </el-button>
       </template>
       <template v-slot="{ size, dynamicColumns }">
@@ -121,6 +95,17 @@ const {
           @page-current-change="handleCurrentChange"
         >
           <template #operation="{ row }">
+
+            <el-button
+              class="reset-margin"
+              link
+              type="primary"
+              :size="size"
+              :icon="useRenderIcon(Menu)"
+              @click="handleMenu"
+            >
+              查看
+            </el-button>
             <el-button
               class="reset-margin"
               link
@@ -130,16 +115,6 @@ const {
               @click="openDialog('修改', row)"
             >
               修改
-            </el-button>
-            <el-button
-              class="reset-margin"
-              link
-              type="primary"
-              :size="size"
-              :icon="useRenderIcon(Menu)"
-              @click="handleMenu"
-            >
-              菜单权限
             </el-button>
             <el-popconfirm
               :title="`是否确认删除角色名称为${row.name}的这条数据`"
@@ -157,6 +132,43 @@ const {
                 </el-button>
               </template>
             </el-popconfirm>
+            <!-- <el-dropdown>
+              <el-button
+                class="ml-3 mt-[2px]"
+                link
+                type="primary"
+                :size="size"
+                :icon="useRenderIcon(More)"
+              />
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item>
+                    <el-button
+                      :class="buttonClass"
+                      link
+                      type="primary"
+                      :size="size"
+                      :icon="useRenderIcon(Menu)"
+                      @click="handleMenu"
+                    >
+                      菜单权限
+                    </el-button>
+                  </el-dropdown-item>
+                  <el-dropdown-item>
+                    <el-button
+                      :class="buttonClass"
+                      link
+                      type="primary"
+                      :size="size"
+                      :icon="useRenderIcon(Database)"
+                      @click="handleDatabase"
+                    >
+                      数据权限
+                    </el-button>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown> -->
           </template>
         </pure-table>
       </template>
@@ -174,4 +186,5 @@ const {
     margin-bottom: 12px;
   }
 }
+
 </style>

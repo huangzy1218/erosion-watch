@@ -1,12 +1,11 @@
 import { $t } from "@/plugins/i18n";
 import { mydata } from "@/router/enums";
-const Layout = () => import("@/layout/index.vue");
+const MyData = () => import("@/views/my-data/index.vue");
 
 export default {
   path: "/my-data",
   name: "MyData",
-  component: Layout,
-  redirect: "/my-data/overview",
+  component: MyData,
   meta: {
     icon: "folderOpen",
     title: $t("menus.hsMyData"),

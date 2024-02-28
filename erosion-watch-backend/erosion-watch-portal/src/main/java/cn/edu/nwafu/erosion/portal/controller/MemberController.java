@@ -75,7 +75,7 @@ public class MemberController {
     }
 
     @ApiOperation("获取验证码")
-    @RequestMapping(value = "/getAuthCode", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-auth-code", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<?> getAuthCode(@RequestParam String telephone) {
         String authCode = memberService.generateAuthCode(telephone);
@@ -83,7 +83,7 @@ public class MemberController {
     }
 
     @ApiOperation("用户修改密码")
-    @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
+    @RequestMapping(value = "/update-password", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult<?> updatePassword(@RequestParam String telephone,
                                           @RequestParam String password,
@@ -98,7 +98,7 @@ public class MemberController {
 
 
     @ApiOperation(value = "刷新token")
-    @RequestMapping(value = "/refreshToken", method = RequestMethod.GET)
+    @RequestMapping(value = "/refresh-token", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<?> refreshToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
@@ -113,7 +113,7 @@ public class MemberController {
     }
 
     @ApiOperation("完善用户资料")
-    @RequestMapping(value = "/completeProfile", method = RequestMethod.POST)
+    @RequestMapping(value = "/complete-profile", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult<?> completeProfile(@RequestParam Long userId,
                                            @RequestParam(required = false) String nickname,
