@@ -1,12 +1,12 @@
 // src/router/menus/dataprocess.ts
 import { $t } from "@/plugins/i18n";
 import { dataprocess } from "@/router/enums";
-const Layout = () => import("@/layout/index.vue");
+const DataProcess = () => import("@/views/data-process/index.vue");
 
 export default {
   path: "/data-process",
   name: "DataProcess",
-  component: Layout,
+  component: DataProcess,
   meta: {
     icon: "share",
     title: $t("menus.hsDataProcess"),

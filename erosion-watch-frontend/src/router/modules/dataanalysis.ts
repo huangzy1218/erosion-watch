@@ -1,12 +1,11 @@
 import { $t } from "@/plugins/i18n";
 import { dataanalysis } from "@/router/enums";
-const Layout = () => import("@/layout/index.vue");
+const DataAnalysis = () => import("@/views/data-analysis/index.vue");
 
 export default {
   path: "/data-analysis",
   name: "DataAnalysis",
-  component: Layout,
-  redirect: "/data-analysis/statistics",
+  component: DataAnalysis,
   meta: {
     icon: "chart",
     title: $t("menus.hsDataAnalysis"),

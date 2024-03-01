@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useRole } from "@/views/my-data/utils/hook";
+import { useRole } from "@/views/data-process/utils/hook";
 import { PureTableBar } from "@/components/RePureTableBar";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 
@@ -64,16 +64,7 @@ const {
       </el-form-item>
     </el-form>
 
-    <PureTableBar title="" :columns="columns" @refresh="onSearch">
-      <template #buttons>
-        <el-button
-          type="primary"
-          :icon="useRenderIcon(AddFill)"
-          @click="openDialog()"
-        >
-          上传文件
-        </el-button>
-      </template>
+    <PureTableBar title="最近处理" :columns="columns" @refresh="onSearch">
       <template v-slot="{ size, dynamicColumns }">
         <pure-table
           align-whole="left"
@@ -85,7 +76,7 @@ const {
           :data="dataList"
           :columns="dynamicColumns"
           :pagination="pagination"
-          :paginationSmall="size === 'small'"
+          :paginationSmall="size === 'small' ? true : false"
           :header-cell-style="{
             background: 'var(--el-fill-color-light)',
             color: 'var(--el-text-color-primary)'
@@ -95,17 +86,6 @@ const {
           @page-current-change="handleCurrentChange"
         >
           <template #operation="{ row }">
-
-            <el-button
-              class="reset-margin"
-              link
-              type="primary"
-              :size="size"
-              :icon="useRenderIcon(Menu)"
-              @click="handleMenu"
-            >
-              查看
-            </el-button>
             <el-button
               class="reset-margin"
               link
@@ -114,10 +94,10 @@ const {
               :icon="useRenderIcon(EditPen)"
               @click="openDialog('修改', row)"
             >
-              修改
+              继续处理
             </el-button>
             <el-popconfirm
-              :title="`是否确认删除角色名称为${row.name}的这条数据`"
+              :title="`是否确认删除文件名称为${row.name}的数据`"
               @confirm="handleDelete(row)"
             >
               <template #reference>
@@ -186,5 +166,4 @@ const {
     margin-bottom: 12px;
   }
 }
-
 </style>

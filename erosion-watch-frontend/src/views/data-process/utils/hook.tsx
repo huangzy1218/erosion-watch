@@ -30,25 +30,19 @@ export function useRole() {
     {
       label: "文件名称",
       prop: "name",
-      minWidth: 180,
+      minWidth: 200,
       fixed: "left"
     },
     {
-      label: "创建时间",
-      minWidth: 180,
+      label: "更新时间",
+      minWidth: 200,
       prop: "createTime",
       formatter: ({ createTime }) =>
         dayjs(createTime).format("YYYY-MM-DD HH:mm:ss")
     },
     {
-      label: "大小",
-      prop: "size",
-      minWidth: 180
-    },
-    {
       label: "操作",
       fixed: "right",
-      width: 340,
       slot: "operation"
     }
   ];
