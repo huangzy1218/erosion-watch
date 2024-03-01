@@ -31,7 +31,13 @@ export function useRole() {
       label: "文件名称",
       prop: "name",
       minWidth: 200,
-      fixed: "left"
+      fixed: "left",
+      cellRenderer: ({ row }) => (
+        <div style="display: flex; align-items: center">
+          <iconify-icon-online icon="ep:document" />
+          <span style="margin-left: 10px">{row.name}</span>
+        </div>
+      )
     },
     {
       label: "更新时间",

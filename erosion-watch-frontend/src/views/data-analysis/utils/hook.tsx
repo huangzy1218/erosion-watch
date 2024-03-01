@@ -31,7 +31,13 @@ export function useRole() {
       label: "项目名称",
       prop: "project_name",
       minWidth: 200,
-      fixed: "left"
+      fixed: "left",
+      cellRenderer: ({ row }) => (
+        <div style="display: flex; align-items: center">
+          <iconify-icon-online icon="ep:folder" />
+          <span style="margin-left: 10px">{row.date}</span>
+        </div>
+      )
     },
     {
       label: "文件名称",

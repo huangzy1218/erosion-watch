@@ -1,11 +1,11 @@
 import { $t } from "@/plugins/i18n";
 import { notes } from "@/router/enums";
-const Layout = () => import("@/layout/index.vue");
+const Notes = () => import("@/views/notes/index.vue");
 
 export default {
   path: "/notes",
   name: "Notes",
-  component: Layout,
+  component: Notes,
   meta: {
     icon: "notebook",
     title: $t("menus.hsNotes"),

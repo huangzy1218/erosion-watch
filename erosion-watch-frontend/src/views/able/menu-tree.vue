@@ -71,7 +71,6 @@ const filterMethod = (query: string, node: treeNode) => {
       ref="treeRef"
       :data="menusData"
       :props="dataProps"
-      show-checkbox
       :height="500"
       :filter-method="filterMethod"
       :default-expanded-keys="expandedKeys"
