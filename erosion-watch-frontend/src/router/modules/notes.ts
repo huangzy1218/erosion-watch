@@ -1,14 +1,24 @@
 import { $t } from "@/plugins/i18n";
 import { notes } from "@/router/enums";
-const Notes = () => import("@/views/notes/index.vue");
 
 export default {
   path: "/notes",
-  name: "Notes",
-  component: Notes,
+  redirect: "/notes/index",
   meta: {
     icon: "notebook",
     title: $t("menus.hsNotes"),
     rank: notes
-  }
-} as RouteConfigsTable;
+  },
+  children: [
+    {
+      path: "/notes/index",
+      name: "Notes",
+      component: () => import("@/views/notes/index.vue"),
+      meta: {
+        icon: "book",
+        title: $t("menus.hsNotes"),
+        keepAlive: true
+      }
+    }
+  ]
+} satisfies RouteConfigsTable;
