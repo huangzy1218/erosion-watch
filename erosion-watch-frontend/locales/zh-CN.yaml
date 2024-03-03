@@ -1,4 +1,5 @@
 buttons:
+  hsPersonCenter: 个人中心
   hsLoginOut: 退出系统
   hsfullscreen: 全屏
   hsexitfullscreen: 退出全屏

@@ -147,7 +147,7 @@ export function useRole() {
 
   function openDialog(title = "新增", row?: FormItemProps) {
     addDialog({
-      title: `上传文件`,
+      title: `选择文件`,
       props: {
         formInline: {
           name: row?.name ?? "",

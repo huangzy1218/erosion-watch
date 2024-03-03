@@ -2,7 +2,7 @@ import type { PropType } from "vue";
 import propTypes from "@/utils/propTypes";
 export const countToProps = {
   startVal: propTypes.number.def(0),
-  endVal: propTypes.number.def(2020),
+  endVal: propTypes.number.def(2023),
   duration: propTypes.number.def(1300),
   autoplay: propTypes.bool.def(true),
   decimals: {

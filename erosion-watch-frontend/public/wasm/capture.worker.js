@@ -8139,7 +8139,7 @@ var FS = {
         }
       }
 
-      // by default, lookupPath will not follow a symlink if it is the final path component.
+      // by default, lookupPath will not follow a symlink if it is the final path components.
       // setting opts.follow = true will override this behavior.
       if (!islast || opts.follow) {
         var count = 0;

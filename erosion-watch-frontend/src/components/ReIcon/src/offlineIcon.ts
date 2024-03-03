@@ -34,6 +34,7 @@ import EpShare from "@iconify-icons/ep/share";
 import EpHistogram from "@iconify-icons/ep/histogram";
 import EpManagement from "@iconify-icons/ep/management";
 import EpList from "@iconify-icons/ep/list";
+import EpDownLoad from "@iconify-icons/ep/document";
 
 addIcon("ubuntuFill", UbuntuFill);
 addIcon("menu", Menu);
@@ -64,3 +65,4 @@ addIcon("share", EpShare);
 addIcon("chart", EpHistogram);
 addIcon("book", EpManagement);
 addIcon("notebook", EpList);
+addIcon("download", EpDownLoad);

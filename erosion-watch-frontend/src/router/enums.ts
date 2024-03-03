@@ -20,7 +20,6 @@ const home = 0, // 平台规定只有 home 路由的 rank 才能为 0 ，所以�
   guide = 18,
   menuoverflow = 19,
   mydata = 1,
-  dataprocess = 2,
   dataanalysis = 3,
   references = 4,
   notes = 5,
@@ -48,7 +47,6 @@ export {
   guide,
   menuoverflow,
   mydata,
-  dataprocess,
   dataanalysis,
   references,
   notes

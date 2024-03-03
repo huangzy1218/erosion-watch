@@ -11,6 +11,7 @@ import EditPen from "@iconify-icons/ep/edit-pen";
 import Refresh from "@iconify-icons/ep/refresh";
 import Menu from "@iconify-icons/ep/menu";
 import Info from "@iconify-icons/ri/file-info-line";
+import AddFill from "@iconify-icons/ri/add-circle-line";
 
 const formRef = ref();
 const {
@@ -24,7 +25,7 @@ const {
   openDialog,
   handleMenu,
   handleDelete,
-  handleDatabase,
+  // handleDatabase,
   handleSizeChange,
   handleCurrentChange,
   handleSelectionChange
@@ -34,6 +35,15 @@ const {
 <template>
   <div class="main">
     <PureTableBar title="最近项目" :columns="columns" @refresh="onSearch">
+      <template #buttons>
+        <el-button
+          type="primary"
+          :icon="useRenderIcon(AddFill)"
+          @click="openDialog()"
+        >
+          新建分析
+        </el-button>
+      </template>
       <template v-slot="{ size, dynamicColumns }">
         <pure-table
           align-whole="left"
@@ -82,7 +92,7 @@ const {
                       type="primary"
                       :size="size"
                       :icon="useRenderIcon(EditPen)"
-                      @click="handleDatabase"
+<!--                      --@click="handleDatabase">
                     >
                       修改
                     </el-button>

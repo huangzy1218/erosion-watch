@@ -3,15 +3,14 @@ import { ref } from "vue";
 import { useRole } from "@/views/my-data/utils/hook";
 import { PureTableBar } from "@/components/RePureTableBar";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-
-// import Database from "@iconify-icons/ri/database-2-line";
-// import More from "@iconify-icons/ep/more-filled";
+import { $t } from "@/plugins/i18n";
 import Delete from "@iconify-icons/ep/delete";
 import EditPen from "@iconify-icons/ep/edit-pen";
 import Refresh from "@iconify-icons/ep/refresh";
 import Menu from "@iconify-icons/ep/menu";
 import AddFill from "@iconify-icons/ri/add-circle-line";
-
+import Download from "@iconify-icons/ep/download";
+import Document from "@iconify-icons/ep/document";
 const formRef = ref();
 const {
   form,
@@ -19,8 +18,9 @@ const {
   columns,
   dataList,
   pagination,
-  // buttonClass,
+  buttonClass,
   onSearch,
+  handleSee,
   resetForm,
   openDialog,
   handleMenu,
@@ -28,7 +28,8 @@ const {
   // handleDatabase,
   handleSizeChange,
   handleCurrentChange,
-  handleSelectionChange
+  handleSelectionChange,
+  openRenameDialog
 } = useRole();
 </script>
 
@@ -95,31 +96,38 @@ const {
           @page-current-change="handleCurrentChange"
         >
           <template #operation="{ row }">
-
             <el-button
               class="reset-margin"
               link
               type="primary"
               :size="size"
-              :icon="useRenderIcon(Menu)"
-              @click="handleMenu"
+              :icon="useRenderIcon(Document)"
+              @click="handleSee(row)"
             >
-              查看
+              查看详情
             </el-button>
             <el-button
               class="reset-margin"
               link
               type="primary"
               :size="size"
+              :icon="useRenderIcon(Download)"
+              @click="handleSee(row)"
+            >
+              导出
+            </el-button>
+            <el-button
+              class="reset-margin"
+              link
+              type="primary"
+              :size="size"
+              :class="buttonClass"
               :icon="useRenderIcon(EditPen)"
-              @click="openDialog('修改', row)"
+              @click="openRenameDialog(row)"
             >
-              修改
+              重命名
             </el-button>
-            <el-popconfirm
-              :title="`是否确认删除角色名称为${row.name}的这条数据`"
-              @confirm="handleDelete(row)"
-            >
+            <el-popconfirm :title="`是否删除文件`" @confirm="handleDelete(row)">
               <template #reference>
                 <el-button
                   class="reset-margin"
@@ -186,5 +194,4 @@ const {
     margin-bottom: 12px;
   }
 }
-
 </style>

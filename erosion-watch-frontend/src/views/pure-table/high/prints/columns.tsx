@@ -1,16 +1,45 @@
 import Print from "@/utils/print";
-import { ref, type Ref } from "vue";
+import { computed, ref, type Ref, Transition } from "vue";
 import { tableDataEdit } from "../data";
-import { clone } from "@pureadmin/utils";
+import { clone, delay } from "@pureadmin/utils";
+import Check from "@iconify-icons/ep/check";
+import EditPen from "@iconify-icons/ep/edit-pen";
+import { message } from "@/utils/message";
 
 export function useColumns(printRef: Ref) {
   const dataList = ref(clone(tableDataEdit, true));
+  const inputValMap = ref({});
+  // 是否正处于修改状态（可多个）
+  const editStatus = ref({});
+  // 当前激活的单元格（唯一）
+  const activeIndex = ref(-1);
 
+  const comVal = computed(() => {
+    return index => {
+      return inputValMap.value[index]?.value;
+    };
+  });
+
+  const editing = computed(() => {
+    return index => {
+      return editStatus.value[index]?.editing;
+    };
+  });
+
+  const iconClass = computed(() => {
+    return (index, other = false) => {
+      return [
+        "cursor-pointer",
+        "ml-2",
+        "transition",
+        "delay-100",
+        other
+          ? ["hover:scale-110", "hover:text-red-500"]
+          : editing.value(index) && ["scale-150", "text-red-500"]
+      ];
+    };
+  });
   const columns: TableColumnList = [
-    {
-      label: "ID",
-      prop: "id"
-    },
     {
       label: "日期",
       prop: "date"

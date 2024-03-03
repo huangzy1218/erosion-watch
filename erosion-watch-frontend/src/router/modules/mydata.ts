@@ -20,6 +20,17 @@ export default {
         title: $t("menus.hsMyData"),
         keepAlive: true
       }
+    },
+    {
+      path: "/my-data/detail",
+      name: "Detail",
+      component: () => import("@/views/my-data/detail.vue"),
+      meta: {
+        icon: "folderOpen",
+        title: $t("menus.hsDetail"),
+        keepAlive: true,
+        showLink: false
+      }
     }
   ]
 } satisfies RouteConfigsTable;

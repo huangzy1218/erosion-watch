@@ -1,17 +1,13 @@
 import { ref } from "vue";
 import { utils, writeFile } from "xlsx";
-import { tableDataDrag } from "../data";
+import {tableDataDrag, tableDataEdit} from "../data";
 import { clone } from "@pureadmin/utils";
 import { message } from "@/utils/message";
 
 export function useColumns() {
-  const dataList = ref(clone(tableDataDrag, true));
+  const dataList = ref(clone(tableDataEdit, true));
 
   const columns: TableColumnList = [
-    {
-      label: "ID",
-      prop: "id"
-    },
     {
       label: "日期",
       prop: "date"
@@ -19,6 +15,10 @@ export function useColumns() {
     {
       label: "姓名",
       prop: "name"
+    },
+    {
+      label: "地址",
+      prop: "address"
     }
   ];
 

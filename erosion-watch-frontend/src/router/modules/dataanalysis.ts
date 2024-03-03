@@ -19,6 +19,16 @@ export default {
         title: $t("menus.hsDataAnalysis"),
         keepAlive: true
       }
+    },
+    {
+      path: "/data-analysis/operation",
+      name: "Operation",
+      component: () => import("@/views/data-analysis/operation.vue"),
+      meta: {
+        icon: "folderOpen",
+        keepAlive: true,
+        showLink: false
+      }
     }
   ]
 } satisfies RouteConfigsTable;
