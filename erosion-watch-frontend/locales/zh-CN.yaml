@@ -131,6 +131,8 @@ menus:
   hsDataAnalysis: 数据分析
   hsReferences: 文献资源
   hsNotes: 我的笔记
+  hsOperation: 操作
+  hsUserProfile: 用户信息
 status:
   hsLoad: 加载中...
 login:

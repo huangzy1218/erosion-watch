@@ -17,6 +17,24 @@ export default {
       meta: {
         title: $t("menus.hsAbout")
       }
+    },
+    {
+      path: "/user-profile",
+      name: "UserProfile",
+      component: () => import("@/views/user-profile/index.vue"),
+      meta: {
+        title: $t("menus.hsUserProfile"),
+        showLink: false,
+      }
+    },
+    {
+      path: "/edit-profile",
+      name: "EditProfile",
+      component: () => import("@/views/user-profile/editInfo.vue"),
+      meta: {
+        title: $t("menus.hsUserProfile"),
+        showLink: false,
+      }
     }
   ]
 } satisfies RouteConfigsTable;

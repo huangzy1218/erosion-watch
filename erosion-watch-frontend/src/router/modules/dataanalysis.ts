@@ -26,6 +26,7 @@ export default {
       component: () => import("@/views/data-analysis/operation.vue"),
       meta: {
         icon: "folderOpen",
+        title: $t("menus.hsOperation"),
         keepAlive: true,
         showLink: false
       }

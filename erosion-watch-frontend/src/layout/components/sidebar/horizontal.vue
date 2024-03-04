@@ -11,6 +11,7 @@ import globalization from "@/assets/svg/globalization.svg?component";
 import LogoutCircleRLine from "@iconify-icons/ri/logout-circle-r-line";
 import Setting from "@iconify-icons/ri/settings-3-line";
 import Check from "@iconify-icons/ep/check";
+import Avatar from "@iconify-icons/ep/avatar";
 
 const menuRef = ref();
 
@@ -25,7 +26,8 @@ const {
   userAvatar,
   avatarsStyle,
   getDropdownItemStyle,
-  getDropdownItemClass
+  getDropdownItemClass,
+  navigateToMemberPage
 } = useNav();
 
 const defaultActive = computed(() =>
@@ -103,6 +105,10 @@ nextTick(() => {
         </span>
         <template #dropdown>
           <el-dropdown-menu class="logout">
+            <el-dropdown-item @click="navigateToMemberPage">
+              <IconifyIconOffline :icon="Avatar" style="margin: 5px" />
+              {{ t("buttons.hsPersonCenter") }}
+            </el-dropdown-item>
             <el-dropdown-item @click="logout">
               <IconifyIconOffline
                 :icon="LogoutCircleRLine"

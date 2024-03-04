@@ -87,6 +87,10 @@ export function useNav() {
     useUserStoreHook().logOut();
   }
 
+  function navigateToMemberPage() {
+    router.push("/user-profile");
+  }
+
   function backTopMenu() {
     router.push(getTopMenu()?.path);
   }
@@ -152,6 +156,7 @@ export function useNav() {
     avatarsStyle,
     tooltipEffect,
     getDropdownItemStyle,
-    getDropdownItemClass
+    getDropdownItemClass,
+    navigateToMemberPage
   };
 }

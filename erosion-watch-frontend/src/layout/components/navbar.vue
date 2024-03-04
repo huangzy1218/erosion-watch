@@ -23,7 +23,8 @@ const {
   avatarsStyle,
   toggleSideBar,
   getDropdownItemStyle,
-  getDropdownItemClass
+  getDropdownItemClass,
+  navigateToMemberPage
 } = useNav();
 
 const { t, locale, translationCh, translationEn } = useTranslationLang();
@@ -90,7 +91,7 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
         </span>
         <template #dropdown>
           <el-dropdown-menu class="logout">
-            <el-dropdown-item @click="logout">
+            <el-dropdown-item @click="navigateToMemberPage">
               <IconifyIconOffline :icon="Avatar" style="margin: 5px" />
               {{ t("buttons.hsPersonCenter") }}
             </el-dropdown-item>

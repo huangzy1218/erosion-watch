@@ -22,6 +22,7 @@ buttons:
   hswholeExitFullScreen: ExitFull
   hscontentFullScreen: Content FullScreen
   hscontentExitFullScreen: Content ExitFullScreen
+  hsPersonCenter: Individual Center
 menus:
   hshome: Home
   hslogin: Login
@@ -130,6 +131,8 @@ menus:
   hsDataAnalysis: Data Analysis
   hsReferences: References
   hsNotes: My Notes
+  hsOperation: Operation
+  hsUserProfile: User Profile
 status:
   hsLoad: Loading...
 login:
