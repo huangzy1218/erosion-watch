@@ -133,6 +133,15 @@ menus:
   hsNotes: My Notes
   hsOperation: Operation
   hsUserProfile: User Profile
+  hsMonitor: Monitor
+  hsAreaInfo: Area Information
+  hsSoilType: Soil Type
+  hsVegetationCoverage: Vegetation Coverage
+  hsTerrainLandform: Terrain Landform
+  hsSoilErosionGrade: Soil Erosion Grade
+  hsMonitorData: Monitor Data
+  hsLandManagementPlans: Land Management Plans
+  hsLandUseChangeHistory: Land Use Change History
 status:
   hsLoad: Loading...
 login:

@@ -133,6 +133,15 @@ menus:
   hsNotes: 我的笔记
   hsOperation: 操作
   hsUserProfile: 用户信息
+  hsMonitor: 监测管理
+  hsAreaInfo: 区域信息
+  hsSoilType: 土壤类型
+  hsVegetationCoverage: 植被覆盖
+  hsTerrainLandform: 地形地貌
+  hsSoilErosionGrade: 土壤侵蚀等级
+  hsMonitorData: 监测数据
+  hsLandManagementPlans: 土地管理规划
+  hsLandUseChangeHistory: 土地利用变化记录
 status:
   hsLoad: 加载中...
 login:

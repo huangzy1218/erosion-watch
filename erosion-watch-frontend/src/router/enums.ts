@@ -21,9 +21,10 @@ const home = 0, // 平台规定只有 home 路由的 rank 才能为 0 ，所以�
   menuoverflow = 19,
   mydata = 1,
   dataanalysis = 3,
-  references = 4,
-  notes = 5,
-  about = 6;
+  monitor = 4,
+  references = 5,
+  notes = 6,
+  about = 7;
 
 export {
   home,
@@ -49,5 +50,6 @@ export {
   mydata,
   dataanalysis,
   references,
-  notes
+  notes,
+  monitor
 };

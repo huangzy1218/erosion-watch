@@ -35,6 +35,7 @@ import EpHistogram from "@iconify-icons/ep/histogram";
 import EpManagement from "@iconify-icons/ep/management";
 import EpList from "@iconify-icons/ep/list";
 import EpDownLoad from "@iconify-icons/ep/document";
+import EpMonitor from "@iconify-icons/ep/monitor";
 
 addIcon("ubuntuFill", UbuntuFill);
 addIcon("menu", Menu);
@@ -66,3 +67,4 @@ addIcon("chart", EpHistogram);
 addIcon("book", EpManagement);
 addIcon("notebook", EpList);
 addIcon("download", EpDownLoad);
+addIcon("monitor", EpMonitor);
