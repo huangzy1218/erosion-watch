@@ -1,31 +1,27 @@
 package cn.edu.nwafu.erosion.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@Builder
 public class VegetationCoverage implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Long id;
-
     @ApiModelProperty(value = "地区ID")
     private Long areaId;
-
     @ApiModelProperty(value = "植被类型")
     private String vegetationType;
-
     @ApiModelProperty(value = "覆盖百分比")
     private BigDecimal coveragePercentage;
-
     @ApiModelProperty(value = "植被密度")
     private String density;
-
     @ApiModelProperty(value = "植被状态：0->不健康；1->健康")
     private Integer status;
-
     @ApiModelProperty(value = "备注")
     private String remarks;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;
