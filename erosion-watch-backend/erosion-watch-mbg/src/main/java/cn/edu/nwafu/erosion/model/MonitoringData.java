@@ -1,30 +1,31 @@
 package cn.edu.nwafu.erosion.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class MonitoringData implements Serializable {
+    private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "记录ID")
     private Long id;
-
     @ApiModelProperty(value = "地区ID")
     private Long areaId;
-
     @ApiModelProperty(value = "监测日期")
     private Date monitoringDate;
-
     @ApiModelProperty(value = "土壤侵蚀率")
     private BigDecimal soilErosionRate;
-
     @ApiModelProperty(value = "植被覆盖率")
     private BigDecimal vegetationCoverageRate;
-
     @ApiModelProperty(value = "降雨量（单位：毫米）")
     private BigDecimal rainfallAmount;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

@@ -1,32 +1,32 @@
 package cn.edu.nwafu.erosion.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class LandManagementPlans implements Serializable {
+    private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "记录ID")
     private Long id;
-
     @ApiModelProperty(value = "地区ID")
     private Long areaId;
-
     @ApiModelProperty(value = "计划日期")
     private Date planDate;
-
     @ApiModelProperty(value = "计划类型（规划/项目）")
     private String planType;
-
     @ApiModelProperty(value = "责任单位")
     private String responsibleUnit;
-
     @ApiModelProperty(value = "实施日期")
     private Date implementationDate;
-
     @ApiModelProperty(value = "计划内容")
     private String planContent;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

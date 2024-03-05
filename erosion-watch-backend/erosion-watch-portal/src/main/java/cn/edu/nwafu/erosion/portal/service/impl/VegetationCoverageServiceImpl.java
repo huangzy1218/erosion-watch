@@ -18,7 +18,6 @@ import java.util.List;
 @Slf4j
 @Service
 public class VegetationCoverageServiceImpl implements VegetationCoverageService {
-
     @Autowired
     private VegetationCoverageMapper vegetationCoverageMapper;
 

@@ -1,37 +1,35 @@
 package cn.edu.nwafu.erosion.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SoilErosionGrade implements Serializable {
+    private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "记录ID")
     private Long id;
-
     @ApiModelProperty(value = "地区ID")
     private Long areaId;
-
     @ApiModelProperty(value = "侵蚀类型")
     private String erosionType;
-
     @ApiModelProperty(value = "侵蚀等级")
     private String erosionGrade;
-
     @ApiModelProperty(value = "抗蚀年限（单位：年）")
     private Integer erosionYears;
-
     @ApiModelProperty(value = "风险等级")
     private String riskLevel;
-
     @ApiModelProperty(value = "侵蚀描述")
     private String erosionDescription;
-
     @ApiModelProperty(value = "风险评估结果")
     private String riskAssessmentResult;
-
     @ApiModelProperty(value = "管理措施")
     private String managementPractice;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

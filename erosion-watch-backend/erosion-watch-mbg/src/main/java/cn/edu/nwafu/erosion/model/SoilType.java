@@ -1,11 +1,15 @@
 package cn.edu.nwafu.erosion.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SoilType implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;

@@ -1,38 +1,36 @@
 package cn.edu.nwafu.erosion.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TerrainLandform implements Serializable {
+    private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "记录ID")
     private Long id;
-
     @ApiModelProperty(value = "地区ID")
     private Long areaId;
-
     @ApiModelProperty(value = "地形类型")
     private String terrainType;
-
     @ApiModelProperty(value = "地貌类型")
     private String landformType;
-
     @ApiModelProperty(value = "海拔高度（单位：米）")
     private BigDecimal elevation;
-
     @ApiModelProperty(value = "坡度（单位：度）")
     private BigDecimal slope;
-
     @ApiModelProperty(value = "土壤类型")
     private String soilType;
-
     @ApiModelProperty(value = "植被类型")
     private String vegetationType;
-
     @ApiModelProperty(value = "水系类型")
     private String waterSystem;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

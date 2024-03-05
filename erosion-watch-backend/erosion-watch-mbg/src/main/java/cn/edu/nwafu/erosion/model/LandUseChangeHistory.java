@@ -1,29 +1,30 @@
 package cn.edu.nwafu.erosion.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class LandUseChangeHistory implements Serializable {
+    private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "记录ID")
     private Long id;
-
     @ApiModelProperty(value = "地区ID")
     private Long areaId;
-
     @ApiModelProperty(value = "变更日期")
     private Date changeDate;
-
     @ApiModelProperty(value = "之前的土地利用情况")
     private String previousLandUse;
-
     @ApiModelProperty(value = "当前的土地利用情况")
     private String currentLandUse;
-
     @ApiModelProperty(value = "变更原因")
     private String changeReason;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;
