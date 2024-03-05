@@ -3,8 +3,6 @@ import { addIcon } from "@iconify/vue/dist/offline";
 /**
  * 这里存放本地图标，在 src/layout/index.vue 文件中加载，避免在首启动加载
  */
-
-// 本地菜单图标，后端在路由的icon中返回对应的图标字符串并且前端在此处使用addIcon添加即可渲染菜单图标
 import UbuntuFill from "@iconify-icons/ri/ubuntu-fill";
 import Menu from "@iconify-icons/ep/menu";
 import Edit from "@iconify-icons/ep/edit";
@@ -36,6 +34,14 @@ import EpManagement from "@iconify-icons/ep/management";
 import EpList from "@iconify-icons/ep/list";
 import EpDownLoad from "@iconify-icons/ep/document";
 import EpMonitor from "@iconify-icons/ep/monitor";
+import RiCoinFill from "@iconify-icons/ri/coin-fill";
+import RiArticleLine from "@iconify-icons/ri/article-line";
+import RiTreeFill from "@iconify-icons/ri/tree-fill";
+import RiLandscapeFill from "@iconify-icons/ri/landscape-fill";
+import RiGradienterFill from "@iconify-icons/ri/gradienter-fill";
+import RiDatabase2Fill from "@iconify-icons/ri/database-2-fill";
+import RiHistoryFill from "@iconify-icons/ri/history-fill";
+import RiOrderPlayLine from "@iconify-icons/ri/order-play-line";
 
 addIcon("ubuntuFill", UbuntuFill);
 addIcon("menu", Menu);
@@ -68,3 +74,12 @@ addIcon("book", EpManagement);
 addIcon("notebook", EpList);
 addIcon("download", EpDownLoad);
 addIcon("monitor", EpMonitor);
+addIcon("soil-type", RiCoinFill);
+addIcon("area-info", RiArticleLine);
+addIcon("vegetation-coverage", RiTreeFill);
+addIcon("terrain-landform", RiLandscapeFill);
+addIcon("soil-erosion-grade", RiGradienterFill);
+addIcon("monitor-data", RiDatabase2Fill);
+addIcon("land-use-change-history", RiHistoryFill);
+addIcon("land-management-plans", RiOrderPlayLine);
+
