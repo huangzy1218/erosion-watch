@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 @Api(tags = "VegetationCoverageController")
 @Tag(name = "VegetationCoverageController", description = "植被覆盖管理")
-@RestController
+@Controller
 @RequestMapping("/vegetation-coverages")
 public class VegetationCoverageController {
     @Autowired

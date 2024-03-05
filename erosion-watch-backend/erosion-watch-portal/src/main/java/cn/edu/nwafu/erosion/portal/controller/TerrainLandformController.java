@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +18,8 @@ import java.util.List;
  * @author Huang Z.Y.
  */
 @Api(tags = "TerrainLandformController")
-@Tag(name = "TerrainLandformControllerController", description = "地形地貌管理")
-@RestController
+@Tag(name = "TerrainLandformController", description = "地形地貌管理")
+@Controller
 @RequestMapping("/terrain-landforms")
 public class TerrainLandformController {
     @Autowired

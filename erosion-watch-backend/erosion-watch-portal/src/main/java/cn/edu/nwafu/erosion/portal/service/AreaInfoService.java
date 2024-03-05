@@ -20,4 +20,10 @@ public interface AreaInfoService {
     List<AreaInfo> listAll();
 
     List<AreaInfo> search(String areaName, String administrativeCode, BigDecimal minLatitude, BigDecimal maxLatitude, BigDecimal minLongitude, BigDecimal maxLongitude);
+
+    /**
+     * @author Huang Z.Y.
+     */
+    interface SoilErosionGradeService {
+    }
 }
