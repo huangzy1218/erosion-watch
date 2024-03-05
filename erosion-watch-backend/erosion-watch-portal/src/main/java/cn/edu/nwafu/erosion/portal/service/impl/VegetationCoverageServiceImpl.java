@@ -6,6 +6,7 @@ import cn.edu.nwafu.erosion.model.VegetationCoverageExample;
 import cn.edu.nwafu.erosion.portal.domain.dto.VegetationCoverageDto;
 import cn.edu.nwafu.erosion.portal.domain.dto.VegetationCoverageSearchDto;
 import cn.edu.nwafu.erosion.portal.service.VegetationCoverageService;
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,8 +73,7 @@ public class VegetationCoverageServiceImpl implements VegetationCoverageService 
         if (vegetationCoverageSearchDto.getAreaId() != null) {
             criteria.andAreaIdEqualTo(vegetationCoverageSearchDto.getAreaId());
         }
-        if (vegetationCoverageSearchDto.getVegetationType() != null &&
-                !vegetationCoverageSearchDto.getVegetationType().isEmpty()) {
+        if (StrUtil.isNotEmpty(vegetationCoverageSearchDto.getVegetationType())) {
             criteria.andVegetationTypeEqualTo(vegetationCoverageSearchDto.getVegetationType());
         }
         if (vegetationCoverageSearchDto.getMinCoveragePercentage() != null &&
@@ -81,8 +81,7 @@ public class VegetationCoverageServiceImpl implements VegetationCoverageService 
             criteria.andCoveragePercentageBetween(vegetationCoverageSearchDto.getMinCoveragePercentage(),
                     vegetationCoverageSearchDto.getMaxCoveragePercentage());
         }
-        if (vegetationCoverageSearchDto.getDensity() != null &&
-                !vegetationCoverageSearchDto.getDensity().isEmpty()) {
+        if (StrUtil.isNotEmpty(vegetationCoverageSearchDto.getDensity())) {
             criteria.andDensityEqualTo(vegetationCoverageSearchDto.getDensity());
         }
         if (vegetationCoverageSearchDto.getStatus() != null) {

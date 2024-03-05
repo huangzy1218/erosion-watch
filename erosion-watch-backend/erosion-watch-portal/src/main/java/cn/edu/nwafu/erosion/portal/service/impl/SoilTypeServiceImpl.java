@@ -70,16 +70,13 @@ public class SoilTypeServiceImpl implements SoilTypeService {
         SoilTypeExample example = new SoilTypeExample();
         SoilTypeExample.Criteria criteria = example.createCriteria();
 
-        if (soilTypeSearchDto.getName() != null &&
-                StrUtil.isNotEmpty(soilTypeSearchDto.getName())) {
+        if (StrUtil.isNotEmpty(soilTypeSearchDto.getName())) {
             criteria.andNameLike(soilTypeSearchDto.getName());
         }
-        if (soilTypeSearchDto.getSoilQuality() != null &&
-                StrUtil.isNotEmpty(soilTypeSearchDto.getSoilQuality())) {
+        if (StrUtil.isNotEmpty(soilTypeSearchDto.getSoilQuality())) {
             criteria.andSoilQualityEqualTo(soilTypeSearchDto.getSoilQuality());
         }
-        if (soilTypeSearchDto.getSoilMoisture() != null &&
-                StrUtil.isNotEmpty(soilTypeSearchDto.getSoilMoisture())) {
+        if (StrUtil.isNotEmpty(soilTypeSearchDto.getSoilMoisture())) {
             criteria.andSoilMoistureEqualTo(soilTypeSearchDto.getSoilMoisture());
         }
 

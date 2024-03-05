@@ -85,10 +85,10 @@ public class AreaInfoServiceImpl implements AreaInfoService {
         AreaInfoExample example = new AreaInfoExample();
         AreaInfoExample.Criteria criteria = example.createCriteria();
 
-        if (areaName != null && StrUtil.isNotEmpty(areaName)) {
+        if (StrUtil.isNotEmpty(areaName)) {
             criteria.andAreaNameLike(areaName);
         }
-        if (administrativeCode != null && StrUtil.isNotEmpty(administrativeCode)) {
+        if (StrUtil.isNotEmpty(administrativeCode)) {
             criteria.andAdministrativeCodeEqualTo(administrativeCode);
         }
         if (minLatitude != null && maxLatitude != null) {
