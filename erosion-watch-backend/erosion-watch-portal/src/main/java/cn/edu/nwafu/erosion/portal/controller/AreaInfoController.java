@@ -3,6 +3,7 @@ package cn.edu.nwafu.erosion.portal.controller;
 import cn.edu.nwafu.common.api.CommonResult;
 import cn.edu.nwafu.erosion.model.AreaInfo;
 import cn.edu.nwafu.erosion.portal.domain.dto.AreaInfoDto;
+import cn.edu.nwafu.erosion.portal.domain.dto.AreaSearchDto;
 import cn.edu.nwafu.erosion.portal.service.AreaInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -85,17 +85,13 @@ public class AreaInfoController {
     }
 
     @ApiOperation("根据条件查询区域信息")
-    @GetMapping("/search")
+    @PostMapping("/search")
     @ResponseBody
-    public CommonResult<List<AreaInfo>> search(@RequestParam(required = false) String areaName,
-                                               @RequestParam(required = false) String administrativeCode,
-                                               @RequestParam(required = false) BigDecimal minLatitude,
-                                               @RequestParam(required = false) BigDecimal maxLatitude,
-                                               @RequestParam(required = false) BigDecimal minLongitude,
-                                               @RequestParam(required = false) BigDecimal maxLongitude) {
-        List<AreaInfo> areaInfoList = areaInfoService.search(areaName, administrativeCode,
-                minLatitude, maxLatitude,
-                minLongitude, maxLongitude);
+    public CommonResult<List<AreaInfo>> search(@RequestBody AreaSearchDto areaSearchDto) {
+        List<AreaInfo> areaInfoList = areaInfoService.search(areaSearchDto.getAreaName(),
+                areaSearchDto.getAdministrativeCode(),
+                areaSearchDto.getMinLatitude(), areaSearchDto.getMaxLatitude(),
+                areaSearchDto.getMinLongitude(), areaSearchDto.getMaxLongitude());
         return CommonResult.success(areaInfoList);
     }
 }

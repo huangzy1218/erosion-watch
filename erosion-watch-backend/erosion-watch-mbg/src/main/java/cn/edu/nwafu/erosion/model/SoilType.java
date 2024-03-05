@@ -1,30 +1,26 @@
 package cn.edu.nwafu.erosion.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
+
 import java.io.Serializable;
 
+@Builder
 public class SoilType implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Long id;
-
     @ApiModelProperty(value = "上级分类的编号：0表示一级分类")
     private Long parentId;
-
     @ApiModelProperty(value = "土壤类型名称")
     private String name;
-
     @ApiModelProperty(value = "分类级别：0->1级；1->2级")
     private Integer level;
-
     @ApiModelProperty(value = "土壤质地")
     private String soilQuality;
-
     @ApiModelProperty(value = "土壤含水量")
     private String soilMoisture;
-
     @ApiModelProperty(value = "描述")
     private String description;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

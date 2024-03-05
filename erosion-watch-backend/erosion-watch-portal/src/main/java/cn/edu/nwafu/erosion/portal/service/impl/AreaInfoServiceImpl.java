@@ -4,6 +4,7 @@ import cn.edu.nwafu.erosion.mapper.AreaInfoMapper;
 import cn.edu.nwafu.erosion.model.AreaInfo;
 import cn.edu.nwafu.erosion.model.AreaInfoExample;
 import cn.edu.nwafu.erosion.portal.service.AreaInfoService;
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -84,10 +85,10 @@ public class AreaInfoServiceImpl implements AreaInfoService {
         AreaInfoExample example = new AreaInfoExample();
         AreaInfoExample.Criteria criteria = example.createCriteria();
 
-        if (areaName != null) {
+        if (areaName != null && StrUtil.isNotEmpty(areaName)) {
             criteria.andAreaNameLike(areaName);
         }
-        if (administrativeCode != null) {
+        if (administrativeCode != null && StrUtil.isNotEmpty(administrativeCode)) {
             criteria.andAdministrativeCodeEqualTo(administrativeCode);
         }
         if (minLatitude != null && maxLatitude != null) {
