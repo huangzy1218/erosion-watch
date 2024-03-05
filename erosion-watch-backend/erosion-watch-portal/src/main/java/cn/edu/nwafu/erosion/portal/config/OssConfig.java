@@ -13,11 +13,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OssConfig {
     @Value("${aliyun.oss.access-key-secret}")
-    private static String ALIYUN_OSS_ACCESS_KEY_SECRET;
+    private String ALIYUN_OSS_ACCESS_KEY_SECRET;
     @Value("${aliyun.oss.endpoint}")
-    private static String ALIYUN_OSS_ENDPOINT;
+    private String ALIYUN_OSS_ENDPOINT;
     @Value("${aliyun.oss.access-key-id}")
-    private static String ALIYUN_OSS_ACCESS_KEY_ID;
+    private String ALIYUN_OSS_ACCESS_KEY_ID;
 
     @Bean
     public OSSClient ossClient() {

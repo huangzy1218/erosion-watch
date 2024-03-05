@@ -38,9 +38,9 @@ import java.util.Random;
 @Slf4j
 public class MemberServiceImpl implements MemberService {
     @Value("${redis.key.auth-code}")
-    private static String REDIS_KEY_PREFIX_AUTH_CODE;
+    private String REDIS_KEY_PREFIX_AUTH_CODE;
     @Value("${redis.expire.auth-code}")
-    private static Long AUTH_CODE_EXPIRE_SECONDS;
+    private Long AUTH_CODE_EXPIRE_SECONDS;
     @Autowired
     private MemberCacheService memberCacheService;
     @Autowired

@@ -17,15 +17,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class MemberCacheServiceImpl implements MemberCacheService {
     @Value("${redis.expire.common}")
-    private static Long REDIS_EXPIRE;
+    private Long REDIS_EXPIRE;
     @Value("${redis.expire.auth-code}")
-    private static Long REDIS_EXPIRE_AUTH_CODE;
+    private Long REDIS_EXPIRE_AUTH_CODE;
     @Value("${redis.key.member}")
-    private static String REDIS_KEY_MEMBER;
+    private String REDIS_KEY_MEMBER;
     @Value("${redis.key.auth-code}")
-    private static String REDIS_KEY_AUTH_CODE;
+    private String REDIS_KEY_AUTH_CODE;
     @Value("${redis.database}")
-    private static String REDIS_DATABASE;
+    private String REDIS_DATABASE;
     @Autowired
     private RedisService redisService;
     @Autowired

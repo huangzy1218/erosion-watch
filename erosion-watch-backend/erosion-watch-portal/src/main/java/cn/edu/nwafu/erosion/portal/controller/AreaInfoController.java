@@ -2,6 +2,7 @@ package cn.edu.nwafu.erosion.portal.controller;
 
 import cn.edu.nwafu.common.api.CommonResult;
 import cn.edu.nwafu.erosion.model.AreaInfo;
+import cn.edu.nwafu.erosion.portal.domain.dto.AreaInfoDto;
 import cn.edu.nwafu.erosion.portal.service.AreaInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,19 +28,11 @@ public class AreaInfoController {
     @ApiOperation("添加区域信息")
     @PostMapping("/add")
     @ResponseBody
-    public CommonResult<?> add(@RequestParam String areaName,
-                               @RequestParam String administrativeCode,
-                               @RequestParam BigDecimal latitude,
-                               @RequestParam BigDecimal longitude,
-                               @RequestParam BigDecimal area,
-                               @RequestParam Integer population,
-                               @RequestParam String climateType,
-                               @RequestParam String terrainFeature,
-                               @RequestParam String landformFeature,
-                               @RequestParam String landUse) {
-        int count = areaInfoService.add(areaName, administrativeCode, latitude, longitude,
-                area, population, climateType, terrainFeature,
-                landformFeature, landUse);
+    public CommonResult<?> add(@RequestBody AreaInfoDto areaInfoDto) {
+        int count = areaInfoService.add(areaInfoDto.getAreaName(), areaInfoDto.getAdministrativeCode(),
+                areaInfoDto.getLatitude(), areaInfoDto.getLongitude(),
+                areaInfoDto.getArea(), areaInfoDto.getPopulation(), areaInfoDto.getClimateType(),
+                areaInfoDto.getTerrainFeature(), areaInfoDto.getLandformFeature(), areaInfoDto.getLandUse());
         if (count > 0) {
             return CommonResult.success(null, "添加区域信息成功");
         } else {
@@ -56,22 +49,14 @@ public class AreaInfoController {
     }
 
     @ApiOperation("更新区域信息")
-    @PostMapping("/update")
+    @PostMapping("/update/{id}")
     @ResponseBody
-    public CommonResult<?> update(@RequestParam Long id,
-                                  @RequestParam(required = false) String areaName,
-                                  @RequestParam(required = false) String administrativeCode,
-                                  @RequestParam(required = false) BigDecimal latitude,
-                                  @RequestParam(required = false) BigDecimal longitude,
-                                  @RequestParam(required = false) BigDecimal area,
-                                  @RequestParam(required = false) Integer population,
-                                  @RequestParam(required = false) String climateType,
-                                  @RequestParam(required = false) String terrainFeature,
-                                  @RequestParam(required = false) String landformFeature,
-                                  @RequestParam(required = false) String landUse) {
-        int count = areaInfoService.update(id, areaName, administrativeCode, latitude, longitude,
-                area, population, climateType, terrainFeature,
-                landformFeature, landUse);
+    public CommonResult<?> update(@PathVariable Long id, @RequestBody AreaInfoDto areaInfoDto) {
+        int count = areaInfoService.update(id, areaInfoDto.getAreaName(), areaInfoDto.getAdministrativeCode(),
+                areaInfoDto.getLatitude(), areaInfoDto.getLongitude(),
+                areaInfoDto.getArea(), areaInfoDto.getPopulation(),
+                areaInfoDto.getClimateType(), areaInfoDto.getTerrainFeature(),
+                areaInfoDto.getLandformFeature(), areaInfoDto.getLandUse());
         if (count > 0) {
             return CommonResult.success("更新区域信息成功");
         } else {
