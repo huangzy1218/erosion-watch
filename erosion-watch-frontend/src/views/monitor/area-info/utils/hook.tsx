@@ -6,7 +6,7 @@ import { addDialog } from "@/components/ReDialog";
 import type { FormItemProps } from "../utils/types";
 import type { PaginationProps } from "@pureadmin/table";
 import { reactive, ref, onMounted, h, toRaw } from "vue";
-import {addAreaInfo, deleteAreaInfo, getAreaInfoList, updateAreaInfo} from "@/api/monitor";
+import {addAreaInfo, deleteAreaInfo, getAreaInfoList, searchAreaInfoList, updateAreaInfo} from "@/api/monitor";
 
 export function useAreaInfo() {
   const form = reactive({
@@ -57,17 +57,17 @@ export function useAreaInfo() {
     {
       label: "面积",
       prop: "area",
-      minWidth: 150
+      minWidth: 100
     },
     {
       label: "人口",
       prop: "population",
-      minWidth: 150
+      minWidth: 100
     },
     {
       label: "气候类型",
       prop: "climateType",
-      minWidth: 150
+      minWidth: 180
     },
     {
       label: "地形特征",
@@ -77,12 +77,12 @@ export function useAreaInfo() {
     {
       label: "地貌特征",
       prop: "landformFeature",
-      minWidth: 150
+      minWidth: 180
     },
     {
       label: "土地利用情况",
       prop: "landUse",
-      minWidth: 150
+      minWidth: 180
     },
     {
       label: "操作",
@@ -137,16 +137,18 @@ export function useAreaInfo() {
   const handleDelete = async row => {
     deleteAreaInfo(row.id)
       .then(response => {
-        console.log("删除成功:", response);
-        message("删除失败", { type: "error" });
-        // 这里可以添加一些成功删除后的逻辑，比如刷新列表、显示成功消息等
-        // 如果你使用了Vue框架，这里可能需要调用一个方法来更新视图或数据
+        if (response.code === 200) {
+          console.log("删除成功:", response);
+          message("删除成功", { type: "success" });
+        } else {
+          console.log("删除失败:", response);
+          message("删除失败", { type: "error" });
+        }
+        onSearch();
       })
       .catch(error => {
         console.error("删除失败:", error);
         message("删除失败", { type: "error" });
-        // 这里可以处理错误情况，比如显示错误消息
-        // 如果你使用了Vue框架，可以使用Element UI的ElMessage等来显示错误消息
       });
   };
 
@@ -168,7 +170,20 @@ export function useAreaInfo() {
     dataList.value = data.list;
     pagination.total = data.total;
     pagination.pageSize = data.pageSize;
-    pagination.currentPage = data.currentPage;
+    pagination.currentPage = data.pageNum;
+
+    setTimeout(() => {
+      loading.value = false;
+    }, 500);
+  }
+
+  async function onConditionalSearch() {
+    loading.value = true;
+    const { data } = await searchAreaInfoList(toRaw(form));
+    dataList.value = data.list;
+    pagination.total = data.total;
+    pagination.pageSize = data.pageSize;
+    pagination.currentPage = data.pageNum;
 
     setTimeout(() => {
       loading.value = false;
@@ -248,6 +263,7 @@ export function useAreaInfo() {
                 });
               chores();
             }
+            onSearch();
           }
         });
       }
@@ -281,6 +297,7 @@ export function useAreaInfo() {
     // handleDatabase,
     handleSizeChange,
     handleCurrentChange,
-    handleSelectionChange
+    handleSelectionChange,
+    onConditionalSearch
   };
 }

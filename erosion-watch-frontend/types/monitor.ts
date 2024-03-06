@@ -10,3 +10,12 @@ export interface AreaInfoDto {
   landformFeature: string;
   landUse: string;
 }
+
+export interface AreaSearchDto {
+  areaName?: string;
+  administrativeCode?: string;
+  minLatitude?: number;
+  maxLatitude?: number;
+  minLongitude?: number;
+  maxLongitude?: number;
+}
