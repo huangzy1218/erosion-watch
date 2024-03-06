@@ -21,7 +21,7 @@ import java.util.List;
 @Controller
 @Api(tags = "SoilTypeController")
 @Tag(name = "SoilTypeController", description = "土壤类型管理")
-@RequestMapping("/soil-types")
+@RequestMapping("/soil-type")
 public class SoilTypeController {
     @Autowired
     private SoilTypeService soilTypeService;

@@ -79,6 +79,12 @@ public class SoilTypeServiceImpl implements SoilTypeService {
         if (StrUtil.isNotEmpty(soilTypeSearchDto.getSoilMoisture())) {
             criteria.andSoilMoistureEqualTo(soilTypeSearchDto.getSoilMoisture());
         }
+        if (soilTypeSearchDto.getParentId() != null) {
+            criteria.andParentIdEqualTo(soilTypeSearchDto.getParentId());
+        }
+        if (soilTypeSearchDto.getLevel() != null) {
+            criteria.andLevelEqualTo(soilTypeSearchDto.getLevel());
+        }
 
         return soilTypeMapper.selectByExampleWithBLOBs(example);
     }

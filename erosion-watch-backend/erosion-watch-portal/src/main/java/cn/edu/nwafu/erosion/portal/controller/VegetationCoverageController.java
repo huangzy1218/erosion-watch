@@ -21,7 +21,7 @@ import java.util.List;
 @Api(tags = "VegetationCoverageController")
 @Tag(name = "VegetationCoverageController", description = "植被覆盖管理")
 @Controller
-@RequestMapping("/vegetation-coverages")
+@RequestMapping("/vegetation-coverage")
 public class VegetationCoverageController {
     @Autowired
     private VegetationCoverageService vegetationCoverageService;

@@ -7,6 +7,9 @@ public class SoilTypeSearchDto {
     private String name;
     private String soilQuality;
     private String soilMoisture;
+    private Long parentId;
+
+    private Integer level;
 
     public String getName() {
         return name;
@@ -30,6 +33,22 @@ public class SoilTypeSearchDto {
 
     public void setSoilMoisture(String soilMoisture) {
         this.soilMoisture = soilMoisture;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 }
     

@@ -21,7 +21,7 @@ import java.util.List;
 @Api(tags = "TerrainLandformController")
 @Tag(name = "TerrainLandformController", description = "地形地貌管理")
 @Controller
-@RequestMapping("/terrain-landforms")
+@RequestMapping("/terrain-landform")
 public class TerrainLandformController {
     @Autowired
     private TerrainLandformService terrainLandformService;
