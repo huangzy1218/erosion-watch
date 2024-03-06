@@ -6,21 +6,22 @@ import { addDialog } from "@/components/ReDialog";
 import type { FormItemProps } from "../utils/types";
 import type { PaginationProps } from "@pureadmin/table";
 import { reactive, ref, onMounted, h, toRaw } from "vue";
-import {addAreaInfo, deleteAreaInfo, getAreaInfoList, updateAreaInfo} from "@/api/monitor";
+import {
+  addAreaInfo,
+  deleteAreaInfo,
+  getAreaInfoList,
+  updateAreaInfo
+} from "@/api/monitor";
 
 export function useAreaInfo() {
   const form = reactive({
     id: "",
-    areaName: "",
-    administrativeCode: "",
-    latitude: "",
-    longitude: "",
-    area: "",
-    population: "",
-    climateType: "",
-    terrainFeature: "",
-    landformFeature: "",
-    landUse: ""
+    areaId: "",
+    planDate: "",
+    planType: "",
+    responsibleUnit: "",
+    implementationDate: "",
+    planContent: ""
   });
   const formRef = ref();
   const dataList = ref([]);
@@ -35,54 +36,34 @@ export function useAreaInfo() {
   });
   const columns: TableColumnList = [
     {
-      label: "地区名称",
-      prop: "areaName",
+      label: "地区编号",
+      prop: "areaId",
       minWidth: 120
     },
     {
-      label: "行政区划代码",
-      prop: "administrativeCode",
+      label: "计划日期",
+      prop: "planDate",
       minWidth: 100
     },
     {
-      label: "纬度",
-      prop: "latitude",
+      label: "计划类型",
+      prop: "planType",
       minWidth: 100
     },
     {
-      label: "经度",
-      prop: "longitude",
+      label: "责任单位",
+      prop: "responsibleUnit",
       minWidth: 100
     },
     {
-      label: "面积",
-      prop: "area",
-      minWidth: 150
+      label: "实施日期",
+      prop: "implementationDate",
+      minWidth: 100
     },
     {
-      label: "人口",
-      prop: "population",
-      minWidth: 150
-    },
-    {
-      label: "气候类型",
-      prop: "climateType",
-      minWidth: 150
-    },
-    {
-      label: "地形特征",
-      prop: "terrainFeature",
-      minWidth: 150
-    },
-    {
-      label: "地貌特征",
-      prop: "landformFeature",
-      minWidth: 150
-    },
-    {
-      label: "土地利用情况",
-      prop: "landUse",
-      minWidth: 150
+      label: "计划内容",
+      prop: "planContent",
+      minWidth: 250
     },
     {
       label: "操作",
@@ -137,16 +118,17 @@ export function useAreaInfo() {
   const handleDelete = async row => {
     deleteAreaInfo(row.id)
       .then(response => {
-        console.log("删除成功:", response);
-        message("删除失败", { type: "error" });
-        // 这里可以添加一些成功删除后的逻辑，比如刷新列表、显示成功消息等
-        // 如果你使用了Vue框架，这里可能需要调用一个方法来更新视图或数据
+        if (response.code === 200) {
+          console.log("删除成功:", response);
+          message("删除成功", { type: "success" });
+        } else {
+          console.log("删除失败:", response);
+          message("删除失败", {type: "error"});
+        }
       })
       .catch(error => {
         console.error("删除失败:", error);
         message("删除失败", { type: "error" });
-        // 这里可以处理错误情况，比如显示错误消息
-        // 如果你使用了Vue框架，可以使用Element UI的ElMessage等来显示错误消息
       });
   };
 
@@ -168,7 +150,7 @@ export function useAreaInfo() {
     dataList.value = data.list;
     pagination.total = data.total;
     pagination.pageSize = data.pageSize;
-    pagination.currentPage = data.currentPage;
+    pagination.currentPage = data.pageNum;
 
     setTimeout(() => {
       loading.value = false;
@@ -187,16 +169,12 @@ export function useAreaInfo() {
       props: {
         formInline: {
           id: row?.id ?? "",
-          areaName: row?.areaName ?? "",
-          administrativeCode: row?.administrativeCode ?? "",
-          latitude: row?.latitude ?? "",
-          longitude: row?.longitude ?? "",
-          area: row?.area ?? "",
-          population: row?.population ?? "",
-          climateType: row?.climateType ?? "",
-          terrainFeature: row?.terrainFeature ?? "",
-          landformFeature: row?.landformFeature ?? "",
-          landUse: row?.landUse ?? ""
+          areaId: row?.areaId ?? "",
+          planDate: row?.planDate ?? "",
+          planType: row?.planType ?? "",
+          responsibleUnit: row?.responsibleUnit ?? "",
+          implementationDate: row?.implementationDate ?? "",
+          planContent: row?.planContent ?? ""
         }
       },
       width: "40%",
@@ -219,32 +197,32 @@ export function useAreaInfo() {
               addAreaInfo(curData)
                 .then(response => {
                   if (response.code === 200) {
-                    console.log('新增区域信息成功', response);
-                    message(`新增区域信息成功`, { type: "success"});
+                    console.log("新增区域信息成功", response);
+                    message(`新增区域信息成功`, { type: "success" });
                   } else {
-                    console.warn('新增区域信息失败');
-                    message(`新增区域信息失败`, { type: "error"});
+                    console.warn("新增区域信息失败");
+                    message(`新增区域信息失败`, { type: "error" });
                   }
-              })
+                })
                 .catch(error => {
-                console.error('新增区域信息失败', error);
-                message(`新增区域信息失败`, { type: "error"});
-              });
+                  console.error("新增区域信息失败", error);
+                  message(`新增区域信息失败`, { type: "error" });
+                });
               chores();
             } else {
               updateAreaInfo(curData.id, curData)
                 .then(response => {
                   if (response.code === 200) {
-                    console.log('修改区域信息成功', response);
-                    message(`修改区域信息成功`, { type: "success"});
+                    console.log("修改区域信息成功", response);
+                    message(`修改区域信息成功`, { type: "success" });
                   } else {
-                    console.warn('修改区域信息失败');
-                    message(`修改区域信息失败`, { type: "error"});
+                    console.warn("修改区域信息失败");
+                    message(`修改区域信息失败`, { type: "error" });
                   }
                 })
                 .catch(error => {
-                  console.error('修改区域信息失败', error);
-                  message(`修改区域信息失败`, { type: "error"});
+                  console.error("修改区域信息失败", error);
+                  message(`修改区域信息失败`, { type: "error" });
                 });
               chores();
             }

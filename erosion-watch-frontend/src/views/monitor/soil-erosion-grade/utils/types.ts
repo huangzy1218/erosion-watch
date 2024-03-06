@@ -2,17 +2,16 @@
 
 interface FormItemProps {
   id: number | null;
-  areaName: string;
-  administrativeCode: string;
-  latitude: number | null;
-  longitude: number | null;
-  area: number | null;
-  population: number | null;
-  climateType: string;
-  terrainFeature: string;
-  landformFeature: string;
-  landUse: string;
+  areaId: number | null;
+  erosionType: string;
+  erosionGrade: string;
+  erosionYears: number | null;
+  riskLevel: string;
+  erosionDescription: string;
+  riskAssessmentResult: string;
+  managementPractice: string;
 }
+
 interface FormProps {
   formInline: FormItemProps;
 }

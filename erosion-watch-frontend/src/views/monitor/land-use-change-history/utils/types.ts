@@ -2,16 +2,11 @@
 
 interface FormItemProps {
   id: number | null;
-  areaName: string;
-  administrativeCode: string;
-  latitude: number | null;
-  longitude: number | null;
-  area: number | null;
-  population: number | null;
-  climateType: string;
-  terrainFeature: string;
-  landformFeature: string;
-  landUse: string;
+  areaId: number | null;
+  changeDate: Date | null;
+  previousLandUse: string;
+  currentLandUse: string;
+  changeReason: string;
 }
 interface FormProps {
   formInline: FormItemProps;

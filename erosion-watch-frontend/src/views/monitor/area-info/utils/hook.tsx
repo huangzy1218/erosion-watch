@@ -35,6 +35,11 @@ export function useAreaInfo() {
   });
   const columns: TableColumnList = [
     {
+      label: "地区编号",
+      prop: "id",
+      minWidth: 80
+    },
+    {
       label: "地区名称",
       prop: "areaName",
       minWidth: 120

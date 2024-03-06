@@ -11,16 +11,12 @@ import {addAreaInfo, deleteAreaInfo, getAreaInfoList, updateAreaInfo} from "@/ap
 export function useAreaInfo() {
   const form = reactive({
     id: "",
-    areaName: "",
-    administrativeCode: "",
-    latitude: "",
-    longitude: "",
-    area: "",
-    population: "",
-    climateType: "",
-    terrainFeature: "",
-    landformFeature: "",
-    landUse: ""
+    parentId: "",
+    name: "",
+    level: "",
+    soilQuality: "",
+    soilMoisture: "",
+    description: ""
   });
   const formRef = ref();
   const dataList = ref([]);
@@ -35,54 +31,34 @@ export function useAreaInfo() {
   });
   const columns: TableColumnList = [
     {
-      label: "地区名称",
-      prop: "areaName",
+      label: "上级分类的编号",
+      prop: "parentId",
+      minWidth: 150
+    },
+    {
+      label: "土壤类型名称",
+      prop: "name",
+      minWidth: 150
+    },
+    {
+      label: "分类级别",
+      prop: "level",
       minWidth: 120
     },
     {
-      label: "行政区划代码",
-      prop: "administrativeCode",
-      minWidth: 100
-    },
-    {
-      label: "纬度",
-      prop: "latitude",
-      minWidth: 100
-    },
-    {
-      label: "经度",
-      prop: "longitude",
-      minWidth: 100
-    },
-    {
-      label: "面积",
-      prop: "area",
+      label: "土壤质地",
+      prop: "soilQuality",
       minWidth: 150
     },
     {
-      label: "人口",
-      prop: "population",
+      label: "土壤含水量",
+      prop: "soilMoisture",
       minWidth: 150
     },
     {
-      label: "气候类型",
-      prop: "climateType",
-      minWidth: 150
-    },
-    {
-      label: "地形特征",
-      prop: "terrainFeature",
-      minWidth: 150
-    },
-    {
-      label: "地貌特征",
-      prop: "landformFeature",
-      minWidth: 150
-    },
-    {
-      label: "土地利用情况",
-      prop: "landUse",
-      minWidth: 150
+      label: "描述",
+      prop: "description",
+      minWidth: 250
     },
     {
       label: "操作",
@@ -137,16 +113,17 @@ export function useAreaInfo() {
   const handleDelete = async row => {
     deleteAreaInfo(row.id)
       .then(response => {
-        console.log("删除成功:", response);
-        message("删除失败", { type: "error" });
-        // 这里可以添加一些成功删除后的逻辑，比如刷新列表、显示成功消息等
-        // 如果你使用了Vue框架，这里可能需要调用一个方法来更新视图或数据
+        if (response.code === 200) {
+          console.log("删除成功:", response);
+          message("删除成功", { type: "success" });
+        } else {
+          console.log("删除失败:", response);
+          message("删除失败", {type: "error"});
+        }
       })
       .catch(error => {
         console.error("删除失败:", error);
         message("删除失败", { type: "error" });
-        // 这里可以处理错误情况，比如显示错误消息
-        // 如果你使用了Vue框架，可以使用Element UI的ElMessage等来显示错误消息
       });
   };
 
@@ -168,7 +145,7 @@ export function useAreaInfo() {
     dataList.value = data.list;
     pagination.total = data.total;
     pagination.pageSize = data.pageSize;
-    pagination.currentPage = data.currentPage;
+    pagination.currentPage = data.pageNum;
 
     setTimeout(() => {
       loading.value = false;
@@ -187,16 +164,12 @@ export function useAreaInfo() {
       props: {
         formInline: {
           id: row?.id ?? "",
-          areaName: row?.areaName ?? "",
-          administrativeCode: row?.administrativeCode ?? "",
-          latitude: row?.latitude ?? "",
-          longitude: row?.longitude ?? "",
-          area: row?.area ?? "",
-          population: row?.population ?? "",
-          climateType: row?.climateType ?? "",
-          terrainFeature: row?.terrainFeature ?? "",
-          landformFeature: row?.landformFeature ?? "",
-          landUse: row?.landUse ?? ""
+          parentId: row?.parentId ?? "",
+          name: row?.name ?? "",
+          level: row?.level ?? "",
+          soilQuality: row?.soilQuality ?? "",
+          soilMoisture: row?.soilMoisture ?? "",
+          description: row?.description ?? ""
         }
       },
       width: "40%",
