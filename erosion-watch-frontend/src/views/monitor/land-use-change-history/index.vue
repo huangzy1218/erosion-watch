@@ -80,7 +80,7 @@ const {
     </el-form>
 
     <PureTableBar
-      title="区域信息"
+      title="土地利用历史"
       :columns="columns"
       @refresh="onSearch"
     >

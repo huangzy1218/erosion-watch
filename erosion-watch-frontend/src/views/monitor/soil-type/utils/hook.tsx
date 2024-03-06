@@ -178,7 +178,7 @@ export function useSoilType() {
 
   function openDialog(title = "新增", row?: FormItemProps) {
     addDialog({
-      title: `${title}区域信息`,
+      title: `${title}土壤类型信息`,
       props: {
         formInline: {
           id: row?.id ?? "",
@@ -210,32 +210,32 @@ export function useSoilType() {
               addSoilType(curData)
                 .then(response => {
                   if (response.code === 200) {
-                    console.log('新增区域信息成功', response);
-                    message(`新增区域信息成功`, { type: "success"});
+                    console.log('新增土壤类型信息成功', response);
+                    message(`新增土壤类型信息成功`, { type: "success"});
                   } else {
-                    console.warn('新增区域信息失败');
-                    message(`新增区域信息失败`, { type: "error"});
+                    console.warn('新增土壤类型信息失败');
+                    message(`新增土壤类型信息失败`, { type: "error"});
                   }
               })
                 .catch(error => {
-                console.error('新增区域信息失败', error);
-                message(`新增区域信息失败`, { type: "error"});
+                console.error('新增土壤类型信息失败', error);
+                message(`新增土壤类型信息失败`, { type: "error"});
               });
               chores();
             } else {
               updateSoilType(curData.id, curData)
                 .then(response => {
                   if (response.code === 200) {
-                    console.log('修改区域信息成功', response);
-                    message(`修改区域信息成功`, { type: "success"});
+                    console.log('修改土壤类型信息成功', response);
+                    message(`修改土壤类型信息成功`, { type: "success"});
                   } else {
-                    console.warn('修改区域信息失败');
-                    message(`修改区域信息失败`, { type: "error"});
+                    console.warn('修改土壤类型信息失败');
+                    message(`修改土壤类型信息失败`, { type: "error"});
                   }
                 })
                 .catch(error => {
-                  console.error('修改区域信息失败', error);
-                  message(`修改区域信息失败`, { type: "error"});
+                  console.error('修改土壤类型信息失败', error);
+                  message(`修改土壤类型信息失败`, { type: "error"});
                 });
               chores();
             }

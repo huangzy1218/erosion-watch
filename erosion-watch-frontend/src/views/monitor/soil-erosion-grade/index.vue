@@ -95,7 +95,7 @@ const {
     </el-form>
 
     <PureTableBar
-      title="区域信息"
+      title="土壤侵蚀等级"
       :columns="columns"
       @refresh="onSearch"
     >

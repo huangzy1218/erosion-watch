@@ -6,7 +6,13 @@ import {addDialog} from "@/components/ReDialog";
 import type {FormItemProps} from "../utils/types";
 import type {PaginationProps} from "@pureadmin/table";
 import {h, onMounted, reactive, ref, toRaw} from "vue";
-import {addAreaInfo, deleteAreaInfo, getAreaInfoList, updateAreaInfo} from "@/api/monitor";
+import {
+  addTerrainLandform,
+  deleteTerrainLandform,
+  getTerrainLandform,
+  searchTerrainLandform,
+  updateTerrainLandform
+} from "@/api/monitor";
 
 export function useTerrainLandForm() {
   const form = reactive({
@@ -123,7 +129,7 @@ export function useTerrainLandForm() {
   }
 
   const handleDelete = async row => {
-    deleteAreaInfo(row.id)
+    deleteTerrainLandform(row.id)
       .then(response => {
         if (response.code === 200) {
           console.log("删除成功:", response);
@@ -153,7 +159,20 @@ export function useTerrainLandForm() {
 
   async function onSearch() {
     loading.value = true;
-    const { data } = await getAreaInfoList(toRaw(form));
+    const { data } = await getTerrainLandform(toRaw(form));
+    dataList.value = data.list;
+    pagination.total = data.total;
+    pagination.pageSize = data.pageSize;
+    pagination.currentPage = data.pageNum;
+
+    setTimeout(() => {
+      loading.value = false;
+    }, 500);
+  }
+
+  async function onConditionalSearch() {
+    loading.value = true;
+    const { data } = await searchTerrainLandform(toRaw(form));
     dataList.value = data.list;
     pagination.total = data.total;
     pagination.pageSize = data.pageSize;
@@ -172,7 +191,7 @@ export function useTerrainLandForm() {
 
   function openDialog(title = "新增", row?: FormItemProps) {
     addDialog({
-      title: `${title}区域信息`,
+      title: `${title}地形地貌信息`,
       props: {
         formInline: {
           id: row?.id ?? "",
@@ -203,26 +222,26 @@ export function useTerrainLandForm() {
             console.log("curData", curData);
             // 表单规则校验通过
             if (title === "新增") {
-              addAreaInfo(curData)
+              addTerrainLandform(curData)
                 .then(response => {
                   if (response.code === 200) {
-                    console.log('新增区域信息成功', response);
-                    message(`新增区域信息成功`, { type: "success"});
+                    console.log('新增地形地貌信息成功', response);
+                    message(`新增地形地貌信息成功`, { type: "success"});
                   } else {
-                    console.warn('新增区域信息失败');
-                    message(`新增区域信息失败`, { type: "error"});
+                    console.warn('新增地形地貌信息失败');
+                    message(`新增地形地貌信息失败`, { type: "error"});
                   }
               })
                 .catch(error => {
-                console.error('新增区域信息失败', error);
-                message(`新增区域信息失败`, { type: "error"});
+                console.error('新增地形地貌信息失败', error);
+                message(`新增地形地貌信息失败`, { type: "error"});
               });
               chores();
             } else {
-              updateAreaInfo(curData.id, curData)
+              updateTerrainLandform(curData.id, curData)
                 .then(response => {
                   if (response.code === 200) {
-                    console.log('修改区域信息成功', response);
+                    console.log('修改地形地貌信息成功', response);
                     message(`修改区域信息成功`, { type: "success"});
                   } else {
                     console.warn('修改区域信息失败');
@@ -235,6 +254,7 @@ export function useTerrainLandForm() {
                 });
               chores();
             }
+            onSearch();
           }
         });
       }
@@ -268,6 +288,7 @@ export function useTerrainLandForm() {
     // handleDatabase,
     handleSizeChange,
     handleCurrentChange,
-    handleSelectionChange
+    handleSelectionChange,
+    onConditionalSearch
   };
 }

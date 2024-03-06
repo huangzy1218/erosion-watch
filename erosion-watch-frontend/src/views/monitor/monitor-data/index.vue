@@ -68,7 +68,7 @@ const {
     </el-form>
 
     <PureTableBar
-      title="区域信息"
+      title="监测数据"
       :columns="columns"
       @refresh="onSearch"
     >

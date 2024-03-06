@@ -31,7 +31,8 @@ const {
   // handleDatabase,
   handleSizeChange,
   handleCurrentChange,
-  handleSelectionChange
+  handleSelectionChange,
+  onConditionalSearch
 } = useTerrainLandForm();
 </script>
 
@@ -43,26 +44,26 @@ const {
       :model="form"
       class="search-form bg-bg_color w-[99/100] pl-8 pt-[12px]"
     >
-      <el-form-item label="区域编号：" prop="id">
+      <el-form-item label="区域编号" prop="areaId">
         <el-input
-          v-model="form.id"
+          v-model="form.areaId"
           placeholder="请输入区域编号"
           clearable
           class="!w-[180px]"
         />
       </el-form-item>
-      <el-form-item label="区域名称：" prop="areaName">
+      <el-form-item label="地形类型" prop="terrainType">
         <el-input
-          v-model="form.areaName"
-          placeholder="请输入区域名称"
+          v-model="form.terrainType"
+          placeholder="请输入地形类型"
           clearable
           class="!w-[180px]"
         />
       </el-form-item>
-      <el-form-item label="行政区划代码：" prop="administrativeCode">
+      <el-form-item label="地貌类型" prop="landformType">
         <el-input
-          v-model="form.administrativeCode"
-          placeholder="请输入行政区划代码"
+          v-model="form.landformType"
+          placeholder="请输入地貌类型"
           clearable
           class="!w-[180px]"
         />
@@ -72,7 +73,7 @@ const {
           type="primary"
           :icon="useRenderIcon('search')"
           :loading="loading"
-          @click="onSearch"
+          @click="onConditionalSearch"
         >
           搜索
         </el-button>
@@ -83,9 +84,9 @@ const {
     </el-form>
 
     <PureTableBar
-      title="区域信息"
+      title="地形地貌"
       :columns="columns"
-      @refresh="onSearch"
+      @refresh="onConditionalSearch"
     >
       <template #buttons>
         <el-button

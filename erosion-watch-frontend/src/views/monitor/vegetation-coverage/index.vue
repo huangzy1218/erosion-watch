@@ -9,6 +9,7 @@ import Delete from "@iconify-icons/ep/delete";
 import EditPen from "@iconify-icons/ep/edit-pen";
 import Refresh from "@iconify-icons/ep/refresh";
 import AddFill from "@iconify-icons/ri/add-circle-line";
+import {useVegetationCoverage} from "@/views/monitor/vegetation-coverage/utils/hook";
 
 defineOptions({
   name: "VegetationCoverage"
@@ -30,7 +31,8 @@ const {
   // handleDatabase,
   handleSizeChange,
   handleCurrentChange,
-  handleSelectionChange
+  handleSelectionChange,
+  onConditionalSearch
 } = useVegetationCoverage();
 </script>
 
@@ -42,36 +44,22 @@ const {
       :model="form"
       class="search-form bg-bg_color w-[99/100] pl-8 pt-[12px]"
     >
-      <el-form-item label="区域编号：" prop="id">
-        <el-input
-          v-model="form.id"
-          placeholder="请输入区域编号"
-          clearable
-          class="!w-[180px]"
-        />
+      <el-form-item label="区域编号" prop="areaId">
+        <el-input v-model="form.areaId" placeholder="请输入区域编号" clearable class="!w-[180px]" />
       </el-form-item>
-      <el-form-item label="区域名称：" prop="areaName">
-        <el-input
-          v-model="form.areaName"
-          placeholder="请输入区域名称"
-          clearable
-          class="!w-[180px]"
-        />
+
+      <el-form-item label="植被类型" prop="vegetationType">
+        <el-input v-model="form.vegetationType" placeholder="请输入植被类型" clearable class="!w-[180px]" />
       </el-form-item>
-      <el-form-item label="行政区划代码：" prop="administrativeCode">
-        <el-input
-          v-model="form.administrativeCode"
-          placeholder="请输入行政区划代码"
-          clearable
-          class="!w-[180px]"
-        />
+      <el-form-item label="状态" prop="status">
+        <el-input v-model="form.status" placeholder="请输入状态" clearable class="!w-[180px]" />
       </el-form-item>
       <el-form-item>
         <el-button
           type="primary"
           :icon="useRenderIcon('search')"
           :loading="loading"
-          @click="onSearch"
+          @click="onConditionalSearch"
         >
           搜索
         </el-button>
@@ -82,7 +70,7 @@ const {
     </el-form>
 
     <PureTableBar
-      title="区域信息"
+      title="植被覆盖"
       :columns="columns"
       @refresh="onSearch"
     >

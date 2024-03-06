@@ -84,7 +84,7 @@ const {
     </el-form>
 
     <PureTableBar
-      title="区域信息"
+      title="土壤类型"
       :columns="columns"
       @refresh="onSearch"
     >

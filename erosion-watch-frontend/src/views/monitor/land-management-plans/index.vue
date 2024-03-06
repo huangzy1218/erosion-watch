@@ -43,23 +43,15 @@ const {
       class="search-form bg-bg_color w-[99/100] pl-8 pt-[12px]"
     >
       <el-form-item label="地区编号" prop="areaId">
-        <el-input v-model="form.areaId" clearable placeholder="请输入地区编号" class="!w-[100px]" />
+        <el-input v-model="form.areaId" clearable placeholder="请输入地区编号" class="!w-[130px]" />
       </el-form-item>
 
-      <el-form-item label="开始日期" prop="startDate">
-        <el-date-picker v-model="form.startDate" type="date" placeholder="选择开始日期" clearable class="!w-[180px]" />
+      <el-form-item label="计划日期" prop="planDate">
+        <el-date-picker v-model="form.planDate" type="date" placeholder="选择计划日期" clearable class="!w-[180px]" />
       </el-form-item>
 
-      <el-form-item label="结束日期" prop="endDate">
-        <el-date-picker v-model="form.endDate" type="date" placeholder="选择结束日期" clearable class="!w-[180px]" />
-      </el-form-item>
-
-      <el-form-item label="之前的土地利用情况" prop="previousLandUse">
-        <el-input v-model="form.previousLandUse" clearable placeholder="请输入之前的土地利用情况" class="!w-[180px]" />
-      </el-form-item>
-
-      <el-form-item label="当前的土地利用情况" prop="currentLandUse">
-        <el-input v-model="form.currentLandUse" clearable placeholder="请输入当前的土地利用情况" class="!w-[180px]" />
+      <el-form-item label="实施日期" prop="implementationDate">
+        <el-date-picker v-model="form.implementationDate" type="date" placeholder="选择实施日期" clearable class="!w-[180px]" />
       </el-form-item>
       <el-form-item>
         <el-button
