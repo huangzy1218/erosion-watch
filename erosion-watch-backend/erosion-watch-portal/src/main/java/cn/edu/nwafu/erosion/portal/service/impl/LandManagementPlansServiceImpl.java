@@ -63,7 +63,7 @@ public class LandManagementPlansServiceImpl implements LandManagementPlansServic
 
     @Override
     public List<LandManagementPlans> listAll() {
-        return landManagementPlansMapper.selectByExample(new LandManagementPlansExample());
+        return landManagementPlansMapper.selectByExampleWithBLOBs(new LandManagementPlansExample());
     }
 
     @Override
@@ -84,7 +84,7 @@ public class LandManagementPlansServiceImpl implements LandManagementPlansServic
             criteria.andImplementationDateEqualTo(landManagementPlansSearchDto.getImplementationDate());
         }
 
-        return landManagementPlansMapper.selectByExample(example);
+        return landManagementPlansMapper.selectByExampleWithBLOBs(example);
     }
 }
     

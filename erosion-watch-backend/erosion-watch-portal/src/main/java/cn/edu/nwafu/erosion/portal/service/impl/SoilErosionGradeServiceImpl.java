@@ -65,7 +65,7 @@ public class SoilErosionGradeServiceImpl implements SoilErosionGradeService {
 
     @Override
     public List<SoilErosionGrade> listAll() {
-        return soilErosionGradeMapper.selectByExample(new SoilErosionGradeExample());
+        return soilErosionGradeMapper.selectByExampleWithBLOBs(new SoilErosionGradeExample());
     }
 
     @Override
@@ -89,7 +89,7 @@ public class SoilErosionGradeServiceImpl implements SoilErosionGradeService {
             criteria.andRiskLevelEqualTo(soilErosionGradeSearchDto.getRiskLevel());
         }
 
-        return soilErosionGradeMapper.selectByExample(example);
+        return soilErosionGradeMapper.selectByExampleWithBLOBs(example);
     }
 }
     

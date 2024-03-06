@@ -61,7 +61,7 @@ public class LandUseChangeHistoryServiceImpl implements LandUseChangeHistoryServ
 
     @Override
     public List<LandUseChangeHistory> listAll() {
-        return landUseChangeHistoryMapper.selectByExample(new LandUseChangeHistoryExample());
+        return landUseChangeHistoryMapper.selectByExampleWithBLOBs(new LandUseChangeHistoryExample());
     }
 
     @Override
@@ -84,7 +84,7 @@ public class LandUseChangeHistoryServiceImpl implements LandUseChangeHistoryServ
             criteria.andCurrentLandUseEqualTo(landUseChangeHistorySearchDto.getCurrentLandUse());
         }
 
-        return landUseChangeHistoryMapper.selectByExample(example);
+        return landUseChangeHistoryMapper.selectByExampleWithBLOBs(example);
     }
 }
     

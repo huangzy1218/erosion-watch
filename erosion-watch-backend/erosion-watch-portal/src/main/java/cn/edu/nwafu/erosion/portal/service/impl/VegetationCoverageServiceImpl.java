@@ -62,7 +62,7 @@ public class VegetationCoverageServiceImpl implements VegetationCoverageService 
 
     @Override
     public List<VegetationCoverage> listAll() {
-        return vegetationCoverageMapper.selectByExample(new VegetationCoverageExample());
+        return vegetationCoverageMapper.selectByExampleWithBLOBs(new VegetationCoverageExample());
     }
 
     @Override
@@ -88,7 +88,7 @@ public class VegetationCoverageServiceImpl implements VegetationCoverageService 
             criteria.andStatusEqualTo(vegetationCoverageSearchDto.getStatus());
         }
 
-        return vegetationCoverageMapper.selectByExample(example);
+        return vegetationCoverageMapper.selectByExampleWithBLOBs(example);
     }
 }
     

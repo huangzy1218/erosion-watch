@@ -10,7 +10,7 @@
         <result column="implementation_date" jdbcType="DATE" property="implementationDate"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.nwafu.erosion.model.LandManagementPlans">
-        <result column="plan_content" jdbcType="LONGVARCHAR" property="planContent"/>
+        <result column="plan_content" jdbcType="VARCHAR" property="planContent"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>

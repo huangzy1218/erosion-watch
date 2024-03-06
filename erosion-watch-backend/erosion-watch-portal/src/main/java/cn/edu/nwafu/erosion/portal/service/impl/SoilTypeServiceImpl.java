@@ -62,7 +62,7 @@ public class SoilTypeServiceImpl implements SoilTypeService {
 
     @Override
     public List<SoilType> listAll() {
-        return soilTypeMapper.selectByExample(new SoilTypeExample());
+        return soilTypeMapper.selectByExampleWithBLOBs(new SoilTypeExample());
     }
 
     @Override
@@ -80,7 +80,7 @@ public class SoilTypeServiceImpl implements SoilTypeService {
             criteria.andSoilMoistureEqualTo(soilTypeSearchDto.getSoilMoisture());
         }
 
-        return soilTypeMapper.selectByExample(example);
+        return soilTypeMapper.selectByExampleWithBLOBs(example);
     }
 }
     
