@@ -1,5 +1,6 @@
 package cn.edu.nwafu.erosion.portal.controller;
 
+import cn.edu.nwafu.common.api.CommonPage;
 import cn.edu.nwafu.common.api.CommonResult;
 import cn.edu.nwafu.erosion.model.MonitoringData;
 import cn.edu.nwafu.erosion.portal.domain.dto.MonitoringDataDto;
@@ -72,17 +73,17 @@ public class MonitoringDataController {
     @ApiOperation("查询所有监测数据")
     @GetMapping("/list")
     @ResponseBody
-    public CommonResult<List<MonitoringData>> listAll() {
+    public CommonResult<CommonPage<MonitoringData>> listAll() {
         List<MonitoringData> monitoringDataList = monitoringDataService.listAll();
-        return CommonResult.success(monitoringDataList);
+        return CommonResult.success(CommonPage.restPage(monitoringDataList));
     }
 
     @ApiOperation("根据条件查询监测数据")
     @PostMapping("/search")
     @ResponseBody
-    public CommonResult<List<MonitoringData>> search(@RequestBody MonitoringDataSearchDto monitoringDataSearchDto) {
+    public CommonResult<CommonPage<MonitoringData>> search(@RequestBody MonitoringDataSearchDto monitoringDataSearchDto) {
         List<MonitoringData> monitoringDataList = monitoringDataService.search(monitoringDataSearchDto);
-        return CommonResult.success(monitoringDataList);
+        return CommonResult.success(CommonPage.restPage(monitoringDataList));
     }
 }
     

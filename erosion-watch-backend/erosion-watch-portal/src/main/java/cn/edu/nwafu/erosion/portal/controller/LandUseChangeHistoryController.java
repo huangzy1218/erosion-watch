@@ -1,5 +1,6 @@
 package cn.edu.nwafu.erosion.portal.controller;
 
+import cn.edu.nwafu.common.api.CommonPage;
 import cn.edu.nwafu.common.api.CommonResult;
 import cn.edu.nwafu.erosion.model.LandUseChangeHistory;
 import cn.edu.nwafu.erosion.portal.domain.dto.LandUseChangeHistoryDto;
@@ -72,17 +73,17 @@ public class LandUseChangeHistoryController {
     @ApiOperation("查询所有土地利用变更历史记录")
     @GetMapping("/list")
     @ResponseBody
-    public CommonResult<List<LandUseChangeHistory>> listAll() {
+    public CommonResult<CommonPage<LandUseChangeHistory>> listAll() {
         List<LandUseChangeHistory> landUseChangeHistoryList = landUseChangeHistoryService.listAll();
-        return CommonResult.success(landUseChangeHistoryList);
+        return CommonResult.success(CommonPage.restPage(landUseChangeHistoryList));
     }
 
     @ApiOperation("根据条件查询土地利用变更历史记录")
     @PostMapping("/search")
     @ResponseBody
-    public CommonResult<List<LandUseChangeHistory>> search(@RequestBody LandUseChangeHistorySearchDto landUseChangeHistorySearchDto) {
+    public CommonResult<CommonPage<LandUseChangeHistory>> search(@RequestBody LandUseChangeHistorySearchDto landUseChangeHistorySearchDto) {
         List<LandUseChangeHistory> landUseChangeHistoryList = landUseChangeHistoryService.search(landUseChangeHistorySearchDto);
-        return CommonResult.success(landUseChangeHistoryList);
+        return CommonResult.success(CommonPage.restPage(landUseChangeHistoryList));
     }
 }
 

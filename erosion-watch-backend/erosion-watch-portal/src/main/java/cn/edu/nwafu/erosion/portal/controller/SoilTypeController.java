@@ -1,5 +1,6 @@
 package cn.edu.nwafu.erosion.portal.controller;
 
+import cn.edu.nwafu.common.api.CommonPage;
 import cn.edu.nwafu.common.api.CommonResult;
 import cn.edu.nwafu.erosion.model.SoilType;
 import cn.edu.nwafu.erosion.portal.domain.dto.SoilTypeDto;
@@ -72,16 +73,16 @@ public class SoilTypeController {
     @ApiOperation("查询所有土壤类型")
     @GetMapping("/list")
     @ResponseBody
-    public CommonResult<List<SoilType>> listAll() {
+    public CommonResult<CommonPage<SoilType>> listAll() {
         List<SoilType> soilTypeList = soilTypeService.listAll();
-        return CommonResult.success(soilTypeList);
+        return CommonResult.success(CommonPage.restPage(soilTypeList));
     }
 
     @ApiOperation("根据条件查询土壤类型")
     @PostMapping("/search")
     @ResponseBody
-    public CommonResult<List<SoilType>> search(@RequestBody SoilTypeSearchDto soilTypeSearchDto) {
+    public CommonResult<CommonPage<SoilType>> search(@RequestBody SoilTypeSearchDto soilTypeSearchDto) {
         List<SoilType> soilTypeList = soilTypeService.search(soilTypeSearchDto);
-        return CommonResult.success(soilTypeList);
+        return CommonResult.success(CommonPage.restPage(soilTypeList));
     }
 }

@@ -1,5 +1,6 @@
 package cn.edu.nwafu.erosion.portal.controller;
 
+import cn.edu.nwafu.common.api.CommonPage;
 import cn.edu.nwafu.common.api.CommonResult;
 import cn.edu.nwafu.erosion.model.VegetationCoverage;
 import cn.edu.nwafu.erosion.portal.domain.dto.VegetationCoverageDto;
@@ -72,16 +73,16 @@ public class VegetationCoverageController {
     @ApiOperation("查询所有植被覆盖信息")
     @GetMapping("/list")
     @ResponseBody
-    public CommonResult<List<VegetationCoverage>> listAll() {
+    public CommonResult<CommonPage<VegetationCoverage>> listAll() {
         List<VegetationCoverage> vegetationCoverageList = vegetationCoverageService.listAll();
-        return CommonResult.success(vegetationCoverageList);
+        return CommonResult.success(CommonPage.restPage(vegetationCoverageList));
     }
 
     @ApiOperation("根据条件查询植被覆盖信息")
     @PostMapping("/search")
     @ResponseBody
-    public CommonResult<List<VegetationCoverage>> search(@RequestBody VegetationCoverageSearchDto vegetationCoverageSearchDto) {
+    public CommonResult<CommonPage<VegetationCoverage>> search(@RequestBody VegetationCoverageSearchDto vegetationCoverageSearchDto) {
         List<VegetationCoverage> vegetationCoverageList = vegetationCoverageService.search(vegetationCoverageSearchDto);
-        return CommonResult.success(vegetationCoverageList);
+        return CommonResult.success(CommonPage.restPage(vegetationCoverageList));
     }
 }

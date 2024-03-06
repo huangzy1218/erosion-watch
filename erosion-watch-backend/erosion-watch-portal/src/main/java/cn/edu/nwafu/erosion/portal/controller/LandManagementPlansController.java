@@ -1,5 +1,6 @@
 package cn.edu.nwafu.erosion.portal.controller;
 
+import cn.edu.nwafu.common.api.CommonPage;
 import cn.edu.nwafu.common.api.CommonResult;
 import cn.edu.nwafu.erosion.model.LandManagementPlans;
 import cn.edu.nwafu.erosion.portal.domain.dto.LandManagementPlansDto;
@@ -74,17 +75,20 @@ public class LandManagementPlansController {
     @ApiOperation("查询所有土地管理计划")
     @GetMapping("/list")
     @ResponseBody
-    public CommonResult<List<LandManagementPlans>> listAll() {
+    public CommonResult<CommonPage<LandManagementPlans>> listAll(@RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                                                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<LandManagementPlans> landManagementPlansList = landManagementPlansService.listAll();
-        return CommonResult.success(landManagementPlansList);
+        return CommonResult.success(CommonPage.restPage(landManagementPlansList));
     }
 
     @ApiOperation("根据条件查询土地管理计划")
     @PostMapping("/search")
     @ResponseBody
-    public CommonResult<List<LandManagementPlans>> search(@RequestBody LandManagementPlansSearchDto searchDto) {
+    public CommonResult<CommonPage<LandManagementPlans>> search(@RequestBody LandManagementPlansSearchDto searchDto,
+                                                                @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<LandManagementPlans> landManagementPlansList = landManagementPlansService.search(searchDto);
-        return CommonResult.success(landManagementPlansList);
+        return CommonResult.success(CommonPage.restPage(landManagementPlansList));
     }
 }
     

@@ -85,7 +85,7 @@ public class AreaInfoController {
     public CommonResult<CommonPage<AreaInfo>> listAll(@RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                       @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<AreaInfo> areaInfoList = areaInfoService.listAll();
-        return CommonResult.success(CommonPage.restPage(areaInfoList)s);
+        return CommonResult.success(CommonPage.restPage(areaInfoList));
     }
 
     @ApiOperation("根据条件查询区域信息")

@@ -1,5 +1,6 @@
 package cn.edu.nwafu.erosion.portal.controller;
 
+import cn.edu.nwafu.common.api.CommonPage;
 import cn.edu.nwafu.common.api.CommonResult;
 import cn.edu.nwafu.erosion.model.TerrainLandform;
 import cn.edu.nwafu.erosion.portal.domain.dto.TerrainLandformDto;
@@ -72,17 +73,17 @@ public class TerrainLandformController {
     @ApiOperation("查询所有地形地貌信息")
     @GetMapping("/list")
     @ResponseBody
-    public CommonResult<List<TerrainLandform>> listAll() {
+    public CommonResult<CommonPage<TerrainLandform>> listAll() {
         List<TerrainLandform> terrainLandformList = terrainLandformService.listAll();
-        return CommonResult.success(terrainLandformList);
+        return CommonResult.success(CommonPage.restPage(terrainLandformList));
     }
 
     @ApiOperation("根据条件查询地形地貌信息")
     @PostMapping("/search")
     @ResponseBody
-    public CommonResult<List<TerrainLandform>> search(@RequestBody TerrainLandformSearchDto terrainLandformSearchDto) {
+    public CommonResult<CommonPage<TerrainLandform>> search(@RequestBody TerrainLandformSearchDto terrainLandformSearchDto) {
         List<TerrainLandform> terrainLandformList = terrainLandformService.search(terrainLandformSearchDto);
-        return CommonResult.success(terrainLandformList);
+        return CommonResult.success(CommonPage.restPage(terrainLandformList));
     }
 }
     

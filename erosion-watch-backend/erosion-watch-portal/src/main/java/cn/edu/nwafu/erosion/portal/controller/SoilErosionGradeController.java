@@ -1,5 +1,6 @@
 package cn.edu.nwafu.erosion.portal.controller;
 
+import cn.edu.nwafu.common.api.CommonPage;
 import cn.edu.nwafu.common.api.CommonResult;
 import cn.edu.nwafu.erosion.model.SoilErosionGrade;
 import cn.edu.nwafu.erosion.portal.domain.dto.SoilErosionGradeDto;
@@ -72,17 +73,17 @@ public class SoilErosionGradeController {
     @ApiOperation("查询所有土壤侵蚀等级")
     @GetMapping("/list")
     @ResponseBody
-    public CommonResult<List<SoilErosionGrade>> listAll() {
+    public CommonResult<CommonPage<SoilErosionGrade>> listAll() {
         List<SoilErosionGrade> soilErosionGradeList = soilErosionGradeService.listAll();
-        return CommonResult.success(soilErosionGradeList);
+        return CommonResult.success(CommonPage.restPage(soilErosionGradeList));
     }
 
     @ApiOperation("根据条件查询土壤侵蚀等级")
     @PostMapping("/search")
     @ResponseBody
-    public CommonResult<List<SoilErosionGrade>> search(@RequestBody SoilErosionGradeSearchDto soilErosionGradeSearchDto) {
+    public CommonResult<CommonPage<SoilErosionGrade>> search(@RequestBody SoilErosionGradeSearchDto soilErosionGradeSearchDto) {
         List<SoilErosionGrade> soilErosionGradeList = soilErosionGradeService.search(soilErosionGradeSearchDto);
-        return CommonResult.success(soilErosionGradeList);
+        return CommonResult.success(CommonPage.restPage(soilErosionGradeList));
     }
 }
     
