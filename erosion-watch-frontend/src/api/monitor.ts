@@ -1,11 +1,16 @@
-import { http } from "@/utils/http";
+import {http} from "@/utils/http";
 import type {
   AreaInfoDto,
   LandManagementPlansDto,
   LandUseChangeHistoryDto,
-  MonitoringDataDto, SoilErosionGradeDto, SoilTypeDto, TerrainLandformDto, VegetationCoverageDto
+  MonitoringDataDto,
+  SoilErosionGradeDto,
+  SoilTypeDto,
+  TerrainLandformDto,
+  VegetationCoverageDto
 } from "../../types/monitor";
-import { baseUrlApi } from "./utils";
+import {baseUrlApi} from "./utils";
+
 type Result = {
   success: boolean;
   data?: Array<any>;

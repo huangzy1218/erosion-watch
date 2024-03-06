@@ -1,14 +1,20 @@
 import editForm from "../form.vue";
-import { message } from "@/utils/message";
-import { ElMessageBox } from "element-plus";
-import { usePublicHooks } from "../../hooks";
-import { addDialog } from "@/components/ReDialog";
-import type { FormItemProps } from "../utils/types";
-import type { PaginationProps } from "@pureadmin/table";
-import { reactive, ref, onMounted, h, toRaw } from "vue";
-import {addAreaInfo, deleteAreaInfo, getAreaInfoList, updateAreaInfo} from "@/api/monitor";
+import {message} from "@/utils/message";
+import {ElMessageBox} from "element-plus";
+import {usePublicHooks} from "../../hooks";
+import {addDialog} from "@/components/ReDialog";
+import type {FormItemProps} from "../utils/types";
+import type {PaginationProps} from "@pureadmin/table";
+import {h, onMounted, reactive, ref, toRaw} from "vue";
+import {
+  addSoilErosionGrade,
+  deleteSoilErosionGrade,
+  getSoilErosionGrade,
+  searchSoilErosionGrade,
+  updateSoilErosionGrade
+} from "@/api/monitor";
 
-export function useAreaInfo() {
+export function useSoilErosionGrade() {
   const form = reactive({
     id: "",
     areaId: "",
@@ -123,7 +129,7 @@ export function useAreaInfo() {
   }
 
   const handleDelete = async row => {
-    deleteAreaInfo(row.id)
+    deleteSoilErosionGrade(row.id)
       .then(response => {
         if (response.code === 200) {
           console.log("删除成功:", response);
@@ -153,7 +159,20 @@ export function useAreaInfo() {
 
   async function onSearch() {
     loading.value = true;
-    const { data } = await getAreaInfoList(toRaw(form));
+    const { data } = await getSoilErosionGrade(toRaw(form));
+    dataList.value = data.list;
+    pagination.total = data.total;
+    pagination.pageSize = data.pageSize;
+    pagination.currentPage = data.pageNum;
+
+    setTimeout(() => {
+      loading.value = false;
+    }, 500);
+  }
+
+  async function onConditionalSearch() {
+    loading.value = true;
+    const { data } = await searchSoilErosionGrade(toRaw(form));
     dataList.value = data.list;
     pagination.total = data.total;
     pagination.pageSize = data.pageSize;
@@ -172,7 +191,7 @@ export function useAreaInfo() {
 
   function openDialog(title = "新增", row?: FormItemProps) {
     addDialog({
-      title: `${title}区域信息`,
+      title: `${title}土壤侵蚀程度信息`,
       props: {
         formInline: {
           id: row?.id ?? "",
@@ -203,37 +222,38 @@ export function useAreaInfo() {
             console.log("curData", curData);
             // 表单规则校验通过
             if (title === "新增") {
-              addAreaInfo(curData)
+              addSoilErosionGrade(curData)
                 .then(response => {
                   if (response.code === 200) {
-                    console.log('新增区域信息成功', response);
-                    message(`新增区域信息成功`, { type: "success"});
+                    console.log('新增土壤侵蚀程度信息成功', response);
+                    message(`新增土壤侵蚀程度信息成功`, { type: "success"});
                   } else {
-                    console.warn('新增区域信息失败');
-                    message(`新增区域信息失败`, { type: "error"});
+                    console.warn('新增土壤侵蚀程度信息失败');
+                    message(`新增土壤侵蚀程度信息失败`, { type: "error"});
                   }
               })
                 .catch(error => {
-                console.error('新增区域信息失败', error);
-                message(`新增区域信息失败`, { type: "error"});
+                console.error('新增土壤侵蚀程度信息失败', error);
+                message(`新增土壤侵蚀程度信息失败`, { type: "error"});
               });
               chores();
             } else {
-              updateAreaInfo(curData.id, curData)
+              updateSoilErosionGrade(curData.id, curData)
                 .then(response => {
                   if (response.code === 200) {
-                    console.log('修改区域信息成功', response);
-                    message(`修改区域信息成功`, { type: "success"});
+                    console.log('修改土壤侵蚀程度信息成功', response);
+                    message(`修改土壤侵蚀程度信息成功`, { type: "success"});
                   } else {
-                    console.warn('修改区域信息失败');
-                    message(`修改区域信息失败`, { type: "error"});
+                    console.warn('修改土壤侵蚀程度信息失败');
+                    message(`修改土壤侵蚀程度信息失败`, { type: "error"});
                   }
                 })
                 .catch(error => {
-                  console.error('修改区域信息失败', error);
-                  message(`修改区域信息失败`, { type: "error"});
+                  console.error('修改土壤侵蚀程度信息失败', error);
+                  message(`修改土壤侵蚀程度信息失败`, { type: "error"});
                 });
               chores();
+              onSearch();
             }
           }
         });
@@ -268,6 +288,7 @@ export function useAreaInfo() {
     // handleDatabase,
     handleSizeChange,
     handleCurrentChange,
-    handleSelectionChange
+    handleSelectionChange,
+    onConditionalSearch
   };
 }

@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import {useAreaInfo} from "./utils/hook";
-import { PureTableBar } from "@/components/RePureTableBar";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import {ref} from "vue";
+import {useMonitorData} from "./utils/hook";
+import {PureTableBar} from "@/components/RePureTableBar";
+import {useRenderIcon} from "@/components/ReIcon/src/hooks";
 
 // import Database from "@iconify-icons/ri/database-2-line";
 // import More from "@iconify-icons/ep/more-filled";
 import Delete from "@iconify-icons/ep/delete";
 import EditPen from "@iconify-icons/ep/edit-pen";
 import Refresh from "@iconify-icons/ep/refresh";
-import Menu from "@iconify-icons/ep/menu";
 import AddFill from "@iconify-icons/ri/add-circle-line";
 
 defineOptions({
-  name: "AreaInfo"
+  name: "MonitorData"
 });
 
 const formRef = ref();
@@ -32,8 +31,9 @@ const {
   // handleDatabase,
   handleSizeChange,
   handleCurrentChange,
-  handleSelectionChange
-} = useAreaInfo();
+  handleSelectionChange,
+  onConditionalSearch
+} = useMonitorData();
 </script>
 
 <template>
@@ -44,26 +44,10 @@ const {
       :model="form"
       class="search-form bg-bg_color w-[99/100] pl-8 pt-[12px]"
     >
-      <el-form-item label="区域编号：" prop="id">
+      <el-form-item label="区域编号" prop="id">
         <el-input
-          v-model="form.id"
+          v-model="form.areaId"
           placeholder="请输入区域编号"
-          clearable
-          class="!w-[180px]"
-        />
-      </el-form-item>
-      <el-form-item label="区域名称：" prop="areaName">
-        <el-input
-          v-model="form.areaName"
-          placeholder="请输入区域名称"
-          clearable
-          class="!w-[180px]"
-        />
-      </el-form-item>
-      <el-form-item label="行政区划代码：" prop="administrativeCode">
-        <el-input
-          v-model="form.administrativeCode"
-          placeholder="请输入行政区划代码"
           clearable
           class="!w-[180px]"
         />
@@ -73,7 +57,7 @@ const {
           type="primary"
           :icon="useRenderIcon('search')"
           :loading="loading"
-          @click="onSearch"
+          @click="onConditionalSearch"
         >
           搜索
         </el-button>

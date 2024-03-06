@@ -1,14 +1,14 @@
 import editForm from "../form.vue";
-import { message } from "@/utils/message";
-import { ElMessageBox } from "element-plus";
-import { usePublicHooks } from "../../hooks";
-import { addDialog } from "@/components/ReDialog";
-import type { FormItemProps } from "../utils/types";
-import type { PaginationProps } from "@pureadmin/table";
-import { reactive, ref, onMounted, h, toRaw } from "vue";
+import {message} from "@/utils/message";
+import {ElMessageBox} from "element-plus";
+import {usePublicHooks} from "../../hooks";
+import {addDialog} from "@/components/ReDialog";
+import type {FormItemProps} from "../utils/types";
+import type {PaginationProps} from "@pureadmin/table";
+import {h, onMounted, reactive, ref, toRaw} from "vue";
 import {addAreaInfo, deleteAreaInfo, getAreaInfoList, updateAreaInfo} from "@/api/monitor";
 
-export function useAreaInfo() {
+export function useVegetationCoverage() {
   const form = reactive({
     id: "",
     areaId: "",

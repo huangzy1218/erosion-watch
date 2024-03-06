@@ -1,19 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import {useAreaInfo} from "./utils/hook";
-import { PureTableBar } from "@/components/RePureTableBar";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import {ref} from "vue";
+import {useLandManagementPlans} from "./utils/hook";
+import {PureTableBar} from "@/components/RePureTableBar";
+import {useRenderIcon} from "@/components/ReIcon/src/hooks";
 
-// import Database from "@iconify-icons/ri/database-2-line";
-// import More from "@iconify-icons/ep/more-filled";
+
 import Delete from "@iconify-icons/ep/delete";
 import EditPen from "@iconify-icons/ep/edit-pen";
 import Refresh from "@iconify-icons/ep/refresh";
-import Menu from "@iconify-icons/ep/menu";
 import AddFill from "@iconify-icons/ri/add-circle-line";
 
 defineOptions({
-  name: "AreaInfo"
+  name: "LandManagementPlans"
 });
 
 const formRef = ref();
@@ -23,7 +21,6 @@ const {
   columns,
   dataList,
   pagination,
-  // buttonClass,
   onSearch,
   resetForm,
   openDialog,
@@ -32,8 +29,9 @@ const {
   // handleDatabase,
   handleSizeChange,
   handleCurrentChange,
-  handleSelectionChange
-} = useAreaInfo();
+  handleSelectionChange,
+  onConditionalSearch
+} = useLandManagementPlans();
 </script>
 
 <template>
@@ -44,36 +42,31 @@ const {
       :model="form"
       class="search-form bg-bg_color w-[99/100] pl-8 pt-[12px]"
     >
-      <el-form-item label="区域编号：" prop="id">
-        <el-input
-          v-model="form.id"
-          placeholder="请输入区域编号"
-          clearable
-          class="!w-[180px]"
-        />
+      <el-form-item label="地区编号" prop="areaId">
+        <el-input v-model="form.areaId" clearable placeholder="请输入地区编号" class="!w-[100px]" />
       </el-form-item>
-      <el-form-item label="区域名称：" prop="areaName">
-        <el-input
-          v-model="form.areaName"
-          placeholder="请输入区域名称"
-          clearable
-          class="!w-[180px]"
-        />
+
+      <el-form-item label="开始日期" prop="startDate">
+        <el-date-picker v-model="form.startDate" type="date" placeholder="选择开始日期" clearable class="!w-[180px]" />
       </el-form-item>
-      <el-form-item label="行政区划代码：" prop="administrativeCode">
-        <el-input
-          v-model="form.administrativeCode"
-          placeholder="请输入行政区划代码"
-          clearable
-          class="!w-[180px]"
-        />
+
+      <el-form-item label="结束日期" prop="endDate">
+        <el-date-picker v-model="form.endDate" type="date" placeholder="选择结束日期" clearable class="!w-[180px]" />
+      </el-form-item>
+
+      <el-form-item label="之前的土地利用情况" prop="previousLandUse">
+        <el-input v-model="form.previousLandUse" clearable placeholder="请输入之前的土地利用情况" class="!w-[180px]" />
+      </el-form-item>
+
+      <el-form-item label="当前的土地利用情况" prop="currentLandUse">
+        <el-input v-model="form.currentLandUse" clearable placeholder="请输入当前的土地利用情况" class="!w-[180px]" />
       </el-form-item>
       <el-form-item>
         <el-button
           type="primary"
           :icon="useRenderIcon('search')"
           :loading="loading"
-          @click="onSearch"
+          @click="onConditionalSearch"
         >
           搜索
         </el-button>

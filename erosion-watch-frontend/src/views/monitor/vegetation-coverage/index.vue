@@ -1,19 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import {useAreaInfo} from "./utils/hook";
-import { PureTableBar } from "@/components/RePureTableBar";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import {ref} from "vue";
+import {PureTableBar} from "@/components/RePureTableBar";
+import {useRenderIcon} from "@/components/ReIcon/src/hooks";
 
 // import Database from "@iconify-icons/ri/database-2-line";
 // import More from "@iconify-icons/ep/more-filled";
 import Delete from "@iconify-icons/ep/delete";
 import EditPen from "@iconify-icons/ep/edit-pen";
 import Refresh from "@iconify-icons/ep/refresh";
-import Menu from "@iconify-icons/ep/menu";
 import AddFill from "@iconify-icons/ri/add-circle-line";
 
 defineOptions({
-  name: "AreaInfo"
+  name: "VegetationCoverage"
 });
 
 const formRef = ref();
@@ -33,7 +31,7 @@ const {
   handleSizeChange,
   handleCurrentChange,
   handleSelectionChange
-} = useAreaInfo();
+} = useVegetationCoverage();
 </script>
 
 <template>

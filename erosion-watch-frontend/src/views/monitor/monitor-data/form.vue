@@ -1,22 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { formRules } from "./utils/rule";
-import { FormProps } from "./utils/types";
+import {ref} from "vue";
+import {formRules} from "./utils/rule";
+import {FormProps} from "./utils/types";
 
 // Assuming FormProps has been updated to include the new fields
 const props = withDefaults(defineProps<FormProps>(), {
   formInline: () => ({
     id: null,
-    areaName: "",
-    administrativeCode: "",
-    latitude: null,
-    longitude: null,
-    area: null,
-    population: null,
-    climateType: "",
-    terrainFeature: "",
-    landformFeature: "",
-    landUse: ""
+    areaId: null,
+    monitoringDate: null,
+    soilErosionRate: null,
+    vegetationCoverageRate: null,
+    rainfallAmount: null
   })
 });
 
@@ -30,54 +25,31 @@ function getRef() {
 defineExpose({ getRef });
 </script>
 
-
 <template>
-  <el-form ref="ruleFormRef" :model="newFormInline" :rules="formRules" label-width="120px">
-    <el-form-item label="地区名称" prop="areaName">
-      <el-input v-model="newFormInline.areaName" clearable placeholder="请输入地区名称" />
+  <el-form
+    ref="ruleFormRef"
+    :model="newFormInline"
+    :rules="formRules"
+    label-width="120px"
+  >
+    <el-form-item label="地区编号" prop="areaId">
+      <el-input v-model="newFormInline.areaId" clearable placeholder="请输入地区编号" />
     </el-form-item>
 
-    <el-form-item label="行政区划代码" prop="administrativeCode">
-      <el-input v-model="newFormInline.administrativeCode" clearable placeholder="请输入行政区划代码" />
+    <el-form-item label="监测日期" prop="monitoringDate">
+      <el-date-picker v-model="newFormInline.monitoringDate" type="date" placeholder="选择监测日期" />
     </el-form-item>
 
-    <el-form-item label="地理坐标">
-      <el-row :gutter="20">
-        <el-col :span="12">
-          <el-form-item prop="latitude">
-            <el-input-number v-model="newFormInline.latitude" placeholder="请输入纬度" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item prop="longitude">
-            <el-input-number v-model="newFormInline.longitude" placeholder="请输入经度" />
-          </el-form-item>
-        </el-col>
-      </el-row>
+    <el-form-item label="土壤侵蚀率" prop="soilErosionRate">
+      <el-input-number v-model="newFormInline.soilErosionRate" placeholder="请输入土壤侵蚀率" />
     </el-form-item>
 
-    <el-form-item label="面积" prop="area">
-      <el-input v-model="newFormInline.area" placeholder="请输入面积" />
+    <el-form-item label="植被覆盖率" prop="vegetationCoverageRate">
+      <el-input-number v-model="newFormInline.vegetationCoverageRate" placeholder="请输入植被覆盖率" />
     </el-form-item>
 
-    <el-form-item label="人口" prop="population">
-      <el-input v-model="newFormInline.population" placeholder="请输入人口" />
-    </el-form-item>
-
-    <el-form-item label="气候类型" prop="climateType">
-      <el-input v-model="newFormInline.climateType" clearable placeholder="请输入气候类型" />
-    </el-form-item>
-
-    <el-form-item label="地形特征" prop="terrainFeature">
-      <el-input v-model="newFormInline.terrainFeature" clearable placeholder="请输入地形特征" />
-    </el-form-item>
-
-    <el-form-item label="地貌特征" prop="landformFeature">
-      <el-input v-model="newFormInline.landformFeature" clearable placeholder="请输入地貌特征" />
-    </el-form-item>
-
-    <el-form-item label="土地利用情况" prop="landUse">
-      <el-input v-model="newFormInline.landUse" clearable placeholder="请输入土地利用情况" />
+    <el-form-item label="降雨量" prop="rainfallAmount">
+      <el-input-number v-model="newFormInline.rainfallAmount" placeholder="请输入降雨量" />
     </el-form-item>
   </el-form>
 </template>

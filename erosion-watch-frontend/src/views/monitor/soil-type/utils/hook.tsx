@@ -1,19 +1,19 @@
 import editForm from "../form.vue";
-import { message } from "@/utils/message";
-import { ElMessageBox } from "element-plus";
-import { usePublicHooks } from "../../hooks";
-import { addDialog } from "@/components/ReDialog";
-import type { FormItemProps } from "../utils/types";
-import type { PaginationProps } from "@pureadmin/table";
-import { reactive, ref, onMounted, h, toRaw } from "vue";
-import {addAreaInfo, deleteAreaInfo, getAreaInfoList, updateAreaInfo} from "@/api/monitor";
+import {message} from "@/utils/message";
+import {ElMessageBox} from "element-plus";
+import {usePublicHooks} from "../../hooks";
+import {addDialog} from "@/components/ReDialog";
+import type {FormItemProps} from "../utils/types";
+import type {PaginationProps} from "@pureadmin/table";
+import {h, onMounted, reactive, ref, toRaw} from "vue";
+import {addSoilType, deleteSoilType, getSoilType, searchSoilType, updateSoilType} from "@/api/monitor";
 
-export function useAreaInfo() {
+export function useSoilType() {
   const form = reactive({
     id: "",
     parentId: "",
     name: "",
-    level: "",
+    level: null,
     soilQuality: "",
     soilMoisture: "",
     description: ""
@@ -31,9 +31,14 @@ export function useAreaInfo() {
   });
   const columns: TableColumnList = [
     {
+      label: "分类编号",
+      prop: "id",
+      minWidth: 80
+    },
+    {
       label: "上级分类的编号",
       prop: "parentId",
-      minWidth: 150
+      minWidth: 100
     },
     {
       label: "土壤类型名称",
@@ -111,7 +116,7 @@ export function useAreaInfo() {
   }
 
   const handleDelete = async row => {
-    deleteAreaInfo(row.id)
+    deleteSoilType(row.id)
       .then(response => {
         if (response.code === 200) {
           console.log("删除成功:", response);
@@ -141,7 +146,20 @@ export function useAreaInfo() {
 
   async function onSearch() {
     loading.value = true;
-    const { data } = await getAreaInfoList(toRaw(form));
+    const { data } = await getSoilType(toRaw(form));
+    dataList.value = data.list;
+    pagination.total = data.total;
+    pagination.pageSize = data.pageSize;
+    pagination.currentPage = data.pageNum;
+
+    setTimeout(() => {
+      loading.value = false;
+    }, 500);
+  }
+
+  async function onConditionalSearch() {
+    loading.value = true;
+    const { data } = await searchSoilType(toRaw(form));
     dataList.value = data.list;
     pagination.total = data.total;
     pagination.pageSize = data.pageSize;
@@ -189,7 +207,7 @@ export function useAreaInfo() {
             console.log("curData", curData);
             // 表单规则校验通过
             if (title === "新增") {
-              addAreaInfo(curData)
+              addSoilType(curData)
                 .then(response => {
                   if (response.code === 200) {
                     console.log('新增区域信息成功', response);
@@ -205,7 +223,7 @@ export function useAreaInfo() {
               });
               chores();
             } else {
-              updateAreaInfo(curData.id, curData)
+              updateSoilType(curData.id, curData)
                 .then(response => {
                   if (response.code === 200) {
                     console.log('修改区域信息成功', response);
@@ -221,6 +239,7 @@ export function useAreaInfo() {
                 });
               chores();
             }
+            onSearch();
           }
         });
       }
@@ -254,6 +273,7 @@ export function useAreaInfo() {
     // handleDatabase,
     handleSizeChange,
     handleCurrentChange,
-    handleSelectionChange
+    handleSelectionChange,
+    onConditionalSearch
   };
 }
