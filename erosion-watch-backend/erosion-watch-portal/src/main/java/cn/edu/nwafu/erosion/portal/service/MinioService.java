@@ -1,6 +1,7 @@
 package cn.edu.nwafu.erosion.portal.service;
 
 import cn.edu.nwafu.erosion.portal.domain.dto.MinioUploadDto;
+import cn.edu.nwafu.erosion.portal.enums.Bucket;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -9,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Huang Z.Y.
  */
 public interface MinioService {
-    MinioUploadDto upload(MultipartFile file);
+    MinioUploadDto upload(MultipartFile file, Bucket type);
 
     boolean delete(String fileName);
 }

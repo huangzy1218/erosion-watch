@@ -2,6 +2,7 @@ package cn.edu.nwafu.erosion.portal.service.impl;
 
 import cn.edu.nwafu.erosion.portal.domain.dto.BucketPolicyConfigDto;
 import cn.edu.nwafu.erosion.portal.domain.dto.MinioUploadDto;
+import cn.edu.nwafu.erosion.portal.enums.Bucket;
 import cn.edu.nwafu.erosion.portal.service.MinioService;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.json.JSONUtil;
@@ -10,9 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * @author Huang Z.Y.
@@ -30,7 +28,7 @@ public class MinioServiceImpl implements MinioService {
     private String SECRET_KEY;
 
     @Override
-    public MinioUploadDto upload(MultipartFile file) {
+    public MinioUploadDto upload(MultipartFile file, Bucket bucket) {
         try {
             // 创建一个MinIO的Java客户端
             MinioClient minioClient = MinioClient.builder()
@@ -51,9 +49,15 @@ public class MinioServiceImpl implements MinioService {
                 minioClient.setBucketPolicy(setBucketPolicyArgs);
             }
             String filename = file.getOriginalFilename();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
             // 设置存储对象名称
-            String objectName = sdf.format(new Date()) + "/" + filename;
+            String prefix = "";
+            switch (bucket) {
+                case data -> prefix = "avatar";
+                case avatar -> prefix = "data";
+                default -> {
+                }
+            }
+            String objectName = prefix + "/" + filename;
             // 使用putObject上传一个文件到存储桶中
             PutObjectArgs putObjectArgs = PutObjectArgs.builder()
                     .bucket(BUCKET_NAME)

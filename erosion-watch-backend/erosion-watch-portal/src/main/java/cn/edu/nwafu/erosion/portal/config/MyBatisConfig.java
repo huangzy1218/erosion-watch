@@ -14,4 +14,3 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan({"cn.edu.nwafu.erosion.mapper"})
 public class MyBatisConfig {
 }
-    
