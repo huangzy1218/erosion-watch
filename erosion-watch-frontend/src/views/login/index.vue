@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
+import {useI18n} from "vue-i18n";
 import Motion from "./utils/motion";
-import { useRouter } from "vue-router";
-import { message } from "@/utils/message";
-import { loginRules } from "./utils/rule";
+import {useRouter} from "vue-router";
+import {message} from "@/utils/message";
+import {loginRules} from "./utils/rule";
 import phone from "./components/phone.vue";
 import TypeIt from "@/components/ReTypeit";
-import { debounce } from "@pureadmin/utils";
+import {debounce} from "@pureadmin/utils";
 import qrCode from "./components/qrCode.vue";
 import regist from "./components/regist.vue";
 import update from "./components/update.vue";
-import { useNav } from "@/layout/hooks/useNav";
-import { useEventListener } from "@vueuse/core";
-import type { FormInstance } from "element-plus";
-import { $t, transformI18n } from "@/plugins/i18n";
-import { operates, thirdParty } from "./utils/enums";
-import { useLayout } from "@/layout/hooks/useLayout";
-import { useUserStoreHook } from "@/store/modules/user";
-import { initRouter, getTopMenu } from "@/router/utils";
-import { bg, avatar, illustration } from "./utils/static";
-import { ReImageVerify } from "@/components/ReImageVerify";
-import { ref, toRaw, reactive, watch, computed } from "vue";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
-import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
+import {useNav} from "@/layout/hooks/useNav";
+import {useEventListener} from "@vueuse/core";
+import type {FormInstance} from "element-plus";
+import {$t, transformI18n} from "@/plugins/i18n";
+import {operates, thirdParty} from "./utils/enums";
+import {useLayout} from "@/layout/hooks/useLayout";
+import {useUserStoreHook} from "@/store/modules/user";
+import {getTopMenu, initRouter} from "@/router/utils";
+import {avatar, bg, illustration} from "./utils/static";
+import {ReImageVerify} from "@/components/ReImageVerify";
+import {computed, reactive, ref, toRaw, watch} from "vue";
+import {useRenderIcon} from "@/components/ReIcon/src/hooks";
+import {useTranslationLang} from "@/layout/hooks/useTranslationLang";
+import {useDataThemeChange} from "@/layout/hooks/useDataThemeChange";
 
 import dayIcon from "@/assets/svg/day.svg?component";
 import darkIcon from "@/assets/svg/dark.svg?component";
@@ -57,8 +57,8 @@ const { title, getDropdownItemStyle, getDropdownItemClass } = useNav();
 const { locale, translationCh, translationEn } = useTranslationLang();
 
 const ruleForm = reactive({
-  username: "admin",
-  password: "admin123",
+  username: "",
+  password: "",
   verifyCode: ""
 });
 
@@ -68,9 +68,9 @@ const onLogin = async (formEl: FormInstance | undefined) => {
     if (valid) {
       loading.value = true;
       useUserStoreHook()
-        .loginByUsername({ username: ruleForm.username, password: "admin123" })
+        .loginByUsername({ username: ruleForm.username, password: ruleForm.password })
         .then(res => {
-          if (res.success) {
+          if (res.code === 200) {
             // 获取后端路由
             return initRouter().then(() => {
               disabled.value = true;
@@ -163,7 +163,7 @@ watch(loginDay, value => {
       </div>
       <div class="login-box">
         <div class="login-form">
-          <avatar class="avatar" />
+          <avatar class="avatar" style="margin-bottom: -20px" />
           <Motion>
             <h2 class="outline-none">
               <TypeIt
@@ -171,7 +171,6 @@ watch(loginDay, value => {
               />
             </h2>
           </Motion>
-
           <el-form
             v-if="currentPage === 0"
             ref="ruleFormRef"

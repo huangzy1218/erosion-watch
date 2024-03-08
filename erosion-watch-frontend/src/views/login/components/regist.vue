@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import { ref, reactive } from "vue";
+import {useI18n} from "vue-i18n";
+import {reactive, ref} from "vue";
 import Motion from "../utils/motion";
-import { message } from "@/utils/message";
-import { updateRules } from "../utils/rule";
-import type { FormInstance } from "element-plus";
-import { useVerifyCode } from "../utils/verifyCode";
-import { $t, transformI18n } from "@/plugins/i18n";
-import { useUserStoreHook } from "@/store/modules/user";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import {message} from "@/utils/message";
+import {updateRules} from "../utils/rule";
+import type {FormInstance} from "element-plus";
+import {useVerifyCode} from "../utils/verifyCode";
+import {$t, transformI18n} from "@/plugins/i18n";
+import {useUserStoreHook} from "@/store/modules/user";
+import {useRenderIcon} from "@/components/ReIcon/src/hooks";
 import Lock from "@iconify-icons/ri/lock-fill";
 import Iphone from "@iconify-icons/ep/iphone";
 import User from "@iconify-icons/ri/user-3-fill";
+import {getRegister} from "@/api/user";
 
 const { t } = useI18n();
 const checked = ref(false);
@@ -48,10 +49,20 @@ const onUpdate = async (formEl: FormInstance | undefined) => {
       if (checked.value) {
         // 模拟请求，需根据实际开发进行修改
         setTimeout(() => {
-          message(transformI18n($t("login.registerSuccess")), {
-            type: "success"
-          });
-          loading.value = false;
+          getRegister({username: ruleForm.username, password: ruleForm.password,
+            telephone: ruleForm.phone, authCode: ruleForm.verifyCode})
+            .then(res => {
+              if (res.code === 200) {
+                message(transformI18n($t("login.registerSuccess")), {
+                  type: "success"
+                });
+                loading.value = false;
+              } else {
+                loading.value = false;
+                message(transformI18n($t("login.tickPrivacy")), { type: "warning" });
+              }
+            });
+
         }, 2000);
       } else {
         loading.value = false;
