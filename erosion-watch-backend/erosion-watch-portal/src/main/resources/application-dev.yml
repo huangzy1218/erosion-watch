@@ -30,4 +30,10 @@ secure:
       - /auth/**
       - /**/**
 
-virtual-host: 192.168.174.128
+minio:
+  endpoint: http://${virtual-host}:9000 #MinIO服务所在地址
+  bucket-name: erosion-watch #存储桶名称
+  access-key: minioadmin #访问的key
+  secret-key: minioadmin #访问的秘钥
+
+virtual-host: 8.140.22.169

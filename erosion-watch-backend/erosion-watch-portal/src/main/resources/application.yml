@@ -6,16 +6,24 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  redis:
+    host: ${virtual-host} # Redis服务器地址
+    database: 0 # Redis数据库索引（默认为0）
+    port: 6379 # Redis服务器连接端口
+    password: # Redis服务器连接密码（默认为空）
+    timeout: 300ms # 连接超时时间（毫秒）
+    
 mybatis:
   mapper-locations:
     - classpath:mapper/*.xml
     - classpath*:cn/**/mapper/*.xml
 
+
 jwt:
   token-header: Authorization # JWT存储的请求头
   secret: erosion-portal-secret # JWT加解密使用的密钥
   expiration: 604800 # JWT的超期限时间(60*60*24*7)
-  token-head: 'Bearer'  # JWT负载中拿到开头
+  token-head: 'Bearer '  # JWT负载中拿到开头
 
 redis:
   database: erosion-watch

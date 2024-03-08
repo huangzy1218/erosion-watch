@@ -53,7 +53,7 @@ export const searchAreaInfoList = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -66,7 +66,7 @@ export const deleteAreaInfo = async id => {
     {},
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -77,7 +77,7 @@ export const addAreaInfo = async (areaInfoDto: AreaInfoDto): Promise<any> => {
     let response = await http.post(baseUrlApi(`area-info/add`), { data: areaInfoDto },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       });
     return await response;
@@ -97,7 +97,7 @@ export const updateAreaInfo = async (
       { data: areaInfoDto },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       }
     );
@@ -114,7 +114,7 @@ export const getLandManagementPlans = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -127,7 +127,7 @@ export const searchLandManagementPlans = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -140,7 +140,7 @@ export const deleteLandManagementPlan = async (id: number) => {
     {},
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -151,7 +151,7 @@ export const addLandManagementPlan = async (landManagementPlan: LandManagementPl
     let response = await http.post(baseUrlApi(`land-management-plans/add`), { data: landManagementPlan },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       });
     return await response;
@@ -168,7 +168,7 @@ export const updateLandManagementPlan = async (id: number, landManagementPlan: L
       { data: landManagementPlan },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       }
     );
@@ -184,7 +184,7 @@ export const getLandUseChangeHistory = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -197,7 +197,7 @@ export const searchLandUseChangeHistory = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -210,7 +210,7 @@ export const deleteLandUseChangeHistory = async (id: number) => {
     {},
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -221,7 +221,7 @@ export const addLandUseChangeHistory = async (landUseChangeHistory: LandUseChang
     let response = await http.post(baseUrlApi(`land-use-change-history/add`), { data: landUseChangeHistory },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       });
     return await response;
@@ -238,7 +238,7 @@ export const updateLandUseChangeHistory = async (id: number, landUseChangeHistor
       { data: landUseChangeHistory },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       }
     );
@@ -254,7 +254,7 @@ export const getMonitoringData = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -267,7 +267,7 @@ export const searchMonitoringData = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -280,7 +280,7 @@ export const deleteMonitoringData = async (id: number) => {
     {},
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -292,7 +292,7 @@ export const addMonitoringData = async (monitoringDataDto: MonitoringDataDto): P
       { data: monitoringDataDto },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       });
     return await response;
@@ -309,7 +309,7 @@ export const updateMonitoringData = async (id: number, monitoringData: Monitorin
       { data: monitoringData },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       }
     );
@@ -325,7 +325,7 @@ export const getSoilErosionGrade = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -338,7 +338,7 @@ export const searchSoilErosionGrade = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -351,7 +351,7 @@ export const deleteSoilErosionGrade = async (id: number) => {
     {},
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -362,7 +362,7 @@ export const addSoilErosionGrade = async (soilErosionGradeDto: SoilErosionGradeD
     let response = await http.post(baseUrlApi(`soil-erosion-grade/add`), { data: soilErosionGradeDto },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       });
     return await response;
@@ -379,7 +379,7 @@ export const updateSoilErosionGrade = async (id: number, soilErosionGradeDto: So
       { data: soilErosionGradeDto },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       }
     );
@@ -395,7 +395,7 @@ export const getSoilType = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -408,7 +408,7 @@ export const searchSoilType = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -421,7 +421,7 @@ export const deleteSoilType = async (id: number) => {
     {},
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -432,7 +432,7 @@ export const addSoilType = async (soilTypeDto: SoilTypeDto): Promise<any> => {
     let response = await http.post(baseUrlApi(`soil-type/add`), { data: soilTypeDto },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       });
     return await response;
@@ -449,7 +449,7 @@ export const updateSoilType = async (id: number, soilTypeDto: SoilTypeDto): Prom
       { data: soilTypeDto },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       }
     );
@@ -465,7 +465,7 @@ export const getTerrainLandform = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -478,7 +478,7 @@ export const searchTerrainLandform = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -491,7 +491,7 @@ export const deleteTerrainLandform = async (id: number) => {
     {},
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -503,7 +503,7 @@ export const addTerrainLandform = async (terrainLandformDto: TerrainLandformDto)
       { data: terrainLandformDto },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       });
     return await response;
@@ -520,7 +520,7 @@ export const updateTerrainLandform = async (id: number, terrainLandformDto: Terr
       { data: terrainLandformDto },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       }
     );
@@ -536,7 +536,7 @@ export const getVegetationCoverage = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -549,7 +549,7 @@ export const searchVegetationCoverage = (data?: object) => {
     { data },
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -562,7 +562,7 @@ export const deleteVegetationCoverage = async (id: number) => {
     {},
     {
       headers: {
-        Authorization: "Bearer"
+        Authorization: "Bearer "
       }
     }
   );
@@ -574,7 +574,7 @@ export const addVegetationCoverage = async (vegetationCoverageDto: VegetationCov
       { data: vegetationCoverageDto },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       });
     return await response;
@@ -591,7 +591,7 @@ export const updateVegetationCoverage = async (id: number, vegetationCoverageDto
       { data: vegetationCoverageDto },
       {
         headers: {
-          Authorization: "Bearer"
+          Authorization: "Bearer "
         }
       }
     );

@@ -26,6 +26,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -41,6 +42,10 @@ public class MemberServiceImpl implements MemberService {
     private String REDIS_KEY_PREFIX_AUTH_CODE;
     @Value("${redis.expire.auth-code}")
     private Long AUTH_CODE_EXPIRE_SECONDS;
+    @Value("${jwt.expiration}")
+    // 7天
+    private Long EXPIRE_SECONDS;
+
     @Autowired
     private MemberCacheService memberCacheService;
     @Autowired
@@ -97,7 +102,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String login(String username, String password) {
+    public HashMap<String, String> login(String username, String password) {
         String token = null;
         try {
             UserDetails userDetails = loadUserByUsername(username);
@@ -110,7 +115,14 @@ public class MemberServiceImpl implements MemberService {
         } catch (AuthenticationException e) {
             log.warn("登录异常:{}", e.getMessage());
         }
-        return token;
+        long currentTimeMillis = System.currentTimeMillis();
+        Date expireTime = new Date(currentTimeMillis + EXPIRE_SECONDS * 1000);
+        HashMap<String, String> tokenMap = new HashMap<>();
+        tokenMap.put("username", username);
+        tokenMap.put("accessToken", token);
+        tokenMap.put("refreshToken", token);
+        tokenMap.put("expires", expireTime.toString());
+        return tokenMap;
     }
 
     @Override

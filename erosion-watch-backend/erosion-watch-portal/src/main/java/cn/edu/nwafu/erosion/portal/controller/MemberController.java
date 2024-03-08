@@ -2,6 +2,8 @@ package cn.edu.nwafu.erosion.portal.controller;
 
 import cn.edu.nwafu.common.api.CommonResult;
 import cn.edu.nwafu.erosion.model.Member;
+import cn.edu.nwafu.erosion.portal.domain.dto.CommonLoginDto;
+import cn.edu.nwafu.erosion.portal.domain.dto.MemberRegisterDto;
 import cn.edu.nwafu.erosion.portal.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -40,26 +39,20 @@ public class MemberController {
     @ApiOperation("用户注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult<?> register(@RequestParam String username,
-                                    @RequestParam String password,
-                                    @RequestParam String telephone,
-                                    @RequestParam String authCode) {
-        memberService.register(username, password, telephone, authCode);
+    public CommonResult<?> register(@RequestBody MemberRegisterDto registerDto) {
+        memberService.register(registerDto.getUsername(), registerDto.getPassword(),
+                registerDto.getTelephone(), registerDto.getAuthCode());
         return CommonResult.success(null, "注册成功");
     }
 
     @ApiOperation("用户登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult<?> login(@RequestParam String username,
-                                 @RequestParam String password) {
-        String token = memberService.login(username, password);
-        if (token == null) {
+    public CommonResult<?> login(@RequestBody CommonLoginDto loginDto) {
+        HashMap<String, String> tokenMap = memberService.login(loginDto.getUsername(), loginDto.getPassword());
+        if (tokenMap == null) {
             return CommonResult.validateFailed("用户名或密码错误");
         }
-        Map<String, String> tokenMap = new HashMap<>();
-        tokenMap.put("token", token);
-        tokenMap.put("tokenHead", tokenHead);
         return CommonResult.success(tokenMap);
     }
 

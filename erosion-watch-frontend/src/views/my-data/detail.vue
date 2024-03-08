@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { tableData } from "./data";
-import { useColumns as useExcelColumns } from "@/views/pure-table/high/excel/columns";
-import { useColumns as usePrintColums } from "@/views/pure-table/high/prints/columns";
-import { PureTableBar } from "@/components/RePureTableBar";
+import {ref} from "vue";
+import {useColumns as useExcelColumns} from "@/views/pure-table/high/excel/columns";
+import {useColumns as usePrintColums} from "@/views/pure-table/high/prints/columns";
+
 const printRef = ref();
 const { columns, dataList, print } = usePrintColums(printRef);
 
@@ -56,7 +55,7 @@ const handleCellClick = (row, column, cell, event) => {
   }
 
   // 更新选中单元格的样式
-  cell.style.border = "1px solid green";
+  cell.style.border = "1.5px solid green";
   selectedCell.value = cell; // 更新选中单元格的引用
 };
 

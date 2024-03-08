@@ -3,6 +3,8 @@ package cn.edu.nwafu.erosion.portal.service;
 import cn.edu.nwafu.erosion.model.Member;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.HashMap;
+
 /**
  * @author Huang Z.Y.
  */
@@ -13,7 +15,7 @@ public interface MemberService {
 
     void register(String username, String password, String telephone, String authCode);
 
-    String login(String username, String password);
+    HashMap<String, String> login(String username, String password);
 
     Member getCurrentMember();
 
