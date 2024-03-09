@@ -11,6 +11,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@MapperScan({"cn.edu.nwafu.erosion.mapper"})
+@MapperScan({"cn.edu.nwafu.erosion.mapper", "cn.edu.nwafu.erosion.portal.mapper"})
 public class MyBatisConfig {
 }

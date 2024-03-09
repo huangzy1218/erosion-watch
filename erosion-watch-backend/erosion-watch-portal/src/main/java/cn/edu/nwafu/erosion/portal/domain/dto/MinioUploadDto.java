@@ -16,5 +16,13 @@ public class MinioUploadDto {
     private String url;
     @ApiModelProperty("文件名称")
     private String name;
+
+    @Override
+    public String toString() {
+        return "MinioUploadDto{" +
+                "url='" + url + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
     

@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRole } from "@/views/my-data/utils/hook";
-import { PureTableBar } from "@/components/RePureTableBar";
-import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import { $t } from "@/plugins/i18n";
+import {ref} from "vue";
+import {useMyData} from "@/views/my-data/utils/hook";
+import {PureTableBar} from "@/components/RePureTableBar";
+import {useRenderIcon} from "@/components/ReIcon/src/hooks";
 import Delete from "@iconify-icons/ep/delete";
 import EditPen from "@iconify-icons/ep/edit-pen";
 import Refresh from "@iconify-icons/ep/refresh";
-import Menu from "@iconify-icons/ep/menu";
 import AddFill from "@iconify-icons/ri/add-circle-line";
 import Download from "@iconify-icons/ep/download";
 import Document from "@iconify-icons/ep/document";
+
 const formRef = ref();
 const {
   form,
@@ -30,7 +29,7 @@ const {
   handleCurrentChange,
   handleSelectionChange,
   openRenameDialog
-} = useRole();
+} = useMyData();
 </script>
 
 <template>
@@ -43,7 +42,7 @@ const {
     >
       <el-form-item label="" prop="">
         <el-input
-          v-model="form.name"
+          v-model="form.fileName"
           placeholder="请输入文件名称"
           clearable
           class="!w-[180px]"
@@ -140,43 +139,6 @@ const {
                 </el-button>
               </template>
             </el-popconfirm>
-            <!-- <el-dropdown>
-              <el-button
-                class="ml-3 mt-[2px]"
-                link
-                type="primary"
-                :size="size"
-                :icon="useRenderIcon(More)"
-              />
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item>
-                    <el-button
-                      :class="buttonClass"
-                      link
-                      type="primary"
-                      :size="size"
-                      :icon="useRenderIcon(Menu)"
-                      @click="handleMenu"
-                    >
-                      菜单权限
-                    </el-button>
-                  </el-dropdown-item>
-                  <el-dropdown-item>
-                    <el-button
-                      :class="buttonClass"
-                      link
-                      type="primary"
-                      :size="size"
-                      :icon="useRenderIcon(Database)"
-                      @click="handleDatabase"
-                    >
-                      数据权限
-                    </el-button>
-                  </el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown> -->
           </template>
         </pure-table>
       </template>

@@ -52,8 +52,8 @@ public class MinioServiceImpl implements MinioService {
             // 设置存储对象名称
             String prefix = "";
             switch (bucket) {
-                case data -> prefix = "avatar";
-                case avatar -> prefix = "data";
+                case data -> prefix = "data";
+                case avatar -> prefix = "avatar";
                 default -> {
                 }
             }
@@ -69,6 +69,7 @@ public class MinioServiceImpl implements MinioService {
             MinioUploadDto minioUploadDto = new MinioUploadDto();
             minioUploadDto.setName(filename);
             minioUploadDto.setUrl(ENDPOINT + "/" + BUCKET_NAME + "/" + objectName);
+            log.info("miniUploadDto: {}", minioUploadDto);
             return minioUploadDto;
         } catch (Exception e) {
             e.printStackTrace();

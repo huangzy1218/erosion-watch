@@ -1,10 +1,13 @@
 package cn.edu.nwafu.erosion.portal.domain.entity;
 
+import lombok.Builder;
+
 import java.util.Date;
 
 /**
  * @author Huang Z.Y.
  */
+@Builder
 public class ExcelFile {
     /**
      * 文件ID
@@ -19,19 +22,31 @@ public class ExcelFile {
      */
     private String author;
     /**
-     * 文件大小（字节为单位）
-     */
-    private Long fileSize;
-    /**
      * 创建时间
      */
     private Date createTime;
+    private Date updateTime;
+    private String updateUser;
+    private String urlPath;
+    private String mongoId;
 
-    // 构造函数
     public ExcelFile() {
     }
 
-    // Getters 和 Setters
+    public ExcelFile(Long fid, String fileName,
+                     String author, Date createTime,
+                     Date updateTime, String updateUser,
+                     String urlPath, String mongoId) {
+        this.fid = fid;
+        this.fileName = fileName;
+        this.author = author;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.updateUser = updateUser;
+        this.urlPath = urlPath;
+        this.mongoId = mongoId;
+    }
+
     public Long getFid() {
         return fid;
     }
@@ -56,14 +71,6 @@ public class ExcelFile {
         this.author = author;
     }
 
-    public Long getFileSize() {
-        return fileSize;
-    }
-
-    public void setFileSize(Long fileSize) {
-        this.fileSize = fileSize;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -72,15 +79,49 @@ public class ExcelFile {
         this.createTime = createTime;
     }
 
-    // toString方法
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
+    }
+
+    public String getUrlPath() {
+        return urlPath;
+    }
+
+    public void setUrlPath(String urlPath) {
+        this.urlPath = urlPath;
+    }
+
+    public String getMongoId() {
+        return mongoId;
+    }
+
+    public void setMongoId(String mongoId) {
+        this.mongoId = mongoId;
+    }
+
     @Override
     public String toString() {
         return "ExcelFile{" +
                 "fid=" + fid +
                 ", fileName='" + fileName + '\'' +
                 ", author='" + author + '\'' +
-                ", fileSize=" + fileSize +
                 ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", updateUser='" + updateUser + '\'' +
+                ", urlPath='" + urlPath + '\'' +
+                ", mongoId='" + mongoId + '\'' +
                 '}';
     }
 }

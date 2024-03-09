@@ -1,18 +1,17 @@
 <script setup lang="ts">
-import { formRules } from "@/views/my-data/utils/rule";
-import { FormProps } from "@/views/my-data/utils/types";
-
-import axios from "axios";
+import {formRules} from "@/views/my-data/utils/rule";
+import {FormProps} from "@/views/my-data/utils/types";
 import Sortable from "sortablejs";
-import { ref, computed } from "vue";
-import { useRouter } from "vue-router";
-import { message } from "@/utils/message";
-import type { UploadFile } from "element-plus";
-import { getKeyList, extractFields, downloadByData } from "@pureadmin/utils";
+import {computed, ref} from "vue";
+import {useRouter} from "vue-router";
+import {message} from "@/utils/message";
+import type {UploadFile} from "element-plus";
+import {extractFields, getKeyList} from "@pureadmin/utils";
 
 import Add from "@iconify-icons/ep/plus";
 import Eye from "@iconify-icons/ri/eye-line";
 import Delete from "@iconify-icons/ri/delete-bin-7-line";
+import {baseUrlApi} from "@/api/utils";
 
 defineOptions({
   name: "PureUpload"
@@ -22,6 +21,7 @@ const fileList = ref([]);
 const router = useRouter();
 const curOpenImgIndex = ref(0);
 const dialogVisible = ref(false);
+const uploadUrl = baseUrlApi("my-data/upload");
 
 const urlList = computed(() => getKeyList(fileList.value, "url"));
 const imgInfos = computed(() => extractFields(fileList.value, "name", "size"));
@@ -33,20 +33,15 @@ const srcList = Array.from({ length: 3 }).map((_, index) => {
 
 /** 上传文件前校验 */
 const onBefore = file => {
-  if (!["image/jpeg", "image/png", "image/gif"].includes(file.type)) {
-    message("只能上传图片");
+  if (
+    ![
+      "application/vnd.ms-excel",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet].includes(file.type)"
+    ]
+  ) {
+    message("只能上传Excel文件");
     return false;
   }
-  const isExceed = file.size / 1024 / 1024 > 2;
-  if (isExceed) {
-    message(`单个图片大小不能超过2MB`);
-    return false;
-  }
-};
-
-/** 超出最大上传数时触发 */
-const onExceed = () => {
-  message("最多上传3张图片，请先删除在上传");
 };
 
 /** 移除上传的文件 */
@@ -82,25 +77,6 @@ const imgDrop = uid => {
   });
 };
 
-/** 下载图片 */
-const onDownload = () => {
-  [
-    { name: "巴旦木.jpeg", type: "img" },
-    { name: "恭喜发财.png", type: "img" },
-    { name: "可爱动物.gif", type: "gif" },
-    { name: "pure-upload.csv", type: "other" },
-    { name: "pure-upload.txt", type: "other" }
-  ].forEach(img => {
-    axios
-      .get(`https://xiaoxian521.github.io/hyperlink/${img.type}/${img.name}`, {
-        responseType: "blob"
-      })
-      .then(({ data }) => {
-        downloadByData(data, img.name);
-      });
-  });
-};
-
 const props = withDefaults(defineProps<FormProps>(), {
   formInline: () => ({
     name: "",
@@ -132,11 +108,10 @@ defineExpose({ getRef });
       multiple
       class="pure-upload"
       list-type="picture-card"
-      accept="image/jpeg,image/png,image/gif"
-      action="https://run.mocky.io/v3/3aa761d7-b0b3-4a03-96b3-6168d4f7467b"
-      :limit="3"
-      :headers="{ Authorization: 'eyJhbGciOiJIUzUxMiJ9.admin' }"
-      :on-exceed="onExceed"
+      accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      :action="uploadUrl"
+      :limit="1"
+      :headers="{ Authorization: 'Bearer ' }"
       :before-upload="onBefore"
     >
       <IconifyIconOffline :icon="Add" class="m-auto mt-4" width="30" />
@@ -157,7 +132,7 @@ defineExpose({ getRef });
         <div v-else @mouseenter.stop="imgDrop(file.uid)">
           <img
             class="el-upload-list__item-thumbnail select-none"
-            :src="file.url"
+            src="https://api.iconify.design/vscode-icons:file-type-excel.svg?color=%2322b04c"
           />
           <span
             id="pure-upload-item"

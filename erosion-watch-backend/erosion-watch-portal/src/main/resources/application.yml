@@ -12,12 +12,13 @@ spring:
     port: 6379 # Redis服务器连接端口
     password: # Redis服务器连接密码（默认为空）
     timeout: 300ms # 连接超时时间（毫秒）
-    
+
 mybatis:
   mapper-locations:
     - classpath:mapper/*.xml
     - classpath*:cn/**/mapper/*.xml
-
+  configuration:
+    map-underscore-to-camel-case: true
 
 jwt:
   token-header: Authorization # JWT存储的请求头
@@ -30,6 +31,7 @@ redis:
   key:
     member: 'member'
     auth-code: 'authCode'
+    data: 'data'
   expire:
     auth-code: 90 # 验证码超时时间
     common: 86400 # 验证码超时时间

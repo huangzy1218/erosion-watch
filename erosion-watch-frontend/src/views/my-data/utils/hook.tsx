@@ -1,20 +1,21 @@
 import dayjs from "dayjs";
 import uploadForm from "../upload.vue";
-import { message } from "@/utils/message";
-import { getFileList } from "@/api/mydata";
-import { usePublicHooks } from "../hooks";
-import { addDialog } from "@/components/ReDialog/index";
-import type { FormItemProps } from "./types";
-import type { PaginationProps } from "@pureadmin/table";
-import { reactive, ref, onMounted, h, toRaw, computed } from "vue";
-import { useRouter } from "vue-router";
+import {message} from "@/utils/message";
+import {deleteMyData, getFileList} from "@/api/mydata";
+import {usePublicHooks} from "../hooks";
+import {addDialog} from "@/components/ReDialog/index";
+import type {FormItemProps} from "./types";
+import type {PaginationProps} from "@pureadmin/table";
+import {computed, h, onMounted, reactive, ref, toRaw} from "vue";
+import {useRouter} from "vue-router";
 import renameForm from "@/views/my-data/renameForm.vue";
 
-export function useRole() {
+export function useMyData() {
   const form = reactive({
-    name: "",
-    code: "",
-    status: ""
+    fid: "",
+    fileName: "",
+    author: "",
+    createTime: ""
   });
   const router = useRouter();
   const formRef = ref();
@@ -40,6 +41,11 @@ export function useRole() {
           <span style="margin-left: 10px">{row.fileName}</span>
         </div>
       )
+    },
+    {
+      label: "创建人",
+      minWidth: 160,
+      prop: "author"
     },
     {
       label: "创建时间",
@@ -107,10 +113,23 @@ export function useRole() {
   //     });
   // }
 
-  function handleDelete(row) {
-    message(`您删除了角色名称为${row.name}的这条数据`, { type: "success" });
-    onSearch();
-  }
+  const handleDelete = async row => {
+    console.log("hhh");
+    deleteMyData(row.fid)
+      .then(response => {
+        if (response.code === 200) {
+          console.log("删除成功:", response);
+          message("删除成功", { type: "success" });
+        } else {
+          console.log("删除失败:", response);
+          message("删除失败", { type: "error" });
+        }
+      })
+      .catch(error => {
+        console.error("删除失败:", error);
+        message("删除失败", { type: "error" });
+      });
+  };
 
   function handleSizeChange(val: number) {
     console.log(`${val} items per page`);
@@ -130,7 +149,7 @@ export function useRole() {
     dataList.value = data.list;
     pagination.total = data.total;
     pagination.pageSize = data.pageSize;
-    pagination.currentPage = data.currentPage;
+    pagination.currentPage = data.pageNum;
 
     setTimeout(() => {
       loading.value = false;
@@ -182,7 +201,6 @@ export function useRole() {
               // 实际开发先调用新增接口，再进行下面操作
               chores();
             } else {
-              // 实际开发先调用修改接口，再进行下面操作
               chores();
             }
           }
