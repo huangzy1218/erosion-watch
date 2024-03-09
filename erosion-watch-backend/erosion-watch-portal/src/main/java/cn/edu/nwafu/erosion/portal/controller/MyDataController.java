@@ -59,5 +59,17 @@ public class MyDataController {
             return CommonResult.failed("删除我的数据失败");
         }
     }
+
+    @ApiOperation("重命名文件")
+    @DeleteMapping("/rename/{id}")
+    @ResponseBody
+    public CommonResult<?> rename(@PathVariable Long id) {
+        int count = myDataService.rename(id);
+        if (count > 0) {
+            return CommonResult.success("重命名文件成功");
+        } else {
+            return CommonResult.failed("重命名文件失败");
+        }
+    }
 }
     

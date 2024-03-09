@@ -17,4 +17,6 @@ public interface MyDataService {
     int delete(Long id);
 
     ExcelFile getById(Long id);
+
+    int rename(Long id);
 }
