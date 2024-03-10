@@ -1,11 +1,14 @@
 package cn.edu.nwafu.erosion.portal.service.impl;
 
 import cn.edu.nwafu.common.service.RedisService;
+import cn.edu.nwafu.common.util.ExcelUtil;
+import cn.edu.nwafu.erosion.portal.domain.ExcelDocument;
 import cn.edu.nwafu.erosion.portal.domain.dto.MinioUploadDto;
 import cn.edu.nwafu.erosion.portal.domain.entity.ExcelFile;
 import cn.edu.nwafu.erosion.portal.domain.vo.ExcelFileVo;
 import cn.edu.nwafu.erosion.portal.enums.Bucket;
 import cn.edu.nwafu.erosion.portal.mapper.MyDataMapper;
+import cn.edu.nwafu.erosion.portal.repository.ExcelDocumentRepository;
 import cn.edu.nwafu.erosion.portal.service.MinioService;
 import cn.edu.nwafu.erosion.portal.service.MyDataService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -34,6 +38,8 @@ public class MyDataServiceImpl implements MyDataService {
     private MinioService minioService;
     @Autowired
     private MyDataMapper myDataMapper;
+    @Autowired
+    private ExcelDocumentRepository repository;
 
     @Override
     public List<ExcelFileVo> listAll() {
@@ -47,13 +53,23 @@ public class MyDataServiceImpl implements MyDataService {
 
     @Override
     public boolean upload(MultipartFile file) {
+        /*try {
+            File cvsFile = ExcelUtil.convertMultipartFileToCsv(file);
+            file.transferTo(cvsFile);
+        } catch (IOException e) {
+            log.info("压缩excel文件失败");
+        }*/
         MinioUploadDto uploadDto = minioService.upload(file, Bucket.data);
         if (uploadDto == null) {
             return false;
         }
         deleteCache();
+        String mongoId = save2Mongo(file);
+
         ExcelFile excelFile = ExcelFile.builder()
                 .fileName(file.getOriginalFilename())
+                .urlPath(uploadDto.getUrl())
+                .mongoId(mongoId)
                 .build();
         log.info("excelFile: {}", excelFile);
         myDataMapper.insert(excelFile);
@@ -81,6 +97,14 @@ public class MyDataServiceImpl implements MyDataService {
         return myDataMapper.getById(id);
     }
 
+    @Override
+    public int rename(Long id, String fileName) {
+        int count = myDataMapper.updateFileName(id, fileName);
+        deleteCache();
+        updateCache();
+        return count;
+    }
+
     private List<ExcelFileVo> queryWithDb() {
         return myDataMapper.listAll();
     }
@@ -99,6 +123,20 @@ public class MyDataServiceImpl implements MyDataService {
     private List<ExcelFileVo> queryWithCache() {
         String key = REDIS_DATABASE + ":" + REDIS_KEY_DATA;
         return (List<ExcelFileVo>) redisService.get(key);
+    }
+
+    private String save2Mongo(MultipartFile file) {
+        try {
+            ExcelUtil.ExcelReadResult result = ExcelUtil.readExcel(file);
+            ExcelDocument document = new ExcelDocument();
+            document.setExcelName(file.getOriginalFilename());
+            document.setHeaders(result.getHeaders());
+            document.setData(result.getRows());
+            return repository.insert(document).getId();
+        } catch (IOException e) {
+            log.info("读取excel文件失败");
+        }
+        return null;
     }
 }
     

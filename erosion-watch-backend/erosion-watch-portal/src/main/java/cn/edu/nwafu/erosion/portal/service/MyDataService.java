@@ -1,6 +1,7 @@
 package cn.edu.nwafu.erosion.portal.service;
 
 import cn.edu.nwafu.erosion.portal.domain.entity.ExcelFile;
+import cn.edu.nwafu.erosion.portal.domain.vo.ExcelDataVo;
 import cn.edu.nwafu.erosion.portal.domain.vo.ExcelFileVo;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,5 +19,7 @@ public interface MyDataService {
 
     ExcelFile getById(Long id);
 
-    int rename(Long id);
+    int rename(Long id, String fileName);
+
+    ExcelDataVo detail();
 }

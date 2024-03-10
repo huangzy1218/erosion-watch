@@ -1,14 +1,14 @@
 import dayjs from "dayjs";
 import uploadForm from "../upload.vue";
-import {message} from "@/utils/message";
-import {deleteMyData, getFileList} from "@/api/mydata";
-import {usePublicHooks} from "../hooks";
-import {addDialog} from "@/components/ReDialog/index";
-import type {FormItemProps} from "./types";
-import type {PaginationProps} from "@pureadmin/table";
-import {computed, h, onMounted, reactive, ref, toRaw} from "vue";
-import {useRouter} from "vue-router";
-import renameForm from "@/views/my-data/renameForm.vue";
+import { message } from "@/utils/message";
+import { deleteMyData, getFileList, renameFile } from "@/api/mydata";
+import { usePublicHooks } from "../hooks";
+import { addDialog } from "@/components/ReDialog/index";
+import type { FormItemProps } from "./types";
+import type { PaginationProps } from "@pureadmin/table";
+import { computed, h, onMounted, reactive, ref, toRaw } from "vue";
+import { useRouter } from "vue-router";
+import renameForm from "@/views/my-data/components/RenameForm.vue";
 
 export function useMyData() {
   const form = reactive({
@@ -187,7 +187,7 @@ export function useMyData() {
         const FormRef = formRef.value.getRef();
         const curData = options.props.formInline as FormItemProps;
         function chores() {
-          message(`您${title}了文件名为${curData.fileName}的这条数据`, {
+          message(`修改成功`, {
             type: "success"
           });
           done(); // 关闭弹框
@@ -234,7 +234,11 @@ export function useMyData() {
             // 在这里调用实际的重命名接口，使用curData.fileName作为新的文件名
             console.log("新文件名", curData.fileName);
             // 假设renameFile是执行重命名操作的函数
-            renameFile(row.id, curData.fileName)
+            const data = {
+              fid: row.fid,
+              fileName: curData.fileName
+            };
+            renameFile(data)
               .then(() => {
                 message("文件重命名成功", { type: "success" });
                 done(); // 关闭弹框
@@ -249,53 +253,6 @@ export function useMyData() {
         });
       }
     });
-  }
-
-  /**
-   * 执行文件重命名操作。
-   *
-   * @param {Number} fileId 要重命名的文件的ID。
-   * @param {String} newName 新的文件名。
-   * @returns {Promise} 一个Promise对象，表示异步操作的结果。
-   */
-  function renameFile(fileId, newName) {
-    // 假设后端提供了一个用于重命名文件的API接口，这里使用POST方法作为示例
-    const apiURL = `/api/files/rename`; // 请根据实际API路径调整
-
-    // 请求体，根据后端要求调整
-    const requestBody = {
-      id: fileId, // 文件ID
-      newName: newName // 新的文件名
-    };
-
-    // 发起fetch请求
-    return fetch(apiURL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(requestBody)
-    })
-      .then(response => {
-        // 检查响应状态
-        if (!response.ok) {
-          throw new Error("网络响应错误");
-        }
-        return response.json();
-      })
-      .then(data => {
-        // 处理后端返回的数据
-        if (data.success) {
-          return data; // 如果成功，返回数据
-        } else {
-          throw new Error(data.message || "重命名失败");
-        }
-      })
-      .catch(error => {
-        // 处理错误情况
-        console.error("重命名文件失败:", error);
-        throw error; // 将错误向上抛出，以便调用者处理
-      });
   }
 
   /** 菜单权限 */

@@ -6,6 +6,7 @@ import cn.edu.nwafu.erosion.portal.domain.vo.ExcelFileVo;
 import cn.edu.nwafu.erosion.portal.enums.OperationType;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -24,4 +25,7 @@ public interface MyDataMapper {
 
     @Select("select * from excel_file where fid = #{id}")
     ExcelFile getById(Long id);
+
+    @Update("update excel_file set file_name = #{fileName} where fid = #{id}")
+    int updateFileName(Long id, String fileName);
 }

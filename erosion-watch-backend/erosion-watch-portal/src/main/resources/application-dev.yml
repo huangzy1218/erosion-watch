@@ -15,6 +15,11 @@ spring:
       stat-view-servlet: # 访问监控网页的登录用户名和密码
         login-username: druid
         login-password: druid
+  data:
+    mongodb:
+      host: 8.140.22.169
+      port: 27017
+      database: erosion-watch
 
 secure:
   ignored:

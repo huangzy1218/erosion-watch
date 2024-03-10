@@ -2,6 +2,8 @@ package cn.edu.nwafu.erosion.portal.controller;
 
 import cn.edu.nwafu.common.api.CommonPage;
 import cn.edu.nwafu.common.api.CommonResult;
+import cn.edu.nwafu.erosion.portal.domain.dto.RenameFileDto;
+import cn.edu.nwafu.erosion.portal.domain.vo.ExcelDataVo;
 import cn.edu.nwafu.erosion.portal.domain.vo.ExcelFileVo;
 import cn.edu.nwafu.erosion.portal.service.MyDataService;
 import io.swagger.annotations.Api;
@@ -28,6 +30,7 @@ public class MyDataController {
     @Autowired
     private MyDataService myDataService;
 
+    @ApiOperation("上传我的数据")
     @PostMapping("/upload")
     @ResponseBody
     public CommonResult<Null> upload(@RequestPart("file") MultipartFile file) {
@@ -41,6 +44,7 @@ public class MyDataController {
         return CommonResult.success("上传文件失败");
     }
 
+    @ApiOperation("列出所有文件")
     @GetMapping("/list")
     @ResponseBody
     public CommonResult<CommonPage<ExcelFileVo>> listAll() {
@@ -61,15 +65,24 @@ public class MyDataController {
     }
 
     @ApiOperation("重命名文件")
-    @DeleteMapping("/rename/{id}")
+    @PostMapping("/rename")
     @ResponseBody
-    public CommonResult<?> rename(@PathVariable Long id) {
-        int count = myDataService.rename(id);
+    public CommonResult<?> rename(@RequestBody RenameFileDto renameFileDto) {
+        int count = myDataService.rename(renameFileDto.getFid(),
+                renameFileDto.getFileName());
         if (count > 0) {
             return CommonResult.success("重命名文件成功");
         } else {
             return CommonResult.failed("重命名文件失败");
         }
+    }
+
+    @ApiOperation("查看文件想起")
+    @PostMapping("/detail/{fid}")
+    @ResponseBody
+    public CommonResult<ExcelDataVo> detail(@PathVariable Long fid) {
+        ExcelDataVo excelDataVo = myDataService.detail();
+        return CommonResult.success(excelDataVo);
     }
 }
     

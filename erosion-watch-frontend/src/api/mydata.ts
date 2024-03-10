@@ -1,6 +1,7 @@
-import {baseUrlApi} from "@/api/utils";
+import { baseUrlApi } from "@/api/utils";
 
-import {http} from "@/utils/http";
+import { http } from "@/utils/http";
+import { object } from "vue-types";
 
 type Result = {
   success: boolean;
@@ -42,6 +43,19 @@ export const deleteMyData = async id => {
     "delete",
     baseUrlApi(`my-data/delete/${id}`),
     {},
+    {
+      headers: {
+        Authorization: "Bearer "
+      }
+    }
+  );
+};
+
+export const renameFile = (data?: object) => {
+  return http.request(
+    "post",
+    baseUrlApi(`my-data/rename`),
+    { data },
     {
       headers: {
         Authorization: "Bearer "

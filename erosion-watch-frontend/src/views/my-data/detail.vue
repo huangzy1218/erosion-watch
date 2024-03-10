@@ -1,51 +1,15 @@
 <script setup lang="ts">
-import {ref} from "vue";
-import {useColumns as useExcelColumns} from "@/views/pure-table/high/excel/columns";
-import {useColumns as usePrintColums} from "@/views/pure-table/high/prints/columns";
+import { ref } from "vue";
+import EditableTable from "./components/EditableTable.vue";
+
+import { useColumns as useExcelColumns } from "@/views/pure-table/high/excel/columns";
+import { useColumns as usePrintColums } from "@/views/pure-table/high/prints/columns";
+import "handsontable/dist/handsontable.full.css";
 
 const printRef = ref();
 const { columns, dataList, print } = usePrintColums(printRef);
 
 const { exportExcel } = useExcelColumns();
-
-const empty: TableColumnList = [
-  {
-    label: "",
-    prop: ""
-  },
-  {
-    label: "",
-    prop: ""
-  },
-  {
-    label: "",
-    prop: ""
-  },
-  {
-    label: "",
-    prop: ""
-  },
-  {
-    label: "",
-    prop: ""
-  },
-  {
-    label: "",
-    prop: ""
-  },
-  {
-    label: "",
-    prop: ""
-  },
-  {
-    label: "",
-    prop: ""
-  },
-  {
-    label: "",
-    prop: ""
-  }
-];
 
 const selectedCell = ref(null);
 const handleCellClick = (row, column, cell, event) => {
@@ -59,27 +23,6 @@ const handleCellClick = (row, column, cell, event) => {
   selectedCell.value = cell; // 更新选中单元格的引用
 };
 
-const rowStyle = ({ rowIndex }) => {
-  return {};
-};
-
-// 单元格样式
-const cellStyle = ({ rowIndex, columnIndex }) => {
-  return {
-    padding: "0px"
-    // border: "0.7px solid #e8e8e8" // Excel-like 细边框
-  };
-};
-
-// 表头单元格样式
-const headerCellStyle = () => {
-  return {
-    // backgroundColor: "#f0f0f0", // 轻灰色背景
-    color: "#333", // 字体颜色
-    fontWeight: "bold", // 加粗
-    fontSize: "14px"
-  };
-};
 const editingCell = ref(null);
 </script>
 
@@ -108,42 +51,7 @@ const editingCell = ref(null);
     </el-form-item>
   </el-form>
   <el-card>
-    <pure-table
-      ref="printRef"
-      adaptive
-      alignWhole="center"
-      :data="dataList.concat(dataList).concat(dataList)"
-      :columns="columns.concat(empty)"
-      row-key="id"
-      border
-      height="500px"
-      auto
-      stripe
-      size="small"
-      :row-style="rowStyle"
-      :cell-style="cellStyle"
-      :header-cell-style="headerCellStyle"
-      @cell-click="handleCellClick"
-      @cell-mouse-enter="handleCellClick"
-    >
-      <template #default="{ row, column, rowIndex, columnIndex }">
-        <div
-          v-if="
-            editingCell &&
-            editingCell.rowIndex === rowIndex &&
-            editingCell.columnIndex === columnIndex
-          "
-        >
-          <input
-            ref="input-${rowIndex}-${columnIndex}"
-            v-model="row[column.prop]"
-          />
-        </div>
-        <div v-else>
-          {{ row[column.prop] }}
-        </div>
-      </template>
-    </pure-table>
+    <EditableTable />
   </el-card>
 </template>
 
