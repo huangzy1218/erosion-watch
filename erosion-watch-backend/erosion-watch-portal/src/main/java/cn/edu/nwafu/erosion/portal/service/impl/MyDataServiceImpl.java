@@ -5,6 +5,7 @@ import cn.edu.nwafu.common.util.ExcelUtil;
 import cn.edu.nwafu.erosion.portal.domain.ExcelDocument;
 import cn.edu.nwafu.erosion.portal.domain.dto.MinioUploadDto;
 import cn.edu.nwafu.erosion.portal.domain.entity.ExcelFile;
+import cn.edu.nwafu.erosion.portal.domain.vo.ExcelDataVo;
 import cn.edu.nwafu.erosion.portal.domain.vo.ExcelFileVo;
 import cn.edu.nwafu.erosion.portal.enums.Bucket;
 import cn.edu.nwafu.erosion.portal.mapper.MyDataMapper;
@@ -103,6 +104,11 @@ public class MyDataServiceImpl implements MyDataService {
         deleteCache();
         updateCache();
         return count;
+    }
+
+    @Override
+    public ExcelDataVo detail() {
+        return null;
     }
 
     private List<ExcelFileVo> queryWithDb() {

@@ -17,9 +17,15 @@ spring:
         login-password: druid
   data:
     mongodb:
-      host: 8.140.22.169
+      host: ${virtual-host}
       port: 27017
       database: erosion-watch
+  rabbitmq:
+    host: ${virtual-host}
+    port: 5672
+    virtual-host: /erosion-watch
+    username: erosion
+    password: erosion
 
 secure:
   ignored:

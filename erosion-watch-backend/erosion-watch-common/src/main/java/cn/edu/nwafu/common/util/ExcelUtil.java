@@ -65,6 +65,7 @@ public class ExcelUtil {
             @Override
             public void invoke(Map<Integer, String> data, AnalysisContext context) {
                 if (isHeader) {
+                    // 第1行作为表头
                     headers.addAll(data.values());
                     isHeader = false;
                 } else {
@@ -74,11 +75,11 @@ public class ExcelUtil {
 
             @Override
             public void doAfterAllAnalysed(AnalysisContext context) {
-                // 可以在这里处理所有分析完成后的逻辑
             }
         };
 
         EasyExcel.read(tempFile.toString(), listener).sheet().doRead();
+        Files.delete(tempFile);
         return new ExcelReadResult(headers, rowsData);
     }
 
