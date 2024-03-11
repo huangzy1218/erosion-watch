@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author Huang Z.Y.
@@ -52,14 +51,14 @@ public class ExcelUtil {
 
     public static ExcelReadResult readExcel(MultipartFile multipartFile) throws IOException {
         final List<String> headers = new ArrayList<>();
-        final List<Map<Integer, String>> rowsData = new ArrayList<>();
+        final List<List<String>> rowsData = new ArrayList<>();
         String originalFileName = multipartFile.getOriginalFilename();
         // 提取文件后缀
         String fileExtension = originalFileName != null ?
                 originalFileName.substring(originalFileName.lastIndexOf('.')) : ".tmp";
         Path tempFile = Files.createTempFile("temp", fileExtension);
         multipartFile.transferTo(tempFile.toFile());
-        AnalysisEventListener<Map<Integer, String>> listener = new AnalysisEventListener<Map<Integer, String>>() {
+        AnalysisEventListener<Map<Integer, String>> listener = new AnalysisEventListener<>() {
             boolean isHeader = true;
 
             @Override
@@ -69,12 +68,12 @@ public class ExcelUtil {
                     headers.addAll(data.values());
                     isHeader = false;
                 } else {
-                    rowsData.add(new HashMap<>(data));
+                    rowsData.add(new HashMap<>(data).values().stream().toList());
                 }
             }
 
             @Override
-            public void doAfterAllAnalysed(AnalysisContext context) {
+            public void doAfterAllAnalysed(AnalysisContext analysisContext) {
             }
         };
 
@@ -91,9 +90,9 @@ public class ExcelUtil {
 
     public static class ExcelReadResult {
         private List<String> headers;
-        private List<Map<Integer, String>> rows;
+        private List<List<String>> rows;
 
-        public ExcelReadResult(List<String> headers, List<Map<Integer, String>> rows) {
+        public ExcelReadResult(List<String> headers, List<List<String>> rows) {
             this.headers = headers;
             this.rows = rows;
         }
@@ -106,11 +105,11 @@ public class ExcelUtil {
             this.headers = headers;
         }
 
-        public List<Map<Integer, String>> getRows() {
+        public List<List<String>> getRows() {
             return rows;
         }
 
-        public void setRows(List<Map<Integer, String>> rows) {
+        public void setRows(List<List<String>> rows) {
             this.rows = rows;
         }
 
@@ -119,11 +118,8 @@ public class ExcelUtil {
             StringBuilder sb = new StringBuilder("ExcelReadResult{\n");
             sb.append("headers=").append(headers).append(",\n");
             sb.append("rows=[\n");
-            for (Map<Integer, String> row : rows) {
-                String rowString = row.entrySet()
-                        .stream()
-                        .map(entry -> entry.getKey() + "=" + entry.getValue())
-                        .collect(Collectors.joining(", "));
+            for (List<String> row : rows) {
+                String rowString = row.toString();
                 sb.append("   {").append(rowString).append("},\n");
             }
             sb.append("]\n}");

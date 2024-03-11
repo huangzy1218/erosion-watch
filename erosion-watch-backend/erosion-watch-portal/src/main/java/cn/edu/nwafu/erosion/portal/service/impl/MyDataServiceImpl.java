@@ -3,6 +3,7 @@ package cn.edu.nwafu.erosion.portal.service.impl;
 import cn.edu.nwafu.common.service.RedisService;
 import cn.edu.nwafu.common.util.ExcelUtil;
 import cn.edu.nwafu.erosion.portal.domain.ExcelDocument;
+import cn.edu.nwafu.erosion.portal.domain.dto.ExcelUpdateDto;
 import cn.edu.nwafu.erosion.portal.domain.dto.MinioUploadDto;
 import cn.edu.nwafu.erosion.portal.domain.entity.ExcelFile;
 import cn.edu.nwafu.erosion.portal.domain.vo.ExcelDataVo;
@@ -111,6 +112,30 @@ public class MyDataServiceImpl implements MyDataService {
         return null;
     }
 
+    @Override
+    public void updateExcelData(ExcelUpdateDto excelUpdateDto) {
+        try {
+            // 查找指定的Excel文档
+            ExcelDocument document = repository.findById(excelUpdateDto.getId()).orElse(null);
+            if (document == null) {
+                log.info("未找到指定的Excel文档");
+                return;
+            }
+
+            // 获取文档中的数据
+            List<List<String>> data = document.getData();
+            // 更新特定行的特定数据
+            List<String> updateDataRow = data.get(excelUpdateDto.getRowId() - 1);
+            updateDataRow.set(excelUpdateDto.getColumnId(), excelUpdateDto.getNewVal());
+
+            // 保存更新后的文档
+            repository.save(document);
+            log.info("Excel数据更新成功");
+        } catch (Exception e) {
+            log.error("更新Excel数据时发生错误", e);
+        }
+    }
+
     private List<ExcelFileVo> queryWithDb() {
         return myDataMapper.listAll();
     }
@@ -144,5 +169,6 @@ public class MyDataServiceImpl implements MyDataService {
         }
         return null;
     }
+
 }
     

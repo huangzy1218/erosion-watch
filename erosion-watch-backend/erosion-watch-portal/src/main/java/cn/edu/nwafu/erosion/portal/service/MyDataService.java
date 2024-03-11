@@ -1,5 +1,6 @@
 package cn.edu.nwafu.erosion.portal.service;
 
+import cn.edu.nwafu.erosion.portal.domain.dto.ExcelUpdateDto;
 import cn.edu.nwafu.erosion.portal.domain.entity.ExcelFile;
 import cn.edu.nwafu.erosion.portal.domain.vo.ExcelDataVo;
 import cn.edu.nwafu.erosion.portal.domain.vo.ExcelFileVo;
@@ -22,4 +23,6 @@ public interface MyDataService {
     int rename(Long id, String fileName);
 
     ExcelDataVo detail();
+
+    void updateExcelData(ExcelUpdateDto excelUpdateDto);
 }

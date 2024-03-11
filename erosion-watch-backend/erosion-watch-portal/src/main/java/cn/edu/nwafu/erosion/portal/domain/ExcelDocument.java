@@ -4,7 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Huang Z.Y.
@@ -21,7 +20,7 @@ public class ExcelDocument {
     /**
      * 实际数据
      */
-    private List<Map<Integer, String>> data;
+    private List<List<String>> data;
 
     public ExcelDocument() {
     }
@@ -50,11 +49,11 @@ public class ExcelDocument {
         this.headers = headers;
     }
 
-    public List<Map<Integer, String>> getData() {
+    public List<List<String>> getData() {
         return data;
     }
 
-    public void setData(List<Map<Integer, String>> data) {
+    public void setData(List<List<String>> data) {
         this.data = data;
     }
 }
