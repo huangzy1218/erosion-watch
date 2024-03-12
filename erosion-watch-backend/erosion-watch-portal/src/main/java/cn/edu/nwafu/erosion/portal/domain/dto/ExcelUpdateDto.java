@@ -1,9 +1,11 @@
 package cn.edu.nwafu.erosion.portal.domain.dto;
 
+import java.io.Serializable;
+
 /**
  * @author Huang Z.Y.
  */
-public class ExcelUpdateDto {
+public class ExcelUpdateDto implements Serializable {
     private String id;
     private Integer rowId;
     private Integer columnId;
@@ -39,6 +41,16 @@ public class ExcelUpdateDto {
 
     public void setNewVal(String newVal) {
         this.newVal = newVal;
+    }
+
+    @Override
+    public String toString() {
+        return "ExcelUpdateDto{" +
+                "id='" + id + '\'' +
+                ", rowId=" + rowId +
+                ", columnId=" + columnId +
+                ", newVal='" + newVal + '\'' +
+                '}';
     }
 }
     

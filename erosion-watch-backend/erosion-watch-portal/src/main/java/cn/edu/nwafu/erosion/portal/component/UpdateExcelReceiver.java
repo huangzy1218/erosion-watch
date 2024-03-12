@@ -21,7 +21,7 @@ public class UpdateExcelReceiver {
     @RabbitHandler
     public void handle(ExcelUpdateDto excelUpdateDto) {
         myDataService.updateExcelData(excelUpdateDto);
-        log.info("excelUpdateDto: {}", excelUpdateDto);
+        log.info("receive: excelUpdateDto: {}", excelUpdateDto);
     }
 }
     

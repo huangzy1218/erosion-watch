@@ -110,6 +110,7 @@ public class MyDataServiceImpl implements MyDataService {
     @Override
     public ExcelDataVo detail(Long fid) {
         ExcelFile file = myDataMapper.getById(fid);
+        log.info("excelFile: {}", file);
         ExcelDocument document = repository.findById(file.getMongoId()).orElse(null);
         if (document == null) {
             log.info("未找到指定的Excel文档");
@@ -124,8 +125,10 @@ public class MyDataServiceImpl implements MyDataService {
     @Override
     public void updateExcelData(ExcelUpdateDto excelUpdateDto) {
         try {
+            ExcelFile file = myDataMapper.getById(Long.parseLong(excelUpdateDto.getId()));
+            log.info("excelFile: {}", file);
             // 查找指定的Excel文档
-            ExcelDocument document = repository.findById(excelUpdateDto.getId()).orElse(null);
+            ExcelDocument document = repository.findById(file.getMongoId()).orElse(null);
             if (document == null) {
                 log.info("未找到指定的Excel文档");
                 return;

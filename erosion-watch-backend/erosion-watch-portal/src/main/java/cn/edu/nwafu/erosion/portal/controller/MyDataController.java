@@ -2,6 +2,8 @@ package cn.edu.nwafu.erosion.portal.controller;
 
 import cn.edu.nwafu.common.api.CommonPage;
 import cn.edu.nwafu.common.api.CommonResult;
+import cn.edu.nwafu.erosion.portal.component.UpdateExcelSender;
+import cn.edu.nwafu.erosion.portal.domain.dto.ExcelUpdateDto;
 import cn.edu.nwafu.erosion.portal.domain.dto.RenameFileDto;
 import cn.edu.nwafu.erosion.portal.domain.vo.ExcelDataVo;
 import cn.edu.nwafu.erosion.portal.domain.vo.ExcelFileVo;
@@ -29,6 +31,8 @@ import java.util.List;
 public class MyDataController {
     @Autowired
     private MyDataService myDataService;
+    @Autowired
+    private UpdateExcelSender sender;
 
     @ApiOperation("上传我的数据")
     @PostMapping("/upload")
@@ -83,6 +87,14 @@ public class MyDataController {
     public CommonResult<ExcelDataVo> detail(@PathVariable Long fid) {
         ExcelDataVo excelDataVo = myDataService.detail(fid);
         return CommonResult.success(excelDataVo);
+    }
+
+    @ApiOperation("更改文档内容")
+    @PostMapping("/update-cell")
+    @ResponseBody
+    public CommonResult<?> updateCell(@RequestBody ExcelUpdateDto updateDto) {
+        sender.sendUpdateRequest(updateDto);
+        return CommonResult.success("");
     }
 }
     
