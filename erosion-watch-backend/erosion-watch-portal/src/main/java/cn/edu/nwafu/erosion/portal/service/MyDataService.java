@@ -22,7 +22,7 @@ public interface MyDataService {
 
     int rename(Long id, String fileName);
 
-    ExcelDataVo detail();
+    ExcelDataVo detail(Long fid);
 
     void updateExcelData(ExcelUpdateDto excelUpdateDto);
 }

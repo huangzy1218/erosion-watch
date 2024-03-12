@@ -77,11 +77,11 @@ public class MyDataController {
         }
     }
 
-    @ApiOperation("查看文件想起")
+    @ApiOperation("查看文件详情")
     @PostMapping("/detail/{fid}")
     @ResponseBody
     public CommonResult<ExcelDataVo> detail(@PathVariable Long fid) {
-        ExcelDataVo excelDataVo = myDataService.detail();
+        ExcelDataVo excelDataVo = myDataService.detail(fid);
         return CommonResult.success(excelDataVo);
     }
 }

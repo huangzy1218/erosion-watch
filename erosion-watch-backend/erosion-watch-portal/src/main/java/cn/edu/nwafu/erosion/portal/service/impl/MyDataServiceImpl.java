@@ -108,8 +108,17 @@ public class MyDataServiceImpl implements MyDataService {
     }
 
     @Override
-    public ExcelDataVo detail() {
-        return null;
+    public ExcelDataVo detail(Long fid) {
+        ExcelFile file = myDataMapper.getById(fid);
+        ExcelDocument document = repository.findById(file.getMongoId()).orElse(null);
+        if (document == null) {
+            log.info("未找到指定的Excel文档");
+            return null;
+        }
+        ExcelDataVo dataVo = new ExcelDataVo();
+        dataVo.setColHeaders(document.getHeaders());
+        dataVo.setData(document.getData());
+        return dataVo;
     }
 
     @Override
@@ -151,6 +160,7 @@ public class MyDataServiceImpl implements MyDataService {
         redisService.set(key, excelFileVos, REDIS_EXPIRE);
     }
 
+    @SuppressWarnings("unchecked")
     private List<ExcelFileVo> queryWithCache() {
         String key = REDIS_DATABASE + ":" + REDIS_KEY_DATA;
         return (List<ExcelFileVo>) redisService.get(key);

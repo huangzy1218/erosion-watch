@@ -50,7 +50,7 @@ public class MemberController {
     @ResponseBody
     public CommonResult<?> login(@RequestBody CommonLoginDto loginDto) {
         HashMap<String, String> tokenMap = memberService.login(loginDto.getUsername(), loginDto.getPassword());
-        if (tokenMap == null) {
+        if (tokenMap.get("accessToken") == null) {
             return CommonResult.validateFailed("用户名或密码错误");
         }
         return CommonResult.success(tokenMap);
