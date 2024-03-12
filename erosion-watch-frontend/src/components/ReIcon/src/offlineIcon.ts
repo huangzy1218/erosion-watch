@@ -42,6 +42,10 @@ import RiGradienterFill from "@iconify-icons/ri/gradienter-fill";
 import RiDatabase2Fill from "@iconify-icons/ri/database-2-fill";
 import RiHistoryFill from "@iconify-icons/ri/history-fill";
 import RiOrderPlayLine from "@iconify-icons/ri/order-play-line";
+import RiCreativeCommonsFill from "@iconify-icons/ri/creative-commons-by-fill";
+import RiTable2 from "@iconify-icons/ri/table-2";
+import RiInputField from "@iconify-icons/ri/input-cursor-move";
+import RiBriefcaseFill from "@iconify-icons/ri/briefcase-fill";
 
 addIcon("ubuntuFill", UbuntuFill);
 addIcon("menu", Menu);
@@ -82,4 +86,8 @@ addIcon("soil-erosion-grade", RiGradienterFill);
 addIcon("monitor-data", RiDatabase2Fill);
 addIcon("land-use-change-history", RiHistoryFill);
 addIcon("land-management-plans", RiOrderPlayLine);
+addIcon("analysis-common", RiCreativeCommonsFill);
+addIcon("analysis-erosion", RiBriefcaseFill);
+addIcon("erosion-base-input", RiInputField);
+addIcon("erosion-base-table", RiTable2);
 

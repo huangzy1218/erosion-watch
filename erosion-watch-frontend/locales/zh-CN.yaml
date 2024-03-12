@@ -142,6 +142,10 @@ menus:
   hsMonitorData: 监测数据
   hsLandManagementPlans: 土地规划
   hsLandUseChangeHistory: 土地利用历史
+  hsBasicDataAnalysis: 通用数据分析
+  hsErosionAnalysis: 专用数据分析
+  hsErosionAnalysisFromFile: 基于表格
+  hsSoilErosionAnalysisFromInput: 基于输入
 status:
   hsLoad: 加载中...
 login:

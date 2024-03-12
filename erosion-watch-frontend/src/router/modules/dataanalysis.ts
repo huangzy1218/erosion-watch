@@ -3,7 +3,7 @@ import { dataanalysis } from "@/router/enums";
 
 export default {
   path: "/data-analysis",
-  redirect: "/data-analysis/index",
+  redirect: "/data-analysis/erosion/table",
   meta: {
     title: $t("menus.hsDataAnalysis"),
     rank: dataanalysis,
@@ -11,24 +11,45 @@ export default {
   },
   children: [
     {
-      path: "/data-analysis/index",
-      name: "DataAnalysis",
-      component: () => import("@/views/data-analysis/index.vue"),
+      path: "/data-analysis/erosion",
+      name: "Erosion",
       meta: {
-        icon: "chart",
-        title: $t("menus.hsDataAnalysis"),
+        icon: "analysis-erosion",
+        title: $t("menus.hsErosionAnalysis"),
         keepAlive: true
-      }
+      },
+      redirect: "/data-analysis/erosion/table",
+      children: [
+        {
+          path: "/data-analysis/erosion/table",
+          name: "TableErosion",
+          component: () => import("@/views/data-analysis/index.vue"),
+          meta: {
+            icon: "erosion-base-table",
+            title: $t("menus.hsErosionAnalysisFromFile"),
+            keepAlive: true
+          }
+        },
+        {
+          path: "/data-analysis/erosion/input",
+          name: "InputErosion",
+          component: () => import("@/views/monitor/area-info/index.vue"),
+          meta: {
+            icon: "erosion-base-input",
+            title: $t("menus.hsSoilErosionAnalysisFromInput"),
+            keepAlive: true
+          }
+        }
+      ]
     },
     {
-      path: "/data-analysis/operation",
-      name: "Operation",
-      component: () => import("@/views/data-analysis/operation.vue"),
+      path: "/data-analysis/common",
+      name: "Analysis",
+      component: () => import("@/views/monitor/area-info/index.vue"),
       meta: {
-        icon: "folderOpen",
-        title: $t("menus.hsOperation"),
-        keepAlive: true,
-        showLink: false
+        icon: "analysis-common",
+        title: $t("menus.hsBasicDataAnalysis"),
+        keepAlive: true
       }
     }
   ]

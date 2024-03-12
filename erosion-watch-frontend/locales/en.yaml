@@ -142,6 +142,10 @@ menus:
   hsMonitorData: Monitor Data
   hsLandManagementPlans: Land Management Plans
   hsLandUseChangeHistory: Land Use Change History
+  hsBasicDataAnalysis: Basic Data Analysis
+  hsErosionAnalysis: Erosion Analysis
+  hsErosionAnalysisFromFile: From File
+  hsSoilErosionAnalysisFromInput: From Input
 status:
   hsLoad: Loading...
 login:
