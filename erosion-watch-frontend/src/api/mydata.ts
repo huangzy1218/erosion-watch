@@ -25,6 +25,15 @@ type ResultTable = {
   };
 };
 
+type ExcelData = {
+  code: number;
+  message: string;
+  data?: {
+    colHeaders: Array<string>;
+    data: Array<Array<string | number>>;
+  };
+};
+
 export const getFileList = (data?: object) => {
   return http.request<ResultTable>(
     "get",
@@ -56,6 +65,19 @@ export const renameFile = (data?: object) => {
     "post",
     baseUrlApi(`my-data/rename`),
     { data },
+    {
+      headers: {
+        Authorization: "Bearer "
+      }
+    }
+  );
+};
+
+export const getDetails = async id => {
+  return http.request<ExcelData>(
+    "post",
+    baseUrlApi(`my-data/detail/${id}`),
+    {},
     {
       headers: {
         Authorization: "Bearer "

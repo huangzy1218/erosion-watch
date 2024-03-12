@@ -123,10 +123,9 @@ export function useMyData() {
 
   const handleSee = row => {
     console.log(row);
-    const { id } = row;
-
+    const { fid } = row;
     // 使用 router.push 方法跳转，携带 fid 作为参数
-    router.push({ path: "/my-data/detail", query: { id: id } });
+    router.push({ path: `/my-data/detail`, query: { fid: fid } });
   };
 
   function openDialog(title = "新增", row?: FormItemProps) {

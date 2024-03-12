@@ -1,22 +1,32 @@
 <template>
   <div class="editable-table">
-    <HotTable :settings="tableSettings" />
+    <HotTable :key="componentKey" :settings="tableSettings" />
   </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
 import { HotTable } from "@handsontable/vue3";
 import "handsontable/dist/handsontable.full.css";
+import { ref, onMounted, reactive, nextTick } from "vue";
+import { useRoute } from "vue-router";
+import { getDetails } from "@/api/mydata";
 
-const tableSettings = ref({
-  data: [
-    ["", "Tesla", "Nissan", "Toyota", "Ford"],
-    ["2020", 10, 11, 12, 13],
-    ["2021", 20, 11, 14, 13],
-    ["2022", 30, 15, 12, 13]
-  ],
-  colHeaders: ["Year", "Tesla", "Nissan", "Toyota", "Ford"],
+// 使用useRoute获取当前路由信息
+const route = useRoute();
+const componentKey = ref("");
+// 创建一个响应式引用来存储fid
+const fid = ref("");
+
+const tableSettings = reactive({
+  // data: [
+  //   ["", "Tesla", "Nissan", "Toyota", "Ford"],
+  //   ["2020", 10, 11, 12, 13],
+  //   ["2021", 20, 11, 14, 13],
+  //   ["2022", 30, 15, 12, 13]
+  // ],
+  // colHeaders: [
+  //   // "Year", "Tesla", "Nissan", "Toyota", "Ford"
+  // ],
   rowHeaders: true,
   width: "auto",
   height: "auto",
@@ -28,6 +38,30 @@ const tableSettings = ref({
   dropdownMenu: true,
   licenseKey: "non-commercial-and-evaluation",
   afterChange: afterChangeHandler
+});
+
+const fetchData = async id => {
+  try {
+    const response = await getDetails(id);
+    if (response && response.data) {
+      // 更新Handsontable的配置以使用新数据
+      const newData = response.data.data;
+      const newColHeaders = response.data.colHeaders;
+
+      // 使用扩展运算符创建一个新的对象
+      tableSettings.data = [...newData];
+      tableSettings.colHeaders = [...newColHeaders];
+      console.log(tableSettings);
+      componentKey.value++;
+      await nextTick();
+    }
+  } catch (error) {
+    console.error("获取数据失败", error);
+  }
+};
+
+onMounted(() => {
+  fetchData(route.query.fid);
 });
 
 function afterChangeHandler(changes, source) {
@@ -49,7 +83,7 @@ function afterChangeHandler(changes, source) {
 .editable-table {
   width: 100%;
   height: auto;
-  overflow: hidden;
+  //overflow: hidden;
   --handsontable-color-primary: #078340; /* 主题颜色 */
 }
 .ht_master .htBorders .current,
