@@ -1,23 +1,13 @@
-package cn.edu.nwafu.erosion.portal.domain.entity;
-
-import java.util.Date;
+package cn.edu.nwafu.erosion.portal.domain.dto;
 
 /**
  * @author Huang Z.Y.
  */
-public class ReferencePdf {
+public class ReferencesDto {
     /**
-     * 文献的唯一标识
-     */
-    private Long id;
-    /**
-     * 文献题目
+     * 标题
      */
     private String label;
-    /**
-     * 相应PDF文档的链接
-     */
-    private String pdfUrl;
     /**
      * 文献的作者
      */
@@ -30,31 +20,19 @@ public class ReferencePdf {
      * 文献摘要
      */
     private String abstractText;
-    private Date createTime;
+    private Long parentId;
 
-
-    public ReferencePdf(Long id, String label, String pdfUrl,
-                        String author, Integer year, String abstractText,
-                        Date createTime) {
-        this.id = id;
+    public ReferencesDto(String label, String author,
+                         Integer year, String abstractText, Long parentId) {
         this.label = label;
-        this.pdfUrl = pdfUrl;
         this.author = author;
         this.year = year;
         this.abstractText = abstractText;
-        this.createTime = createTime;
+        this.parentId = parentId;
     }
 
-    public ReferencePdf() {
+    public ReferencesDto() {
         // noop
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getLabel() {
@@ -65,13 +43,6 @@ public class ReferencePdf {
         this.label = label;
     }
 
-    public String getPdfUrl() {
-        return pdfUrl;
-    }
-
-    public void setPdfUrl(String pdfUrl) {
-        this.pdfUrl = pdfUrl;
-    }
 
     public String getAuthor() {
         return author;
@@ -97,13 +68,12 @@ public class ReferencePdf {
         this.abstractText = abstractText;
     }
 
-
-    public Date getCreateTime() {
-        return createTime;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 }
     

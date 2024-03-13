@@ -12,7 +12,10 @@ spring:
     port: 6379 # Redis服务器连接端口
     password: # Redis服务器连接密码（默认为空）
     timeout: 300ms # 连接超时时间（毫秒）
-
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 mybatis:
   mapper-locations:
     - classpath:mapper/*.xml
@@ -48,7 +51,7 @@ aliyun:
     callback: http://${virtual-host}/aliyun/oss/callback # 文件上传成功后的回调地址
     dir:
       prefix: erosion-watch/images/ # 上传文件夹路径前缀
-      
+
 mongo:
   insert:
     sqlEnable: true # 用于控制是否通过数据库数据来插入mongo

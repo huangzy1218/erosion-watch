@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, reactive } from "vue";
+import { ref, computed, reactive, onMounted } from "vue";
 import { clone } from "@pureadmin/utils";
 import type { ElTreeV2 } from "element-plus";
 import { transformI18n } from "@/plugins/i18n";
@@ -11,30 +11,30 @@ import NodeTree from "@iconify-icons/ri/node-tree";
 import { useI18n } from "vue-i18n";
 import VuePdfEmbed from "vue-pdf-embed";
 import splitpane, { ContextProps } from "@/components/ReSplitPane";
+import { getReferencesList } from "@/api/references";
 
 const settingLR: ContextProps = reactive({
-  minPercent: 20,
-  defaultPercent: 20,
+  minPercent: 30,
+  defaultPercent: 30,
   split: "vertical"
 });
 
-interface treeNode extends TreeNode {
-  meta: {
-    title: string;
-  };
+interface treeNode {
+  id: number; // 节点的唯一标识
+  label: string; // 显示在树上的文献题目
+  pdfUrl: string; // 相应PDF文档的链接
+  children?: treeNode[]; // 子节点数组
 }
+
+const menusData = ref<treeNode[]>();
 
 const query = ref("");
 const dataProps = ref({
-  value: "uniqueId",
+  label: "label",
   children: "children"
 });
 const treeRef = ref<InstanceType<typeof ElTreeV2>>();
 const menusTree = clone(usePermissionStoreHook().wholeMenus, true);
-
-const menusData = computed(() => {
-  return deleteChildren(menusTree);
-});
 
 const expandedKeys = extractPathList(menusData.value);
 
@@ -42,9 +42,15 @@ const onQueryChanged = (query: string) => {
   (treeRef as any).value!.filter(query);
 };
 
-const filterMethod = (query: string, node: treeNode) => {
-  return transformI18n(node.meta.title)!.indexOf(query) !== -1;
-};
+onMounted(async () => {
+  try {
+    const res = await getReferencesList();
+    console.log(res);
+    menusData.value = res.data.nodes;
+  } catch (error) {
+    console.error("Failed to fetch menus data:", error);
+  }
+});
 
 const { t } = useI18n();
 const pdfRef = ref<any>();
@@ -55,8 +61,17 @@ const currentRotation = ref(0);
 const showAllPages = ref(false);
 const rotations = [0, 90, 180, 270];
 
-const source =
-  "https://xiaoxian521.github.io/hyperlink/pdf/Cookie%E5%92%8CSession%E5%8C%BA%E5%88%AB%E7%94%A8%E6%B3%95.pdf";
+const source = ref(
+  "https://xiaoxian521.github.io/hyperlink/pdf/Cookie%E5%92%8CSession%E5%8C%BA%E5%88%AB%E7%94%A8%E6%B3%95.pdf"
+);
+
+const handleNodeClick = (nodeData: treeNode) => {
+  if (nodeData.pdfUrl) {
+    source.value = nodeData.pdfUrl; // 更新PDF源地址
+    currentPage.value = 1; // 重置到PDF的第一页
+    loading.value = true; // 可能需要重新显示加载状态
+  }
+};
 
 const handleDocumentRender = () => {
   loading.value = false;
@@ -87,12 +102,12 @@ const onPrint = () => {
           ref="treeRef"
           :data="menusData"
           :props="dataProps"
-          :height="500"
-          :filter-method="filterMethod"
+          :height="400"
           :default-expanded-keys="expandedKeys"
+          @node-click="handleNodeClick"
         >
           <template #default="{ data }">
-            <span>{{ transformI18n(data.meta.title) }}</span>
+            <span>{{ data.label }}</span>
           </template>
         </el-tree-v2>
       </template>
@@ -104,7 +119,7 @@ const onPrint = () => {
             :element-loading-text="t('status.hsLoad')"
           >
             <div class="flex justify-between items-center h-9">
-              <div v-if="showAllPages" class="font-medium ml-1.25 text-lg">
+              <div v-if="showAllPages" class="font-medium ml-1.25 text-base">
                 共{{ pageCount }}页
               </div>
               <div v-else>
@@ -152,6 +167,7 @@ const onPrint = () => {
             <el-scrollbar>
               <vue-pdf-embed
                 ref="pdfRef"
+                :height="1050"
                 class="h-full container overflow-auto"
                 :rotation="rotations[currentRotation]"
                 :page="currentPage"

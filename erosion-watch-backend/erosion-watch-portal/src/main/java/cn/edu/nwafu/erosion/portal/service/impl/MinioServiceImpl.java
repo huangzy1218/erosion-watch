@@ -54,6 +54,7 @@ public class MinioServiceImpl implements MinioService {
             switch (bucket) {
                 case data -> prefix = "data";
                 case avatar -> prefix = "avatar";
+                case ref -> prefix = "ref";
                 default -> {
                 }
             }
