@@ -1,4 +1,4 @@
-import {http} from "@/utils/http";
+import { http } from "@/utils/http";
 import type {
   AreaInfoDto,
   LandManagementPlansDto,
@@ -9,7 +9,7 @@ import type {
   TerrainLandformDto,
   VegetationCoverageDto
 } from "../../types/monitor";
-import {baseUrlApi} from "./utils";
+import { baseUrlApi } from "./utils";
 
 type Result = {
   success: boolean;
@@ -74,12 +74,15 @@ export const deleteAreaInfo = async id => {
 
 export const addAreaInfo = async (areaInfoDto: AreaInfoDto): Promise<any> => {
   try {
-    let response = await http.post(baseUrlApi(`area-info/add`), { data: areaInfoDto },
+    let response = await http.post(
+      baseUrlApi(`area-info/add`),
+      { data: areaInfoDto },
       {
         headers: {
           Authorization: "Bearer "
         }
-      });
+      }
+    );
     return await response;
   } catch (error) {
     throw error;
@@ -105,7 +108,6 @@ export const updateAreaInfo = async (
     throw error;
   }
 };
-
 
 export const getLandManagementPlans = (data?: object) => {
   return http.request<ResultTable>(
@@ -146,21 +148,29 @@ export const deleteLandManagementPlan = async (id: number) => {
   );
 };
 
-export const addLandManagementPlan = async (landManagementPlan: LandManagementPlansDto): Promise<any> => {
+export const addLandManagementPlan = async (
+  landManagementPlan: LandManagementPlansDto
+): Promise<any> => {
   try {
-    let response = await http.post(baseUrlApi(`land-management-plans/add`), { data: landManagementPlan },
+    let response = await http.post(
+      baseUrlApi(`land-management-plans/add`),
+      { data: landManagementPlan },
       {
         headers: {
           Authorization: "Bearer "
         }
-      });
+      }
+    );
     return await response;
   } catch (error) {
     throw error;
   }
 };
 
-export const updateLandManagementPlan = async (id: number, landManagementPlan: LandManagementPlansDto): Promise<any> => {
+export const updateLandManagementPlan = async (
+  id: number,
+  landManagementPlan: LandManagementPlansDto
+): Promise<any> => {
   console.log(`更新土地管理计划信息：${landManagementPlan}`);
   try {
     return await http.post(
@@ -216,21 +226,29 @@ export const deleteLandUseChangeHistory = async (id: number) => {
   );
 };
 
-export const addLandUseChangeHistory = async (landUseChangeHistory: LandUseChangeHistoryDto): Promise<any> => {
+export const addLandUseChangeHistory = async (
+  landUseChangeHistory: LandUseChangeHistoryDto
+): Promise<any> => {
   try {
-    let response = await http.post(baseUrlApi(`land-use-change-history/add`), { data: landUseChangeHistory },
+    let response = await http.post(
+      baseUrlApi(`land-use-change-history/add`),
+      { data: landUseChangeHistory },
       {
         headers: {
           Authorization: "Bearer "
         }
-      });
+      }
+    );
     return await response;
   } catch (error) {
     throw error;
   }
 };
 
-export const updateLandUseChangeHistory = async (id: number, landUseChangeHistory: LandUseChangeHistoryDto): Promise<any> => {
+export const updateLandUseChangeHistory = async (
+  id: number,
+  landUseChangeHistory: LandUseChangeHistoryDto
+): Promise<any> => {
   console.log(`更新土地利用变更历史信息：${landUseChangeHistory}`);
   try {
     return await http.post(
@@ -286,22 +304,29 @@ export const deleteMonitoringData = async (id: number) => {
   );
 };
 
-export const addMonitoringData = async (monitoringDataDto: MonitoringDataDto): Promise<any> => {
+export const addMonitoringData = async (
+  monitoringDataDto: MonitoringDataDto
+): Promise<any> => {
   try {
-    let response = await http.post(baseUrlApi(`monitoring-data/add`),
+    let response = await http.post(
+      baseUrlApi(`monitoring-data/add`),
       { data: monitoringDataDto },
       {
         headers: {
           Authorization: "Bearer "
         }
-      });
+      }
+    );
     return await response;
   } catch (error) {
     throw error;
   }
 };
 
-export const updateMonitoringData = async (id: number, monitoringData: MonitoringDataDto): Promise<any> => {
+export const updateMonitoringData = async (
+  id: number,
+  monitoringData: MonitoringDataDto
+): Promise<any> => {
   console.log(`更新监测数据信息：${monitoringData}`);
   try {
     return await http.post(
@@ -357,21 +382,29 @@ export const deleteSoilErosionGrade = async (id: number) => {
   );
 };
 
-export const addSoilErosionGrade = async (soilErosionGradeDto: SoilErosionGradeDto): Promise<any> => {
+export const addSoilErosionGrade = async (
+  soilErosionGradeDto: SoilErosionGradeDto
+): Promise<any> => {
   try {
-    let response = await http.post(baseUrlApi(`soil-erosion-grade/add`), { data: soilErosionGradeDto },
+    let response = await http.post(
+      baseUrlApi(`soil-erosion-grade/add`),
+      { data: soilErosionGradeDto },
       {
         headers: {
           Authorization: "Bearer "
         }
-      });
+      }
+    );
     return await response;
   } catch (error) {
     throw error;
   }
 };
 
-export const updateSoilErosionGrade = async (id: number, soilErosionGradeDto: SoilErosionGradeDto): Promise<any> => {
+export const updateSoilErosionGrade = async (
+  id: number,
+  soilErosionGradeDto: SoilErosionGradeDto
+): Promise<any> => {
   console.log(`更新土壤侵蚀等级信息：${soilErosionGradeDto}`);
   try {
     return await http.post(
@@ -429,19 +462,25 @@ export const deleteSoilType = async (id: number) => {
 
 export const addSoilType = async (soilTypeDto: SoilTypeDto): Promise<any> => {
   try {
-    let response = await http.post(baseUrlApi(`soil-type/add`), { data: soilTypeDto },
+    let response = await http.post(
+      baseUrlApi(`soil-type/add`),
+      { data: soilTypeDto },
       {
         headers: {
           Authorization: "Bearer "
         }
-      });
+      }
+    );
     return await response;
   } catch (error) {
     throw error;
   }
 };
 
-export const updateSoilType = async (id: number, soilTypeDto: SoilTypeDto): Promise<any> => {
+export const updateSoilType = async (
+  id: number,
+  soilTypeDto: SoilTypeDto
+): Promise<any> => {
   console.log(`更新土壤类型信息：${soilTypeDto}`);
   try {
     return await http.post(
@@ -497,22 +536,29 @@ export const deleteTerrainLandform = async (id: number) => {
   );
 };
 
-export const addTerrainLandform = async (terrainLandformDto: TerrainLandformDto): Promise<any> => {
+export const addTerrainLandform = async (
+  terrainLandformDto: TerrainLandformDto
+): Promise<any> => {
   try {
-    let response = await http.post(baseUrlApi(`terrain-landform/add`),
+    let response = await http.post(
+      baseUrlApi(`terrain-landform/add`),
       { data: terrainLandformDto },
       {
         headers: {
           Authorization: "Bearer "
         }
-      });
+      }
+    );
     return await response;
   } catch (error) {
     throw error;
   }
 };
 
-export const updateTerrainLandform = async (id: number, terrainLandformDto: TerrainLandformDto): Promise<any> => {
+export const updateTerrainLandform = async (
+  id: number,
+  terrainLandformDto: TerrainLandformDto
+): Promise<any> => {
   console.log(`更新地形地貌信息：${terrainLandformDto}`);
   try {
     return await http.post(
@@ -568,22 +614,29 @@ export const deleteVegetationCoverage = async (id: number) => {
   );
 };
 
-export const addVegetationCoverage = async (vegetationCoverageDto: VegetationCoverageDto): Promise<any> => {
+export const addVegetationCoverage = async (
+  vegetationCoverageDto: VegetationCoverageDto
+): Promise<any> => {
   try {
-    let response = await http.post(baseUrlApi(`vegetation-coverage/add`),
+    let response = await http.post(
+      baseUrlApi(`vegetation-coverage/add`),
       { data: vegetationCoverageDto },
       {
         headers: {
           Authorization: "Bearer "
         }
-      });
+      }
+    );
     return await response;
   } catch (error) {
     throw error;
   }
 };
 
-export const updateVegetationCoverage = async (id: number, vegetationCoverageDto: VegetationCoverageDto): Promise<any> => {
+export const updateVegetationCoverage = async (
+  id: number,
+  vegetationCoverageDto: VegetationCoverageDto
+): Promise<any> => {
   console.log(`更新植被覆盖信息：${vegetationCoverageDto}`);
   try {
     return await http.post(

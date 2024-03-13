@@ -106,8 +106,47 @@ const onPrint = () => {
           :default-expanded-keys="expandedKeys"
           @node-click="handleNodeClick"
         >
-          <template #default="{ data }">
-            <span>{{ data.label }}</span>
+          <template #default="{ node, data }">
+            <span
+              v-if="data.children.length != 0"
+              style="display: inline-flex; align-items: center"
+              @click="handleNodeClick(node, data)"
+            >
+              <i style="display: inline-flex; align-items: center">
+                <svg
+                  style="margin: 2px 7px 2px 5px"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                >
+                  <path
+                    d="M14,6 L14,5 L7.58578644,5 L5.58578644,3 L2,3 L2,6 L14,6 Z M14,7 L2,7 L2,13 L14,13 L14,7 Z M1,2 L6,2 L8,4 L15,4 L15,14 L1,14 L1,2 Z"
+                    stroke-width="1"
+                    fill="#8a8e99"
+                  />
+                </svg>
+              </i>
+              <small :title="node.label">{{ node.label }}</small>
+            </span>
+            <!-- 文档 -->
+            <span v-else style="display: inline-flex; align-items: center">
+              <i style="display: inline-flex; align-items: center">
+                <svg
+                  style="margin: 2px 5px 2px 3px"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                >
+                  <path
+                    d="M13,6 L9,6 L9,5 L9,2 L3,2 L3,14 L13,14 L13,6 Z M12.5857864,5 L10,2.41421356 L10,5 L12.5857864,5 Z M2,1 L10,1 L14,5 L14,15 L2,15 L2,1 Z"
+                    stroke-width="1"
+                    fill="#8a8e99"
+                  />
+                </svg>
+              </i>
+
+              <small :title="node.label">{{ node.label }}</small>
+            </span>
           </template>
         </el-tree-v2>
       </template>
