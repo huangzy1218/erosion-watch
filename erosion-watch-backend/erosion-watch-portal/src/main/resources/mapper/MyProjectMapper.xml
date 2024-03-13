@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.nwafu.erosion.portal.mapper.MyProjectMapper">
+    <insert id="insert" parameterType="cn.edu.nwafu.erosion.portal.domain.entity.AnalysisProject">
+        INSERT INTO analysis_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectName != null">
+                project_name,
+            </if>
+            <if test="fid != null">
+                fid,
+            </if>
+            <if test="author != null">
+                author,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="projectName != null">
+                #{projectName},
+            </if>
+            <if test="fid != null">
+                #{fid},
+            </if>
+            <if test="author != null">
+                #{author},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser},
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

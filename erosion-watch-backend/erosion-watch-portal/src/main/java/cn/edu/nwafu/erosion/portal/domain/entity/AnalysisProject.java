@@ -1,11 +1,15 @@
 package cn.edu.nwafu.erosion.portal.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author Huang Z.Y.
  */
+@TableName("analysis_project")
 public class AnalysisProject {
     private Long id;
     /**
@@ -17,16 +21,42 @@ public class AnalysisProject {
      */
     private Long fid;
     /**
+     * 创建人
+     */
+    private String author;
+    /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
     /**
-     * 分析结果列表
+     * 更新时间
      */
-    private List<Long> analysisResults;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
+    /**
+     * 更新用户
+     */
+    private String updateUser;
 
-    // 构造方法
     public AnalysisProject() {
+    }
+
+    public AnalysisProject(Long id, String projectName, Long fid,
+                           String author, Date createTime, Date updateTime, String updateUser) {
+        this.id = id;
+        this.projectName = projectName;
+        this.fid = fid;
+        this.author = author;
+        this.updateUser = updateUser;
+    }
+    
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
     }
 
     public Long getId() {
@@ -53,6 +83,13 @@ public class AnalysisProject {
         this.projectName = projectName;
     }
 
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 
     public Date getCreateTime() {
         return createTime;
@@ -62,24 +99,26 @@ public class AnalysisProject {
         this.createTime = createTime;
     }
 
-    public List<Long> getAnalysisResults() {
-        return analysisResults;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAnalysisResults(List<Long> analysisResults) {
-        this.analysisResults = analysisResults;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    // toString方法，用于输出项目信息
+
     @Override
     public String toString() {
-        return "Project{" +
-                "projectName='" + projectName + '\'' +
+        return "AnalysisProject{" +
+                "id=" + id +
+                ", projectName='" + projectName + '\'' +
+                ", fid=" + fid +
+                ", author='" + author + '\'' +
                 ", createTime=" + createTime +
-                ", analysisResults=" + analysisResults +
+                ", updateTime=" + updateTime +
                 '}';
     }
-
 }
 
     

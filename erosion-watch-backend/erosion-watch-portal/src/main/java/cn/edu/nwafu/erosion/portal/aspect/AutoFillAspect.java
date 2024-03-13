@@ -73,13 +73,13 @@ public class AutoFillAspect {
                 Method setCreateTime = entity.getClass().getDeclaredMethod(SET_CREATE_TIME, Date.class);
                 Method setAuthor = entity.getClass().getDeclaredMethod(SET_CREATE_USER, String.class);
                 Method setUpdateTime = entity.getClass().getDeclaredMethod(SET_UPDATE_TIME, Date.class);
-                Method setUpdateUser = entity.getClass().getDeclaredMethod(SET_UPDATE_USER, String.class);
+                //Method setUpdateUser = entity.getClass().getDeclaredMethod(SET_UPDATE_USER, String.class);
 
                 // 通过反射赋值
                 setCreateTime.invoke(entity, currentTime);
                 setAuthor.invoke(entity, username);
                 setUpdateTime.invoke(entity, currentTime);
-                setUpdateUser.invoke(entity, username);
+                //setUpdateUser.invoke(entity, username);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -87,7 +87,6 @@ public class AutoFillAspect {
             try {
                 Method setUpdateTime = entity.getClass().getDeclaredMethod(SET_UPDATE_TIME, LocalDateTime.class);
                 Method setUpdateUser = entity.getClass().getDeclaredMethod(SET_UPDATE_USER, String.class);
-
                 // 通过反射赋值
                 setUpdateTime.invoke(entity, currentTime);
                 setUpdateUser.invoke(entity, username);
