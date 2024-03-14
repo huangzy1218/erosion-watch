@@ -23,7 +23,8 @@ export default {
         {
           path: "/data-analysis/erosion/table",
           name: "TableErosion",
-          component: () => import("@/views/data-analysis/common-analysis/index.vue"),
+          component: () =>
+            import("@/views/data-analysis/common-analysis/index.vue"),
           meta: {
             icon: "erosion-base-table",
             title: $t("menus.hsErosionAnalysisFromFile"),
@@ -33,7 +34,8 @@ export default {
         {
           path: "/data-analysis/erosion/input",
           name: "InputErosion",
-          component: () => import("@/views/monitor/area-info/index.vue"),
+          component: () =>
+            import("@/views/data-analysis/erosion-analysis/input/index.vue"),
           meta: {
             icon: "erosion-base-input",
             title: $t("menus.hsSoilErosionAnalysisFromInput"),

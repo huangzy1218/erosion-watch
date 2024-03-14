@@ -2,9 +2,9 @@
   <el-card>
     <el-row>
       <el-col :span="6">
-        <div class="sidebar2">
+        <div class="sidebar2 sidebar2-extra">
           <el-text tag="b" class="text">选择算法</el-text>
-          <el-divider />
+          <el-divider class="divider" />
           <el-tree-v2
             :ref="'treeRef'"
             :data="treeData"
@@ -62,14 +62,15 @@
       <el-col :span="18">
         <el-row>
           <el-col :span="4">
-            <div class="sidebar2">
+            <div class="sidebar2 sidebar2-extra">
               <el-text tag="b" class="text">选择变量</el-text>
-              <el-divider />
+              <el-divider class="divider" />
               <el-tree-v2
                 :data="columnsData"
                 :props="dataProps"
                 :show-checkbox="true"
                 :expand-on-click-node="false"
+                @check-change="handleCheckChange"
               >
                 <template #default="{ node }">
                   <small :title="node.label">{{ node.label }}</small>
@@ -80,7 +81,7 @@
           <el-col :span="20">
             <div class="sidebar2">
               <el-text tag="b">{{ algo }}</el-text>
-              <el-divider />
+              <el-divider class="divider" />
               <div class="description">
                 <el-text class="mx-1" type="info" size="small"
                   >描述性统计，是指运用制表和分类，图形以及计算概括性数据来描述数据特征的各项活动。描述性统计分析要对调查总体所有变量的有关数据进行统计性描述，主要包括数据的频数分析、集中趋势分析、离散程度分析、分布以及一些基本的统计图形。</el-text
@@ -96,11 +97,11 @@
                   :key="item.id"
                   class="dropped-item"
                 >
-                  <el-tag closable @close="removeItem(item)">{{
+                  <el-tag size="large" closable @close="removeItem(item)">{{
                     item.label
                   }}</el-tag>
                 </div>
-                拖拽至目标区域
+                <span v-if="droppedItems.length === 0">拖拽至目标区域</span>
               </div>
 
               <div style="float: right">
@@ -147,15 +148,42 @@ const columnsData = ref([
   { id: "2", label: "性别" },
   { id: "3", label: "学号" }
 ]);
+const droppedItems = columnsData;
 
-// 处理拖拽的函数
-const handleDrop = e => {
-  // 可以从 e.dataTransfer.getData 获取到被拖拽元素的数据
-  // 假设数据是JSON字符串
-  const itemData = JSON.parse(e.dataTransfer.getData("itemData"));
-  droppedItems.value.push(itemData);
+const handleCheckChange = (data, checked, indeterminate) => {
+  // 如果节点被选中，则添加到 droppedItems
+  if (checked) {
+    droppedItems.value.push({
+      id: data.id,
+      label: data.label
+    });
+  } else {
+    // 如果节点被取消选中，则从 droppedItems 移除
+    const index = droppedItems.value.findIndex(item => item.id === data.id);
+    if (index > -1) {
+      droppedItems.value.splice(index, 1);
+    }
+  }
 };
 
+// 处理拖拽的函数
+const handleDrop = event => {
+  // 防止默认处理（默认是打开链接）
+  event.preventDefault();
+
+  const variableId = event.dataTransfer.getData("text/plain");
+
+  const variable = columnsData.value.find(v => v.id === variableId);
+  if (variable && !droppedItems.value.includes(variable)) {
+    droppedItems.value.push(variable);
+  }
+};
+
+const handleDragOver = event => {
+  event.preventDefault(); // 必须阻止默认事件以允许放下
+};
+
+// 删除项的方法
 const removeItem = item => {
   const index = droppedItems.value.indexOf(item);
   if (index > -1) {
@@ -182,12 +210,19 @@ const handleSearch = () => {
 </script>
 
 <style scoped>
+.text {
+  font-size: 14px;
+  margin-bottom: -10px;
+}
 .sidebar2 {
   height: 500px;
   overflow-y: auto;
   margin-right: 20px;
   margin-left: 0;
   margin-top: 5px;
+}
+
+.sidebar2-extra {
   border-right: 1px solid #ddd;
 }
 
@@ -206,5 +241,15 @@ const handleSearch = () => {
 
 .description {
   margin-bottom: 20px;
+}
+
+.divider {
+  margin: 8px 0;
+}
+
+.dashed-box:empty::after {
+  content: "拖拽至目标区域";
+  color: #bbb;
+  font-style: italic;
 }
 </style>
