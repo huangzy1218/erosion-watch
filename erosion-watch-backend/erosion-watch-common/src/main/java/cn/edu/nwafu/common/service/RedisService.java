@@ -180,4 +180,23 @@ public interface RedisService {
      * 从List结构中移除属性
      */
     Long lRemove(String key, long count, Object value);
+
+    /**
+     * 将指定的元素添加到HyperLogLog中，可以添加多个元素
+     */
+    Long pfAdd(String key, String... value);
+
+    /**
+     * 返回给定HyperLogLog的基数估算值。<br/>
+     * 当一次统计多个HyperLogLog时(通过key实现时间窗口统计user:web1:2020061600、user:web1:2020061601)，需要对多个HyperLogLog结构进行比较，
+     * 并将并集的结果放入一个临时的HyperLogLog，性能不高，谨慎使用
+     */
+    Long pfCount(String... key);
+
+    /**
+     * 将多个HyperLogLog进行合并，将并集的结果放入一个指定的HyperLogLog中
+     */
+    Long pfMerge(String destKey, String... sourceKey);
+
+    Long zsIncr(String key);
 }

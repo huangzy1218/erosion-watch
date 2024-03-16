@@ -182,6 +182,11 @@ public class MemberServiceImpl implements MemberService {
         return memberMapper.updateByPrimaryKeySelective(member);
     }
 
+    @Override
+    public Long getRegisterCount() {
+        return memberMapper.countByExample(new MemberExample());
+    }
+
     private boolean verifyAuthCode(String authCode, String telephone) {
         if (StrUtil.isEmpty(authCode)) {
             return true;

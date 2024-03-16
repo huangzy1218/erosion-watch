@@ -195,4 +195,24 @@ public class RedisServiceImpl implements RedisService {
     public Long lRemove(String key, long count, Object value) {
         return redisTemplate.opsForList().remove(key, count, value);
     }
+
+    @Override
+    public Long pfAdd(String key, String... value) {
+        return redisTemplate.opsForHyperLogLog().add(key, value);
+    }
+
+    @Override
+    public Long pfCount(String... key) {
+        return redisTemplate.opsForHyperLogLog().size(key);
+    }
+
+    @Override
+    public Long pfMerge(String destKey, String... sourceKey) {
+        return redisTemplate.opsForHyperLogLog().union(destKey, sourceKey);
+    }
+
+    @Override
+    public Long zsIncr(String key) {
+        return redisTemplate.opsForValue().increment(key);
+    }
 }

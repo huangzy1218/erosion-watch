@@ -1,6 +1,7 @@
-package cn.edu.nwafu.common.log;
+package cn.edu.nwafu.erosion.portal.aspect;
 
 import cn.edu.nwafu.common.domain.WebLog;
+import cn.edu.nwafu.common.service.RedisService;
 import cn.edu.nwafu.common.util.RequestUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
@@ -13,6 +14,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,7 +41,21 @@ import java.util.Map;
 @Order(1)
 @Slf4j
 public class WebLogAspect {
-    @Pointcut("execution(public * cn.edu.nwafu.erosion.controller.*.*(..))||execution(public * com.macro.mall.*.controller.*.*(..))")
+    @Value("${redis.database}")
+    private String REDIS_DATABASE;
+    @Value("${redis.key.unique-visit}")
+    private String REDIS_KEY_UV;
+    @Value("${redis.key.total-visit}")
+    private String REDIS_KEY_TV;
+    @Value("${redis.key.upload-data}")
+    private String REDIS_KEY_UPLOAD;
+    @Value("${redis.key.process-data}")
+    private String REDIS_KEY_PROCESS;
+
+    @Autowired
+    private RedisService redisService;
+
+    @Pointcut("execution(public * cn.edu.nwafu.erosion.portal.controller.*.*(..))||execution(public * cn.edu.nwafu.*.controller.*.*(..))")
     public void webLog() {
     }
 
@@ -79,13 +96,25 @@ public class WebLogAspect {
         webLog.setUri(request.getRequestURI());
         webLog.setUrl(request.getRequestURL().toString());
         Map<String, Object> logMap = new HashMap<>();
+
+        // 记录统计网站浏览量
+        String uvKey = REDIS_DATABASE + ":" + REDIS_KEY_UV;
+        String tvKey = REDIS_DATABASE + ":" + REDIS_KEY_TV;
+        String uploadKey = REDIS_DATABASE + ":" + REDIS_KEY_UPLOAD;
+        String processKey = REDIS_DATABASE + ":" + REDIS_KEY_PROCESS;
+        redisService.pfAdd(uvKey, webLog.getIp());
+        redisService.zsIncr(tvKey);
+        if ("/my-data/upload".equals(webLog.getUri())) {
+            redisService.zsIncr(uploadKey);
+        }
         logMap.put("url", webLog.getUrl());
         logMap.put("method", webLog.getMethod());
         logMap.put("parameter", webLog.getParameter());
         logMap.put("spendTime", webLog.getSpendTime());
         logMap.put("description", webLog.getDescription());
-//        log.info("{}", JSONUtil.parse(webLog));
+        log.info("----------------------------------------------------------------");
         log.info(Markers.appendEntries(logMap), JSONUtil.parse(webLog).toString());
+        log.info("----------------------------------------------------------------");
         return result;
     }
 
@@ -96,7 +125,7 @@ public class WebLogAspect {
         List<Object> argList = new ArrayList<>();
         Parameter[] parameters = method.getParameters();
         for (int i = 0; i < parameters.length; i++) {
-            //将RequestBody注解修饰的参数作为请求参数
+            // 将RequestBody注解修饰的参数作为请求参数
             RequestBody requestBody = parameters[i].getAnnotation(RequestBody.class);
             if (requestBody != null) {
                 argList.add(args[i]);

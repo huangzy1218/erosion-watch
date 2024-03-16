@@ -35,6 +35,10 @@ redis:
     member: 'member'
     auth-code: 'authCode'
     data: 'data'
+    unique-visit: 'uniqueVisit'
+    total-visit: 'totalVisit'
+    upload-data: 'uploadData'
+    process-data: 'processData'
   expire:
     auth-code: 90 # 验证码超时时间
     common: 86400 # 验证码超时时间

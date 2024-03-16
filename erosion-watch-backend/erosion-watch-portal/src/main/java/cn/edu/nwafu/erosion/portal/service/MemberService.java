@@ -28,4 +28,6 @@ public interface MemberService {
     UserDetails loadUserByUsername(String username);
 
     int completeProfile(Member member);
+
+    Long getRegisterCount();
 }
