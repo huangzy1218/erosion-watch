@@ -3,7 +3,9 @@
     <el-row>
       <el-col :span="6">
         <div class="sidebar2 sidebar2-extra">
-          <el-text tag="b" class="text">选择算法</el-text>
+          <el-text tag="b" class="text"
+            ><el-icon class="icon2"><DataAnalysis /></el-icon>选择算法</el-text
+          >
           <el-divider class="divider" />
           <el-tree-v2
             :ref="'treeRef'"
@@ -63,7 +65,9 @@
         <el-row>
           <el-col :span="4">
             <div class="sidebar2 sidebar2-extra">
-              <el-text tag="b" class="text">选择变量</el-text>
+              <el-text tag="b" class="text"
+                ><el-icon class="icon2"><View /></el-icon>选择变量</el-text
+              >
               <el-divider class="divider" />
               <el-tree-v2
                 :data="columnsData"
@@ -73,14 +77,17 @@
                 @check-change="handleCheckChange"
               >
                 <template #default="{ node }">
-                  <small :title="node.label">{{ node.label }}</small>
+                  <el-icon class="icon3"><PriceTag /></el-icon
+                  ><small :title="node.label">{{ node.label }}</small>
                 </template>
               </el-tree-v2>
             </div>
           </el-col>
           <el-col :span="20">
             <div class="sidebar2">
-              <el-text tag="b">{{ algo }}</el-text>
+              <el-text tag="b"
+                ><el-icon class="icon2"><PieChart /></el-icon>{{ algo }}</el-text
+              >
               <el-divider class="divider" />
               <div class="description">
                 <el-text class="mx-1" type="info" size="small"
@@ -118,6 +125,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { PriceTag, DataAnalysis, View, PieChart } from "@element-plus/icons-vue";
 const data = ref(/* your data object */);
 const algo = ref("描述性统计");
 const treeData = ref([
@@ -251,5 +259,13 @@ const handleSearch = () => {
   content: "拖拽至目标区域";
   color: #bbb;
   font-style: italic;
+}
+
+.icon2 {
+  margin-right: 10px;
+}
+
+.icon3 {
+  margin-right: 5px;
 }
 </style>

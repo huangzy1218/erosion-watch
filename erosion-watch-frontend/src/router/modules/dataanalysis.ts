@@ -41,6 +41,20 @@ export default {
             title: $t("menus.hsSoilErosionAnalysisFromInput"),
             keepAlive: true
           }
+        },
+        {
+          path: "/data-analysis/erosion/input/result",
+          name: "InputResult",
+          component: () =>
+            import(
+              "@/views/data-analysis/erosion-analysis/components/input-result.vue"
+            ),
+          meta: {
+            icon: "folderOpen",
+            title: $t("menus.hsDetail"),
+            keepAlive: true,
+            showLink: false
+          }
         }
       ]
     },
