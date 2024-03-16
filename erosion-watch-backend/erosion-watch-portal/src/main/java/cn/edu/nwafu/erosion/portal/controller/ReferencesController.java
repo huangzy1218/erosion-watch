@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Null;
+import java.util.List;
 
 /**
  * @author Huang Z.Y.
@@ -48,6 +49,14 @@ public class ReferencesController {
     public CommonResult<ReferencesListVo> list() {
         ReferencesListVo listVo = referencesService.listAll();
         return CommonResult.success(listVo);
+    }
+
+    @ApiOperation("使用es根据文本内容查找文献")
+    @PostMapping("/search")
+    @ResponseBody
+    public CommonResult<List<String>> search(@RequestParam("keyword") String keyword) {
+        List<String> documentNames = referencesService.search(keyword);
+        return CommonResult.success(documentNames);
     }
 }
     

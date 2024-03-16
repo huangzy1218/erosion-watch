@@ -6,6 +6,7 @@ import cn.edu.nwafu.erosion.portal.domain.entity.ReferencePdf;
 import cn.edu.nwafu.erosion.portal.domain.entity.ReferencePdfRelation;
 import cn.edu.nwafu.erosion.portal.domain.vo.ReferencesListVo;
 import cn.edu.nwafu.erosion.portal.enums.Bucket;
+import cn.edu.nwafu.erosion.portal.es.utils.FileUtils;
 import cn.edu.nwafu.erosion.portal.mapper.ReferencesMapper;
 import cn.edu.nwafu.erosion.portal.mapper.ReferencesRelationMapper;
 import cn.edu.nwafu.erosion.portal.service.MinioService;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -74,6 +76,16 @@ public class ReferencesServiceImpl extends ServiceImpl<ReferencesMapper, Referen
                 .collect(Collectors.toList());
 
         return new ReferencesListVo(nodes);
+    }
+
+    @Override
+    public List<String> search(String keyword) {
+        try {
+            return FileUtils.searchDocumentsByKeyword(keyword);
+        } catch (IOException e) {
+            log.info("查询出错");
+        }
+        return null;
     }
 
     public String extractTitleFromOrigin(String fileNameWithExtension) {

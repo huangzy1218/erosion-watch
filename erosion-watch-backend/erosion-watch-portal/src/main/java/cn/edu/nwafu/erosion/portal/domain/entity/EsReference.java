@@ -20,7 +20,7 @@ public class EsReference implements Serializable {
     private Long id;
     @Field(analyzer = "ik_max_word", type = FieldType.Keyword)
     private String label;
-    @Field(analyzer = "ik_max_word", type = FieldType.)
+    @Field(analyzer = "ik_max_word", type = FieldType.Keyword)
     private String author;
     private Integer year;
     private String abstractText;
