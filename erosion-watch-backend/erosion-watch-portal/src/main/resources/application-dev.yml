@@ -20,6 +20,11 @@ spring:
       host: ${virtual-host}
       port: 27017
       database: erosion-watch
+    elasticsearch:
+      repositories:
+        enabled: true
+  elasticsearch:
+    uris: ${virtual-host}:9200
   rabbitmq:
     host: ${virtual-host}
     port: 5672
