@@ -7,6 +7,7 @@ import cn.edu.nwafu.erosion.model.MemberExample;
 import cn.edu.nwafu.erosion.portal.domain.MemberDetails;
 import cn.edu.nwafu.erosion.portal.service.MemberCacheService;
 import cn.edu.nwafu.erosion.portal.service.MemberService;
+import cn.edu.nwafu.erosion.security.dto.UserToken;
 import cn.edu.nwafu.erosion.security.util.JwtTokenUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.CollectionUtil;
@@ -26,7 +27,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -102,27 +102,26 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public HashMap<String, String> login(String username, String password) {
+    public UserToken login(String username, String password) {
         String token = null;
+        UserToken userToken = null;
         try {
             UserDetails userDetails = loadUserByUsername(username);
             if (!passwordEncoder.matches(password, userDetails.getPassword())) {
                 throw new BadCredentialsException("密码不正确");
             }
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             token = jwtTokenUtil.generateToken(userDetails);
+            userToken = jwtTokenUtil.generateTokens(userDetails);
         } catch (AuthenticationException e) {
             log.warn("登录异常:{}", e.getMessage());
+            return null;
         }
         long currentTimeMillis = System.currentTimeMillis();
-        Date expireTime = new Date(currentTimeMillis + EXPIRE_SECONDS * 1000);
-        HashMap<String, String> tokenMap = new HashMap<>();
-        tokenMap.put("username", username);
-        tokenMap.put("accessToken", token);
-        tokenMap.put("refreshToken", token);
-        tokenMap.put("expires", expireTime.toString());
-        return tokenMap;
+        userToken.setExpires(currentTimeMillis + EXPIRE_SECONDS * 1000);
+        return userToken;
     }
 
     @Override
@@ -186,6 +185,17 @@ public class MemberServiceImpl implements MemberService {
     public Long getRegisterCount() {
         return memberMapper.countByExample(new MemberExample());
     }
+
+    @Override
+    public void logoff(String token) {
+        jwtTokenUtil.addBlacklist(token, jwtTokenUtil.getExpirationDate(token));
+    }
+
+    @Override
+    public void logout(String token) {
+        jwtTokenUtil.addBlacklist(token, jwtTokenUtil.getExpirationDate(token));
+    }
+
 
     private boolean verifyAuthCode(String authCode, String telephone) {
         if (StrUtil.isEmpty(authCode)) {

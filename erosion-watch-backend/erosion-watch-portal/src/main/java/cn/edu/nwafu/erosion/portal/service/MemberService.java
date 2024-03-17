@@ -1,9 +1,8 @@
 package cn.edu.nwafu.erosion.portal.service;
 
 import cn.edu.nwafu.erosion.model.Member;
+import cn.edu.nwafu.erosion.security.dto.UserToken;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.HashMap;
 
 /**
  * @author Huang Z.Y.
@@ -15,7 +14,7 @@ public interface MemberService {
 
     void register(String username, String password, String telephone, String authCode);
 
-    HashMap<String, String> login(String username, String password);
+    UserToken login(String username, String password);
 
     Member getCurrentMember();
 
@@ -30,4 +29,8 @@ public interface MemberService {
     int completeProfile(Member member);
 
     Long getRegisterCount();
+
+    void logoff(String token);
+
+    void logout(String token);
 }

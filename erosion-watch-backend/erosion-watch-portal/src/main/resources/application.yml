@@ -28,6 +28,9 @@ jwt:
   secret: erosion-portal-secret # JWT加解密使用的密钥
   expiration: 604800 # JWT的超期限时间(60*60*24*7)
   token-head: 'Bearer '  # JWT负载中拿到开头
+  expire:
+    access-token: 604800
+    refresh-token: 2592000 # 设置为一个月
 
 redis:
   database: erosion-watch

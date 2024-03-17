@@ -5,6 +5,7 @@ import cn.edu.nwafu.erosion.model.Member;
 import cn.edu.nwafu.erosion.portal.domain.dto.CommonLoginDto;
 import cn.edu.nwafu.erosion.portal.domain.dto.MemberRegisterDto;
 import cn.edu.nwafu.erosion.portal.service.MemberService;
+import cn.edu.nwafu.erosion.security.dto.UserToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -49,11 +50,11 @@ public class MemberController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult<?> login(@RequestBody CommonLoginDto loginDto) {
-        HashMap<String, String> tokenMap = memberService.login(loginDto.getUsername(), loginDto.getPassword());
-        if (tokenMap.get("accessToken") == null) {
+        UserToken userToken = memberService.login(loginDto.getUsername(), loginDto.getPassword());
+        if (userToken == null) {
             return CommonResult.validateFailed("用户名或密码错误");
         }
-        return CommonResult.success(tokenMap);
+        return CommonResult.success(userToken);
     }
 
     @ApiOperation("获取用户信息")
@@ -139,6 +140,21 @@ public class MemberController {
         } else {
             return CommonResult.failed("用户资料完善失败");
         }
+    }
+
+    @PostMapping("/logout/{token}")
+    public CommonResult<?> logout(@PathVariable("token") String token) {
+        // 放入黑名单
+        memberService.logout(token);
+        return CommonResult.success(null);
+    }
+
+    @ApiOperation(value = "注销")
+    @RequestMapping(value = "/logoff/{token}", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult<?> logoff(@PathVariable("token") String token) {
+        memberService.logoff(token);
+        return CommonResult.success(null);
     }
 }
     

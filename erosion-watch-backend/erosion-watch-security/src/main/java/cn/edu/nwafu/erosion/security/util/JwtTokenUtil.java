@@ -1,11 +1,16 @@
 package cn.edu.nwafu.erosion.security.util;
 
+import cn.edu.nwafu.common.service.RedisService;
+import cn.edu.nwafu.erosion.security.dto.UserToken;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSONObject;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -25,14 +30,21 @@ import java.util.Map;
  */
 @Slf4j
 public class JwtTokenUtil {
+    public static final String TOKEN_BLACKLIST_PREFIX = "TOKEN_BLACKLIST-";
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_CREATED = "created";
+    @Value("${jwt.expire.access-token}")
+    private Long accessTokenExpire;
+    @Value("${jwt.expire.refresh-token}")
+    private Long refreshTokenExpire;
     @Value("${jwt.secret}")
     private String secret;
     @Value("${jwt.expiration}")
     private Long expiration;
     @Value("${jwt.token-head}")
     private String tokenHead;
+    @Autowired
+    private RedisService redisService;
 
     /**
      * 根据负责生成 JWT 的 token
@@ -146,6 +158,7 @@ public class JwtTokenUtil {
             return token;
         } else {
             claims.put(CLAIM_KEY_CREATED, new Date());
+            addBlacklist(oldToken, getExpirationDate(oldToken));
             return generateToken(claims);
         }
     }
@@ -162,5 +175,92 @@ public class JwtTokenUtil {
         Date refreshDate = new Date();
         // 刷新时间在创建时间的指定时间内
         return refreshDate.after(created) && refreshDate.before(DateUtil.offsetSecond(created, time));
+    }
+
+    /**
+     * 保存 刷新令牌 与 访问令牌 关联关系 到redis
+     *
+     * @param userToken              用户令牌
+     * @param refreshTokenExpireDate 刷新令牌过期日期
+     */
+    public void tokenAssociation(UserToken userToken, Date refreshTokenExpireDate) {
+        long time = (refreshTokenExpireDate.getTime() - System.currentTimeMillis()) / 1000 + 100;
+        redisService.set(userToken.getRefreshToken(), userToken.getAccessToken(), time);
+    }
+
+    /**
+     * 根据 刷新令牌 获取 访问令牌
+     *
+     * @param refreshToken 刷新令牌
+     */
+    public String getAccessTokenByRefresh(String refreshToken) {
+        Object value = redisService.get(refreshToken);
+        return value == null ? null : String.valueOf(value);
+    }
+
+    public void addBlacklist(String token, Date expireTime) {
+        long expireTimeLong = (expireTime.getTime() - System.currentTimeMillis()) / 1000 + 100;
+        redisService.set(getBlacklistPrefix(token), "1", expireTimeLong);
+    }
+
+    public String getBlacklistPrefix(String token) {
+        return TOKEN_BLACKLIST_PREFIX + token;
+    }
+
+    public boolean checkBlackList(String token) {
+        return redisService.hasKey(getBlacklistPrefix(token));
+    }
+
+    /**
+     * 生成双令牌
+     */
+
+    public UserToken generateTokens(UserDetails userDetails) {
+        Date nowDate = new Date();
+        Date accessTokenExpireDate = new Date(nowDate.getTime() + accessTokenExpire * 1000);
+        Date refreshTokenExpireDate = new Date(nowDate.getTime() + refreshTokenExpire * 1000);
+        UserToken userToken = new UserToken();
+        String username = userDetails.getUsername();
+        userToken.setUsername(username);
+        userToken.setAccessToken(createToken(userDetails, nowDate, accessTokenExpireDate));
+        userToken.setRefreshToken(createToken(userDetails, nowDate, refreshTokenExpireDate));
+        // 创建 刷新令牌 与 访问令牌 关联关系
+        tokenAssociation(userToken, refreshTokenExpireDate);
+        return userToken;
+    }
+
+    public String createToken(UserDetails userDetails, Date date, Date expireDate) {
+        return Jwts.builder()
+                .setHeaderParam("typ", "JWT")
+                .setSubject(JSONObject.toJSONString(userDetails))
+                .setIssuedAt(date)
+                .setExpiration(expireDate)
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
+    }
+
+    /**
+     * 获取 token 中的注册信息
+     */
+    public Claims getTokenClaim(String token) {
+        Claims claims = null;
+        try {
+            claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token)
+                    .getBody();
+        } catch (ExpiredJwtException e) {
+            claims = e.getClaims();
+        }
+        return claims;
+    }
+
+    /**
+     * 获取 token 的发布时间
+     */
+    public Date getIssudedDate(String token) {
+        return getTokenClaim(token).getIssuedAt();
+    }
+
+    public Date getExpirationDate(String token) {
+        return getTokenClaim(token).getExpiration();
     }
 }
