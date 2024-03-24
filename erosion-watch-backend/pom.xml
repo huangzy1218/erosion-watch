@@ -43,6 +43,7 @@
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <knife4j.version>3.0.3</knife4j.version>
         <easyexcel.version>3.1.2</easyexcel.version>
+        <commons-math3.version>3.6.1</commons-math3.version>
         <erosion-watch-common.version>1.0-SNAPSHOT</erosion-watch-common.version>
         <erosion-watch-mbg.version>1.0-SNAPSHOT</erosion-watch-mbg.version>
         <erosion-watch-portal.version>1.0-SNAPSHOT</erosion-watch-portal.version>

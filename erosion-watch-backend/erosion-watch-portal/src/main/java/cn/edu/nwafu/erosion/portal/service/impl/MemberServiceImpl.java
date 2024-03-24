@@ -31,7 +31,6 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeUtility;
-import javax.swing.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -54,7 +53,7 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private JavaMailSender javaMailSender;
     @Value("${spring.mail.username}")
-    private Spring sender;
+    private String sender;
     @Autowired
     private MemberCacheService memberCacheService;
     @Autowired
