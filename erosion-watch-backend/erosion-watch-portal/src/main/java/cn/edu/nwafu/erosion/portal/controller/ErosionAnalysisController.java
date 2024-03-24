@@ -2,6 +2,7 @@ package cn.edu.nwafu.erosion.portal.controller;
 
 import cn.edu.nwafu.common.api.CommonResult;
 import cn.edu.nwafu.erosion.portal.domain.dto.USLEInputDto;
+import cn.edu.nwafu.erosion.portal.domain.vo.ErosionInputResultVo;
 import cn.edu.nwafu.erosion.portal.service.ErosionAnalysisService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,15 +25,15 @@ public class ErosionAnalysisController {
     @Autowired
     private ErosionAnalysisService erosionAnalysisService;
 
-    @ApiOperation("添加土地管理计划")
-    @PostMapping("/add")
+    @ApiOperation("在线土壤分析")
+    @PostMapping("/input")
     @ResponseBody
-    public CommonResult<?> analysisInput(@RequestBody USLEInputDto usleInputDto) {
-        int count = erosionAnalysisService.analysis(usleInputDto);
-        if (count > 0) {
-            return CommonResult.success(null, "添加土地管理计划成功");
+    public CommonResult<ErosionInputResultVo> analysisInput(@RequestBody USLEInputDto usleInputDto) {
+        ErosionInputResultVo resultVo = erosionAnalysisService.analysis(usleInputDto);
+        if (resultVo != null) {
+            return CommonResult.success(resultVo, "分析成功");
         } else {
-            return CommonResult.failed("添加土地管理计划失败");
+            return CommonResult.failed("分析失败");
         }
     }
 }

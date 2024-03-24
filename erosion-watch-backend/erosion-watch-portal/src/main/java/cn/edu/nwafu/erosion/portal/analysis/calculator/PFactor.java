@@ -29,12 +29,12 @@ public class PFactor {
                 }
             }
         }
-        throw new IllegalArgumentException("Slope or tillage method not found in P values table.");
+        return 0.2;
     }
 
     public static void main(String[] args) {
         double slope = 9; // 坡度例子
-        TillageMethod tillageMethod = TillageMethod.CONTOUR_FARMING; // 耕作方式例子
+        TillageMethod tillageMethod = TillageMethod.fromMethod("等高耕作"); // 耕作方式例子
 
         double pFactor = calculatePFactor(slope, tillageMethod);
         System.out.println("P factor: " + pFactor);
@@ -42,8 +42,22 @@ public class PFactor {
 
     // 用于表示耕作方式的枚举
     public enum TillageMethod {
-        CONTOUR_FARMING, // 等高耕作
-        STRIP_CROPPING,  // 条带耕作
-        TERRACING        // 梯田耕作
+        CONTOUR_FARMING("等高耕作"), // 等高耕作
+        STRIP_CROPPING("等高带状种植并开垅沟"),  // 条带耕作
+        TERRACING("修梯田");       // 梯田耕作
+        public String method;
+
+        TillageMethod(String method) {
+            this.method = method;
+        }
+
+        public static TillageMethod fromMethod(String method) {
+            for (TillageMethod tillageMethod : TillageMethod.values()) {
+                if (tillageMethod.method.equalsIgnoreCase(method)) {
+                    return tillageMethod;
+                }
+            }
+            throw new IllegalArgumentException("No constant with method " + method + " found");
+        }
     }
 }

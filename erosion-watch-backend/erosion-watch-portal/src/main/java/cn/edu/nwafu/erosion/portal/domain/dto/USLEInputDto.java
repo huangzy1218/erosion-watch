@@ -4,6 +4,7 @@ package cn.edu.nwafu.erosion.portal.domain.dto;
  * @author Huang Z.Y.
  */
 public class USLEInputDto {
+    private String erosionTypeArea;
     // R因子的输入参数
     private double Etotal; // 降雨总动能
     private double I30; // 最大30分钟雨强
@@ -50,6 +51,14 @@ public class USLEInputDto {
         this.rainfallAndRunoffFactor = rainfallAndRunoffFactor;
         this.soilSlope = soilSlope;
         this.cultivationMethod = cultivationMethod;
+    }
+
+    public String getErosionTypeArea() {
+        return erosionTypeArea;
+    }
+
+    public void setErosionTypeArea(String erosionTypeArea) {
+        this.erosionTypeArea = erosionTypeArea;
     }
 
     public double getEtotal() {

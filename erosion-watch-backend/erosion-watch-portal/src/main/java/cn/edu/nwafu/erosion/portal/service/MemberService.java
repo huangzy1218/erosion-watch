@@ -33,4 +33,6 @@ public interface MemberService {
     void logoff(String token);
 
     void logout(String token);
+
+    void sendAuthCode(String emailAddress);
 }
