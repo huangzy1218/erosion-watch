@@ -57,77 +57,304 @@ erosion-watch
 ### 项目演示
 
 在线分析输入界面
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678012808-65483c7c-561f-4c0a-b0d7-5842d9bdc210.png#averageHue=%23fefefe&clientId=u21acd822-6933-4&from=paste&height=670&id=uce0fee0c&originHeight=837&originWidth=1897&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=60525&status=done&style=none&taskId=u5f74c56b-c082-4b40-9b08-264429f89b8&title=&width=1517.6)
+
+![img](images/1710678012808-65483c7c-561f-4c0a-b0d7-5842d9bdc210.png)
+
+
+
 在线分析结果界面
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710677903735-4987aeaf-8cba-4a42-8f2d-3757bd797b64.png#averageHue=%23fefdfd&clientId=u21acd822-6933-4&from=paste&height=682&id=u5114a303&originHeight=852&originWidth=1910&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=118851&status=done&style=none&taskId=u3835edb8-5c4a-43d1-ab76-bcb4536d8d1&title=%E5%9C%A8%E7%BA%BF%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C%E7%95%8C%E9%9D%A2&width=1528)
+![img](images/1710677903735-4987aeaf-8cba-4a42-8f2d-3757bd797b64.png)
+
+
+
 我的数据界面
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678040450-b3de9cef-4db9-48c8-917b-c80c5f9a704f.png#averageHue=%23fefefd&clientId=u21acd822-6933-4&from=paste&height=681&id=u5cd1d03d&originHeight=851&originWidth=1905&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=114297&status=done&style=none&taskId=uce31d68e-8e55-4cc4-a1cb-e68114a8fd1&title=&width=1524)
+
+![img](images/1710678040450-b3de9cef-4db9-48c8-917b-c80c5f9a704f.png)
+
+
+
 文件重命名
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678069337-f8df0bb3-33ab-4105-8093-516b20c0134e.png#averageHue=%239e9e9e&clientId=u21acd822-6933-4&from=paste&height=523&id=u71b386ac&originHeight=654&originWidth=1037&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=34073&status=done&style=none&taskId=u3ce876de-188e-4d6f-a833-022febd4ee4&title=&width=829.6)
+![img](images/1710678069337-f8df0bb3-33ab-4105-8093-516b20c0134e.png)
+
+
+
 文件上传界面
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678134762-cf83daa9-19f4-4bbf-bb2b-47a6640e3c29.png#averageHue=%23c1c1c0&clientId=u21acd822-6933-4&from=paste&height=641&id=ucc23922d&originHeight=801&originWidth=1328&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=97626&status=done&style=none&taskId=ubf88256a-e9eb-4096-9587-743a680e2e8&title=&width=1062.4)
+![img](images/1710678134762-cf83daa9-19f4-4bbf-bb2b-47a6640e3c29.png)
+
+
+
 上传成功提示
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678161356-ee56e37f-c84e-4429-9ed8-5718cfb4ac99.png#averageHue=%23dadada&clientId=u21acd822-6933-4&from=paste&height=319&id=u7127a697&originHeight=399&originWidth=849&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=16905&status=done&style=none&taskId=ue230ae2b-b567-472a-85c7-edb266610e5&title=&width=679.2)
+![img](images/1710678161356-ee56e37f-c84e-4429-9ed8-5718cfb4ac99.png)
+
+
+
 excel 数据展示
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678188714-a547a99c-b7ac-4185-a37b-bbbcb4128778.png#averageHue=%23f9f8f7&clientId=u21acd822-6933-4&from=paste&height=661&id=u3545dfd2&originHeight=826&originWidth=1905&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=120381&status=done&style=none&taskId=u9ef0e4c6-3f39-409d-8e1b-6af9c3cff1b&title=&width=1524)
+![img](images/1710678188714-a547a99c-b7ac-4185-a37b-bbbcb4128778.png)
+
+
+
 基于表格数据分析
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678230010-6ecb925a-6a04-4ad5-a40a-fdb7fd00f025.png#averageHue=%23e7cfa9&clientId=u21acd822-6933-4&from=paste&height=632&id=udb5c1882&originHeight=790&originWidth=1900&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=57093&status=done&style=none&taskId=ucf6d1d69-19be-437a-a899-f9e1e417d2b&title=&width=1520)
+![img](images/1710678230010-6ecb925a-6a04-4ad5-a40a-fdb7fd00f025.png)
+
+
+
 监测管理
+
 区域信息
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678261374-55c0e00e-4333-45ab-94ec-1af4b2bf1cf6.png#averageHue=%23fefefe&clientId=u21acd822-6933-4&from=paste&height=490&id=u2ac8921e&originHeight=612&originWidth=1896&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=51071&status=done&style=none&taskId=ub73a61d4-0c43-4ad0-8048-c11ec94b07a&title=&width=1516.8)
+![img](images/1710678261374-55c0e00e-4333-45ab-94ec-1af4b2bf1cf6.png)
+
+
+
 新增区域信息
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678278862-55aff430-9e82-4fa2-88bb-bd868e6c96f2.png#averageHue=%23dbdbdb&clientId=u21acd822-6933-4&from=paste&height=557&id=uae4d90e9&originHeight=696&originWidth=922&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=41653&status=done&style=none&taskId=ua36baa80-3be0-42c2-b6eb-5fb9d405bd8&title=&width=737.6)
+![img](images/1710678297656-aa165d02-0bff-4542-a506-052388620940.png)
+
+
+
 土壤类型
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678297656-aa165d02-0bff-4542-a506-052388620940.png#averageHue=%23fefefe&clientId=u21acd822-6933-4&from=paste&height=639&id=ue6ce3bb8&originHeight=799&originWidth=1891&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=76597&status=done&style=none&taskId=u40c8ccc6-e77e-43f8-9df2-d24f2f43a26&title=&width=1512.8)
+![img](images/1710678297656-aa165d02-0bff-4542-a506-052388620940-171213747369314.png)
+
+
+
 新增土壤类型
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678311689-f2302398-0ab4-496e-b9ed-42c4dcc380cc.png#averageHue=%23dcdcdc&clientId=u21acd822-6933-4&from=paste&height=467&id=ub4ea145b&originHeight=584&originWidth=861&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=36985&status=done&style=none&taskId=uc698de2e-1f31-4ebe-9444-138f58b0e6b&title=&width=688.8)
+![img](images/1710678311689-f2302398-0ab4-496e-b9ed-42c4dcc380cc.png)![img](images/1710678311689-f2302398-0ab4-496e-b9ed-42c4dcc380cc-171213751364017.png)
+
+
+
 植被覆盖
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678337520-ca8fd62c-1ed4-46d4-b83e-380ca4031a3e.png#averageHue=%23fefefe&clientId=u21acd822-6933-4&from=paste&height=638&id=u44290c4d&originHeight=798&originWidth=1900&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=42575&status=done&style=none&taskId=u6daf7b91-16cf-4fca-a075-b7ba4f048fd&title=&width=1520)
+
+![img](images/1710678337520-ca8fd62c-1ed4-46d4-b83e-380ca4031a3e.png)
+
+
+
 新增植被覆盖
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678358370-ebaf3b71-cf27-48ca-a347-ed663e721ab4.png#averageHue=%23e5e5e5&clientId=u21acd822-6933-4&from=paste&height=394&id=uf750bebc&originHeight=492&originWidth=875&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=25607&status=done&style=none&taskId=u629058cf-5070-45b7-aa90-2b35539aad7&title=&width=700)
+
+![img](images/1710678358370-ebaf3b71-cf27-48ca-a347-ed663e721ab4.png)
+
+
+
 地形地貌
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678374682-e4f540d0-eea7-4756-9dbc-39554deec0f1.png#averageHue=%23fefefe&clientId=u21acd822-6933-4&from=paste&height=621&id=uce314108&originHeight=776&originWidth=1906&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=40558&status=done&style=none&taskId=u03306397-34ee-4715-9f63-a700b8ad612&title=&width=1524.8)
+
+![img](images/1710678374682-e4f540d0-eea7-4756-9dbc-39554deec0f1.png)
+
+
+
 新增地形地貌
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678379630-7c9ad70f-f249-4f62-b39f-a6953b82714d.png#averageHue=%23fefefe&clientId=u21acd822-6933-4&from=paste&height=621&id=uc1396f8f&originHeight=776&originWidth=1906&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=40558&status=done&style=none&taskId=uff93d1ec-7563-42c7-9a14-b89a62697ba&title=&width=1524.8)
+
+![img](images/1710678379630-7c9ad70f-f249-4f62-b39f-a6953b82714d.png)
+
+
+
 侵蚀等级
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678393355-7d568ecf-5206-4c4c-a62b-b5ff56c5d1c5.png#averageHue=%23fefefe&clientId=u21acd822-6933-4&from=paste&height=645&id=u746d0423&originHeight=806&originWidth=1891&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=62440&status=done&style=none&taskId=ufdabbf8c-b408-4a3e-818c-9621d38d676&title=&width=1512.8)
+
+![img](images/1710678393355-7d568ecf-5206-4c4c-a62b-b5ff56c5d1c5.png)
+
+
+
 新增侵蚀等级
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678408045-94575688-ec58-4b6b-9093-c4c6be2389a6.png#averageHue=%23e9e8e8&clientId=u21acd822-6933-4&from=paste&height=465&id=u22f32685&originHeight=581&originWidth=849&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=39667&status=done&style=none&taskId=ubd1e9954-8fbf-4872-9f57-f953fb0ff21&title=&width=679.2)
+
+![img](images/1710678408045-94575688-ec58-4b6b-9093-c4c6be2389a6.png)
+
+
+
 监测数据
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678423236-ae3c0d68-c8cb-4718-8e3b-6f8601245f94.png#averageHue=%23fefefe&clientId=u21acd822-6933-4&from=paste&height=646&id=u7b839d82&originHeight=807&originWidth=1906&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=42969&status=done&style=none&taskId=u1e59072b-e02a-46ee-acf0-ac7ade41f96&title=&width=1524.8)
+
+![img](images/1710678423236-ae3c0d68-c8cb-4718-8e3b-6f8601245f94.png)
+
+
+
 新增监测数据
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678435725-17e5a4a9-63c4-46d3-8f12-ea2d731dc561.png#averageHue=%23e8e7e7&clientId=u21acd822-6933-4&from=paste&height=366&id=uc2b66092&originHeight=457&originWidth=819&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=21582&status=done&style=none&taskId=u3d9b8509-1936-403c-a700-881220c2214&title=&width=655.2)
+
+![img](images/1710678435725-17e5a4a9-63c4-46d3-8f12-ea2d731dc561.png)
+
+
 
 土地使用历史
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678455231-6622fde0-0260-4c34-ba27-959f86f97b07.png#averageHue=%23fefefe&clientId=u21acd822-6933-4&from=paste&height=629&id=ud1dfc0ae&originHeight=786&originWidth=1892&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=44715&status=done&style=none&taskId=u2a5d6e8b-9cf0-4e35-8dda-25871c382d4&title=&width=1513.6)
+
+![img](images/1710678455231-6622fde0-0260-4c34-ba27-959f86f97b07.png)
+
+
 
 新增土地使用历史
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678471210-d50b11cc-3c5b-4aaf-a6e1-0e649a4c96be.png#averageHue=%23fefefe&clientId=u21acd822-6933-4&from=paste&height=614&id=u7777838c&originHeight=767&originWidth=1899&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=43085&status=done&style=none&taskId=ue7210367-b625-49db-8956-930b6179d43&title=&width=1519.2)
+
+![img](images/1710678471210-d50b11cc-3c5b-4aaf-a6e1-0e649a4c96be.png)
+
+
 
 土地规划
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678491154-93530683-0301-46fd-bd77-cdcf792b113d.png#averageHue=%23fefefd&clientId=u21acd822-6933-4&from=paste&height=694&id=u345ba532&originHeight=867&originWidth=1910&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=70088&status=done&style=none&taskId=u10c5479c-e3a8-470d-a2d7-813f7eb4b22&title=&width=1528)
+
+![img](images/1710678491154-93530683-0301-46fd-bd77-cdcf792b113d.png)
+
+
 
 新增土地规划
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678504765-02a68188-79fc-4e53-a645-63beb03af2e9.png#averageHue=%23eeeeee&clientId=u21acd822-6933-4&from=paste&height=406&id=ud1df35e4&originHeight=507&originWidth=807&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=27201&status=done&style=none&taskId=u94aeb792-13ca-45f3-bc52-13cfafd24d2&title=&width=645.6)
+
+![img](images/1710678504765-02a68188-79fc-4e53-a645-63beb03af2e9.png)
+
+
 
 文献资源查看
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/40592343/1710678543398-47f9d125-05e7-481d-964f-97ea50e5146b.png#averageHue=%23fafafa&clientId=u21acd822-6933-4&from=paste&height=660&id=uab29b255&originHeight=825&originWidth=1882&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=257800&status=done&style=none&taskId=ufc389c63-fc33-423e-9951-74541400ab6&title=&width=1505.6)
+
+![img](images/1710678543398-47f9d125-05e7-481d-964f-97ea50e5146b.png)
+
+
 
 地图资源
-![RWYT_)8GB4}SY(H~6OWEW%J.jpg](https://cdn.nlark.com/yuque/0/2024/jpeg/40592343/1710678595626-6f59f359-e826-462e-9fa0-135cfc530e5d.jpeg#averageHue=%23657d67&clientId=u21acd822-6933-4&from=paste&height=694&id=u9a3be994&originHeight=868&originWidth=1916&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=284122&status=done&style=none&taskId=u38fd60a2-fd71-41dd-9b7a-960e4ff34f3&title=&width=1532.8)
+
+![img](images/1710678595626-6f59f359-e826-462e-9fa0-135cfc530e5d.jpeg)
+
+
 
 用户登录
 
 ![img](images/1710678603713-70078cc6-2009-48af-b764-4b300c066cdb.png)
 
+
+
 用户注册
 
 ![img](images/1710678614175-b6f3557a-4cc3-4493-b698-608a3ed3ec98.png)
+
+
 
 用户信息查看
 
 ![img](images/1710678626693-6d6abb82-6e7e-4f48-aabf-9386fa32f1eb.png)
 
+
+
 用户信息编辑
 
-![img](images/1710678626693-6d6abb82-6e7e-4f48-aabf-9386fa32f1eb-17121370294836.png)
+![img](images/1710678639213-fdad019e-b521-4674-be67-3e6d1f507129.png)
+
+
+
+## 数据库表结构
+
+数据库表结构概览
+
+![image-20240403174948206](images/image-20240403174948206.png)
+
+**soil_type 表**
+
+| **列名**      | **数据类型** | **说明**       |
+| ------------- | ------------ | -------------- |
+| id            | bigint       | 主键           |
+| parent_id     | bigint       | 上级分类的编号 |
+| name          | varchar(64)  | 土壤类型名称   |
+| level         | int(1)       | 分类级别       |
+| soil_quality  | varchar(64)  | 土壤质地       |
+| soil_moisture | varchar(64)  | 土壤含水量     |
+| description   | text         | 描述           |
+
+**vegetation_coverage 表**
+
+| **列名**            | **数据类型** | **说明**   |
+| ------------------- | ------------ | ---------- |
+| id                  | bigint       | 主键       |
+| area_id             | bigint       | 地区ID     |
+| vegetation_type     | varchar(100) | 植被类型   |
+| coverage_percentage | decimal(5,2) | 覆盖百分比 |
+| density             | varchar(50)  | 植被密度   |
+| status              | int(1)       | 植被状态   |
+| remarks             | text         | 备注       |
+
+**area_info 表**
+
+| **列名**            | **数据类型**   | **说明**     |
+| ------------------- | -------------- | ------------ |
+| id                  | bigint         | 主键         |
+| area_name           | varchar(100)   | 地区名称     |
+| administrative_code | varchar(20)    | 行政区划代码 |
+| latitude            | decimal(9, 6)  | 纬度         |
+| longitude           | decimal(9, 6)  | 经度         |
+| area                | decimal(10, 2) | 面积         |
+| population          | int            | 人口         |
+| climate_type        | varchar(50)    | 气候类型     |
+| terrain_feature     | varchar(50)    | 地形特征     |
+| landform_feature    | varchar(50)    | 地貌特征     |
+| land_use            | varchar(50)    | 土地利用情况 |
+
+**member 表**
+
+| **列名**          | **数据类型** | **说明**     |
+| ----------------- | ------------ | ------------ |
+| id                | bigint       | 主键         |
+| username          | varchar(50)  | 用户名       |
+| password          | varchar(100) | 密码         |
+| nickname          | varchar(100) | 昵称         |
+| email             | varchar(100) | 邮箱         |
+| registration_date | datetime     | 注册日期     |
+| last_login        | datetime     | 上次登录时间 |
+| first_name        | varchar(50)  | 用户的名     |
+| last_name         | varchar(50)  | 用户的姓     |
+| gender            | enum         | 性别         |
+| date_of_birth     | date         | 出生日期     |
+| address           | varchar(255) | 地址         |
+| phone_number      | varchar(20)  | 电话号码     |
+| profile_picture   | varchar(255) | 个人头像路径 |
+| biography         | text         | 个人简介     |
+| organization      | varchar(100) | 所属单位     |
+| real_name         | varchar(100) | 真实姓名     |
+
+**terrain_landform 表**
+
+| **列名**        | **数据类型**   | **说明**             |
+| --------------- | -------------- | -------------------- |
+| id              | bigint         | 主键                 |
+| area_id         | bigint         | 地区ID               |
+| terrain_type    | varchar(50)    | 地形类型             |
+| landform_type   | varchar(50)    | 地貌类型             |
+| elevation       | decimal(10, 2) | 海拔高度（单位：米） |
+| slope           | decimal(10, 2) | 坡度（单位：度）     |
+| soil_type       | varchar(100)   | 土壤类型             |
+| vegetation_type | varchar(100)   | 植被类型             |
+| water_system    | varchar(100)   | 水系类型             |
+
+**soil_erosion_grade 表**
+
+| **列名**               | **数据类型** | **说明**             |
+| ---------------------- | ------------ | -------------------- |
+| id                     | bigint       | 主键                 |
+| area_id                | bigint       | 地区ID               |
+| erosion_type           | varchar(50)  | 侵蚀类型             |
+| erosion_grade          | varchar(20)  | 侵蚀等级             |
+| erosion_years          | int          | 抗蚀年限（单位：年） |
+| erosion_description    | text         | 侵蚀描述             |
+| risk_level             | varchar(20)  | 风险等级             |
+| risk_assessment_result | text         | 风险评估结果         |
+| management_practice    | text         | 管理措施             |
+
+**monitoring_data 表**
+
+| **列名**                 | **数据类型**  | **说明**             |
+| ------------------------ | ------------- | -------------------- |
+| id                       | bigint        | 主键                 |
+| area_id                  | bigint        | 地区ID               |
+| monitoring_date          | date          | 监测日期             |
+| soil_erosion_rate        | decimal(5,2)  | 土壤侵蚀率           |
+| vegetation_coverage_rate | decimal(5,2)  | 植被覆盖率           |
+| rainfall_amount          | decimal(10,2) | 降雨量（单位：毫米） |
+
+**land_use_change_history 表**
+
+| **列名**          | **数据类型** | **说明**           |
+| ----------------- | ------------ | ------------------ |
+| id                | bigint       | 主键               |
+| area_id           | bigint       | 地区ID             |
+| change_date       | date         | 变更日期           |
+| previous_land_use | varchar(50)  | 之前的土地利用情况 |
+| current_land_use  | varchar(50)  | 当前的土地利用情况 |
+| change_reason     | text         | 变更原因           |
+
+**land_management_plans 表**
+
+| **列名**            | **数据类型** | **说明**              |
+| ------------------- | ------------ | --------------------- |
+| id                  | bigint       | 主键                  |
+| area_id             | bigint       | 地区ID                |
+| plan_date           | date         | 计划日期              |
+| plan_type           | varchar(50)  | 计划类型（规划/项目） |
+| plan_content        | text         | 计划内容              |
+| responsible_unit    | varchar(100) | 责任单位              |
+| implementation_date | date         | 实施日期              |
+
