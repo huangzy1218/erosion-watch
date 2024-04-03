@@ -22,7 +22,7 @@ spring:
     # 发送验证码的邮箱（发件人的邮箱）
     username: 2691386627@qq.com
     # 授权码
-    password: 123
+    password: rjdqzidcrfucdfai
     # 编码
     default-encoding: utf-8
     # 其它参数
@@ -55,6 +55,7 @@ jwt:
   expire:
     access-token: 604800
     refresh-token: 2592000 # 设置为一个月
+  blacklist: token-black-list
 
 redis:
   database: erosion-watch

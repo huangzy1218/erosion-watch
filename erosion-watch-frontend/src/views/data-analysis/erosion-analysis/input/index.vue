@@ -1,6 +1,30 @@
 <template>
   <el-card>
     <div>
+      <el-form
+        ref="ruleFormRef"
+        :model="newFormInline"
+        :rules="formRules"
+        label-width="200px"
+        :label-position="'top'"
+        :size="'small'"
+      >
+        <el-form-item label="侵蚀类型区" prop="erosionTypeArea">
+          <el-select
+            v-model="newFormInline.erosionTypeArea"
+            placeholder="请选择"
+            size="small"
+            style="width: 240px"
+          >
+            <el-option
+              v-for="item in types"
+              :key="item.value"
+              :label="item.label"
+              :value="item.label"
+            />
+          </el-select>
+        </el-form-item>
+      </el-form>
       <el-collapse v-model="activeNames">
         <el-collapse-item name="1">
           <template #title>
@@ -239,7 +263,16 @@
 import { formRules } from "@/views/system/user/utils/rule";
 import { Odometer, ElementPlus } from "@element-plus/icons-vue";
 import { ref } from "vue";
-import { FormProps } from "@/views/data-analysis/utils/types";
+import {FormItemProps, FormProps} from "@/views/data-analysis/utils/types";
+import {
+  type LocationQueryRaw,
+  type RouteParamsRaw,
+  useRouter
+} from "vue-router";
+import { getInputErosionResult } from "@/api/erosion";
+
+import { store } from "@/store";
+import router from "@/router";
 const props = withDefaults(defineProps<FormProps>(), {
   formInline: () => ({
     Etotal: 0.0,
@@ -256,12 +289,19 @@ const props = withDefaults(defineProps<FormProps>(), {
     fallowLandLoss: 0.0,
     rainfallAndRunoffFactor: 0.0,
     soilSlope: 0.0,
-    cultivationMethod: ""
+    cultivationMethod: "",
+    erosionTypeArea: ""
   })
 });
+import { useRoute } from "vue-router";
 
+// 使用 computed 函数创建计算属性 result
+const route = useRoute();
 function onSubmit() {
-  console.log(newFormInline.value);
+  router.push({
+    path: "/data-analysis/erosion/input/result",
+    query: { formInline: JSON.stringify(props.formInline) }
+  });
 }
 
 const opts = [
@@ -276,6 +316,41 @@ const opts = [
   {
     value: "修梯田",
     label: "修梯田"
+  }
+];
+
+const types = [
+  {
+    value: "东北黑土区",
+    label: "东北黑土区"
+  },
+  {
+    value: "北方风沙区",
+    label: "北方风沙区"
+  },
+  {
+    value: "北方土石山区",
+    label: "北方土石山区"
+  },
+  {
+    value: "西北黄土高原区",
+    label: "西北黄土高原区"
+  },
+  {
+    value: "南方红壤区",
+    label: "南方红壤区"
+  },
+  {
+    value: "西南紫色土区",
+    label: "西南紫色土区"
+  },
+  {
+    value: "西南岩溶区",
+    label: "西南岩溶区"
+  },
+  {
+    value: "青藏高原区",
+    label: "青藏高原区"
   }
 ];
 

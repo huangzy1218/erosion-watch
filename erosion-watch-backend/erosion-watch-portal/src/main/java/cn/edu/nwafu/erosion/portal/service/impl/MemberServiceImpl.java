@@ -16,8 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,8 +29,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeUtility;
+import javax.mail.internet.MimeMessage;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -211,27 +212,39 @@ public class MemberServiceImpl implements MemberService {
         }
         String authCode = generateAuthCode(emailAddress);
         // 邮件对象
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setSubject("土地侵蚀调查分析系统验证码");
-        message.setText("尊敬的用户您好！\n\n感谢使用土地侵蚀调查分析系统。\n\n您的验证码为：" + authCode + "，有效期为 5 分钟。如非本人请勿操作，" +
-                "请不要把验证码信息泄露给其他人");
-        message.setTo(emailAddress);
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = null;
         try {
-            message.setFrom(new InternetAddress(MimeUtility.encodeText("**土地侵蚀调查分析系统官方") + sender).toString());
+            helper = new MimeMessageHelper(message, true);
+            helper.setTo(emailAddress);
+            helper.setSubject("土地侵蚀调查分析系统验证码");
+            message.setSubject("土地侵蚀调查分析系统验证码");
+            String htmlContent = "<html><body>" +
+                    "<h3>尊敬的用户您好！</h3>" +
+                    "<p>感谢使用土地侵蚀调查分析系统。</p>" +
+                    "<p>您的验证码为：<strong>" + authCode + "</strong>，有效期为 90 秒。</p>" +
+                    "<p>如非本人请勿操作，请不要把验证码信息泄露给其他人。</p>" +
+                    "</body></html>";
+
+            helper.setText(htmlContent, true);
+            message.setText("尊敬的用户您好！\n\n感谢使用土地侵蚀调查分析系统。\n\n您的验证码为：" + authCode + "，有效期为 90 秒。如非本人请勿操作，" +
+                    "请不要把验证码信息泄露给其他人");
+            message.setFrom(new InternetAddress(sender).toString());
+            javaMailSender.send(message);
             log.info("邮件发送成功");
-        } catch (Exception e) {
+        } catch (MessagingException e) {
             log.info("邮件发送失败");
         }
+
     }
 
 
-    private boolean verifyAuthCode(String authCode, String telephone) {
+    private boolean verifyAuthCode(String authCode, String email) {
         if (StrUtil.isEmpty(authCode)) {
             return true;
         }
-        String realAuthCode = memberCacheService.getAuthCode(telephone);
-        // return authCode.equals(realAuthCode);todo
-        return false;
+        String realAuthCode = memberCacheService.getAuthCode(email);
+        return authCode.equals(realAuthCode);
     }
 }
     

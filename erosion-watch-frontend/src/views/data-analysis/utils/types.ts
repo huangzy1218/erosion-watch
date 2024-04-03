@@ -14,6 +14,7 @@ interface FormItemProps {
   rainfallAndRunoffFactor: number;
   soilSlope: number;
   cultivationMethod: string;
+  erosionTypeArea: string;
 }
 interface FormProps {
   formInline: FormItemProps;

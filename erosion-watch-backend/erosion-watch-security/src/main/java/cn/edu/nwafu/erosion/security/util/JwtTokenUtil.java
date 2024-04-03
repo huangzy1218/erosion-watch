@@ -30,9 +30,10 @@ import java.util.Map;
  */
 @Slf4j
 public class JwtTokenUtil {
-    public static final String TOKEN_BLACKLIST_PREFIX = "TOKEN_BLACKLIST-";
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_CREATED = "created";
+    @Value("${jwt.blacklist}")
+    public String tokenBlackListPrefix;
     @Value("${jwt.expire.access-token}")
     private Long accessTokenExpire;
     @Value("${jwt.expire.refresh-token}")
@@ -204,7 +205,7 @@ public class JwtTokenUtil {
     }
 
     public String getBlacklistPrefix(String token) {
-        return TOKEN_BLACKLIST_PREFIX + token;
+        return tokenBlackListPrefix + token;
     }
 
     public boolean checkBlackList(String token) {

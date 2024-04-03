@@ -164,6 +164,9 @@ dependencies:
   vuedraggable:
     specifier: ^4.1.0
     version: 4.1.0(vue@3.4.14)
+  vuex:
+    specifier: ^4.1.0
+    version: 4.1.0(vue@3.4.14)
   wavesurfer.js:
     specifier: ^7.7.1
     version: 7.7.1
@@ -9132,6 +9135,15 @@ packages:
       vue: ^3.0.1
     dependencies:
       sortablejs: 1.14.0
+      vue: 3.4.14(typescript@5.3.3)
+    dev: false
+
+  /vuex@4.1.0(vue@3.4.14):
+    resolution: {integrity: sha512-hmV6UerDrPcgbSy9ORAtNXDr9M4wlNP4pEFKye4ujJF8oqgFFuxDCdOLS3eNoRTtq5O3hoBDh9Doj1bQMYHRbQ==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': 6.5.1
       vue: 3.4.14(typescript@5.3.3)
     dev: false
 
