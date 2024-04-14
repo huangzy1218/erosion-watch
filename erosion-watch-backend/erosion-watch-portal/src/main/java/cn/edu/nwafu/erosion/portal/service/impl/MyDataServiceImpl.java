@@ -16,11 +16,14 @@ import cn.edu.nwafu.erosion.portal.service.MyDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author Huang Z.Y.
@@ -42,6 +45,8 @@ public class MyDataServiceImpl implements MyDataService {
     private MyDataMapper myDataMapper;
     @Autowired
     private ExcelDocumentRepository repository;
+    @Autowired
+    private TaskExecutor taskExecutor;
 
     @Override
     public List<ExcelFileVo> listAll() {
@@ -66,13 +71,17 @@ public class MyDataServiceImpl implements MyDataService {
             return false;
         }
         deleteCache();
-        String mongoId = save2Mongo(file);
+        CompletableFuture<String> future = save2MongoAsync(file, 1000);
 
         ExcelFile excelFile = ExcelFile.builder()
                 .fileName(file.getOriginalFilename())
                 .urlPath(uploadDto.getUrl())
-                .mongoId(mongoId)
                 .build();
+        // 异步任务执行完成后的回调函数
+        future.thenAccept(excelFile::setMongoId).exceptionally(ex -> {
+            // 异步任务执行失败的处理逻辑
+            return null;
+        });
         log.info("excelFile: {}", excelFile);
         myDataMapper.insert(excelFile);
         updateCache();
@@ -169,18 +178,41 @@ public class MyDataServiceImpl implements MyDataService {
         return (List<ExcelFileVo>) redisService.get(key);
     }
 
-    private String save2Mongo(MultipartFile file) {
-        try {
-            ExcelUtil.ExcelReadResult result = ExcelUtil.readExcel(file);
-            ExcelDocument document = new ExcelDocument();
-            document.setExcelName(file.getOriginalFilename());
-            document.setHeaders(result.getHeaders());
-            document.setData(result.getRows());
-            return repository.insert(document).getId();
-        } catch (IOException e) {
-            log.info("读取excel文件失败");
-        }
-        return null;
+    @Transactional
+    public String save2Mongo(ExcelDocument document) {
+        return repository.insert(document).getId();
+    }
+
+    public CompletableFuture<String> save2MongoAsync(MultipartFile file, int batchSize) {
+        CompletableFuture<String> future = new CompletableFuture<>();
+        taskExecutor.execute(() -> {
+            try {
+                String mongoId = null;
+                // 读取Excel文件
+                ExcelUtil.ExcelReadResult result = ExcelUtil.readExcel(file);
+                // 创建ExcelDocument对象
+                // 获取Excel行数
+                int rowCount = result.getRows().size();
+                int totalBatches = (int) Math.ceil((double) rowCount / batchSize);
+                for (int i = 0; i < totalBatches; i++) {
+                    // 计算当前批次的起始索引和结束索引
+                    int startIndex = i * batchSize;
+                    int endIndex = Math.min((i + 1) * batchSize, rowCount);
+                    List<List<String>> batchRows = result.getRows().subList(startIndex, endIndex);
+                    ExcelDocument document = new ExcelDocument();
+                    document.setExcelName(file.getOriginalFilename());
+                    document.setHeaders(result.getHeaders());
+                    document.setData(batchRows);
+                    mongoId = save2Mongo(document);
+                }
+                // 将保存操作提交给异步任务处理
+                future.complete(mongoId);
+            } catch (IOException e) {
+                log.error("读取excel文件失败", e);
+                future.completeExceptionally(e);
+            }
+        });
+        return future;
     }
 
 }

@@ -39,11 +39,12 @@
         <aliyun-oss.version>2.5.0</aliyun-oss.version>
         <alipay-sdk.version>4.38.61.ALL</alipay-sdk.version>
         <logstash-logback.version>7.2</logstash-logback.version>
-        <minio.version>8.4.5</minio.version>
+        <minio.version>8.3.5</minio.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <knife4j.version>3.0.3</knife4j.version>
         <easyexcel.version>3.1.2</easyexcel.version>
         <commons-math3.version>3.6.1</commons-math3.version>
+        <aws-java-sdk-s3.version>1.12.263</aws-java-sdk-s3.version>
         <erosion-watch-common.version>1.0-SNAPSHOT</erosion-watch-common.version>
         <erosion-watch-mbg.version>1.0-SNAPSHOT</erosion-watch-mbg.version>
         <erosion-watch-portal.version>1.0-SNAPSHOT</erosion-watch-portal.version>
@@ -215,6 +216,21 @@
                 <groupId>org.elasticsearch.client</groupId>
                 <artifactId>elasticsearch-rest-high-level-client</artifactId>
                 <version>7.17.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.5.13</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.plexpt</groupId>
+                <artifactId>chatgpt</artifactId>
+                <version>4.0.5</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-http</artifactId>
+                <version>5.8.18</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

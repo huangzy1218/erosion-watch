@@ -59,5 +59,24 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.78</version>
         </dependency>
+        <!-- Apache HttpComponents -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.plexpt</groupId>
+            <artifactId>chatgpt</artifactId>
+            <version>4.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-http</artifactId>
+            <version>5.8.18</version>
+        </dependency>
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+        </dependency>
     </dependencies>
 </project>

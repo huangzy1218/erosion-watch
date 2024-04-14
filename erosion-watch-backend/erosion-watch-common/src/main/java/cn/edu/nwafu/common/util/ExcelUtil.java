@@ -10,8 +10,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,12 +50,6 @@ public class ExcelUtil {
     public static ExcelReadResult readExcel(MultipartFile multipartFile) throws IOException {
         final List<String> headers = new ArrayList<>();
         final List<List<String>> rowsData = new ArrayList<>();
-        String originalFileName = multipartFile.getOriginalFilename();
-        // 提取文件后缀
-        String fileExtension = originalFileName != null ?
-                originalFileName.substring(originalFileName.lastIndexOf('.')) : ".tmp";
-        Path tempFile = Files.createTempFile("temp", fileExtension);
-        multipartFile.transferTo(tempFile.toFile());
         AnalysisEventListener<Map<Integer, String>> listener = new AnalysisEventListener<>() {
             boolean isHeader = true;
 
@@ -77,8 +69,7 @@ public class ExcelUtil {
             }
         };
 
-        EasyExcel.read(tempFile.toString(), listener).sheet().doRead();
-        Files.delete(tempFile);
+        EasyExcel.read(multipartFile.getInputStream(), listener).sheet().doRead();
         return new ExcelReadResult(headers, rowsData);
     }
 

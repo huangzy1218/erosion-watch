@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * JwtToken生成的工具类，JWT token的格式：{@code header.payload.signature}。<br/>
@@ -186,7 +187,7 @@ public class JwtTokenUtil {
      */
     public void tokenAssociation(UserToken userToken, Date refreshTokenExpireDate) {
         long time = (refreshTokenExpireDate.getTime() - System.currentTimeMillis()) / 1000 + 100;
-        redisService.set(userToken.getRefreshToken(), userToken.getAccessToken(), time);
+        redisService.set(userToken.getRefreshToken(), userToken.getAccessToken(), time, TimeUnit.SECONDS);
     }
 
     /**
@@ -201,7 +202,7 @@ public class JwtTokenUtil {
 
     public void addBlacklist(String token, Date expireTime) {
         long expireTimeLong = (expireTime.getTime() - System.currentTimeMillis()) / 1000 + 100;
-        redisService.set(getBlacklistPrefix(token), "1", expireTimeLong);
+        redisService.set(getBlacklistPrefix(token), "1", expireTimeLong, TimeUnit.SECONDS);
     }
 
     public String getBlacklistPrefix(String token) {

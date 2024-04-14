@@ -32,6 +32,12 @@ spring:
     username: erosion
     password: erosion
 
+file:
+  custom:
+    fileDispose: src\main\resources\dispose_files
+    fileSave: src\main\resources\save_files
+
+
 secure:
   ignored:
     urls: #安全路径白名单
@@ -51,5 +57,6 @@ minio:
   bucket-name: erosion-watch #存储桶名称
   access-key: minioadmin #访问的key
   secret-key: minioadmin #访问的秘钥
+  redis-key: erosion-watch:file-md5
 
 virtual-host: 8.140.22.169
